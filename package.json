@@ -1,12 +1,14 @@
 {
-  "name": "odin-book",
+  "name": "odin_book",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "nodemon src/server/main.js -w src/server",
     "start": "NODE_ENV=production node src/server/main.js",
-    "build": "vite build"
+    "build": "vite build",
+    "test": "vitest",
+    "format": "prettier --write './**/*.{js, jsx, css, md, json}' --config ./.prettierrc"
   },
   "dependencies": {
     "@mdi/js": "^7.4.47",
@@ -46,8 +48,8 @@
     "nodemon": "^3.0.1",
     "prettier": "^3.3.3",
     "prisma": "^5.20.0",
+    "supertest": "^7.0.0",
     "vite": "^5.0.2",
     "vitest": "^2.1.0"
   }
 }
-
