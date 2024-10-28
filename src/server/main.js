@@ -3,7 +3,7 @@ import ViteExpress from "vite-express";
 import passport from "passport";
 import session from "express-session";
 import dotenv from "dotenv";
-import router from "./routes.js";
+import router from "./router.js";
 import initializePassport from "./passport_config.js";
 import cookieParser from "cookie-parser";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
@@ -23,12 +23,12 @@ app.use(
     saveUninitialized: true,
     cookie: {
       maxAge: 1000 * 60 * 60 * 24
-    },
-    store: new PrismaSessionStore(new PrismaClient(), {
-      checkPeriod: 2 * 60 * 1000,
-      dbRecordIdIsSessionId: true,
-      dbRecordIdFunction: undefined
-    })
+    }
+    // store: new PrismaSessionStore(new PrismaClient(), {
+    //   checkPeriod: 2 * 60 * 1000,
+    //   dbRecordIdIsSessionId: true,
+    //   dbRecordIdFunction: undefined
+    // })
   })
 );
 app.use(passport.initialize());
