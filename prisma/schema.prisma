@@ -14,9 +14,36 @@ datasource db {
 }
 
 model User {
-  id       String @id @default(uuid())
-  username String @unique @db.VarChar(10)
-  password String @db.VarChar(10)
+  id           String    @id @default(uuid())
+  username     String    @unique @db.VarChar(10)
+  password     String    @db.VarChar(10)
+  // Implicit many-to-many self relations
+  followedBy   User[]    @relation("UserFollows")
+  following    User[]    @relation("UserFollows")
+  writtenPosts Post[]    @relation("WrittenPosts")
+  likedPosts   Post[]    @relation("LikedPosts")
+  comments     Comment[]
 
   @@map("users")
+}
+
+model Post {
+  id        String    @id @default(uuid())
+  author    User      @relation("WrittenPosts", fields: [authorId], references: [id])
+  authorId  String
+  text      String    @db.VarChar(100)
+  likedBy   User?     @relation("LikedPosts", fields: [likedById], references: [id])
+  likedById String?
+  comments  Comment[]
+
+  @@map("posts")
+}
+
+model Comment {
+  id       String @id @default(uuid())
+  author   User   @relation(fields: [authorId], references: [id])
+  authorId String
+  text     String @db.VarChar(100)
+  post     Post   @relation(fields: [postId], references: [id])
+  postId   String
 }
