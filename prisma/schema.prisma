@@ -17,13 +17,13 @@ model User {
   id               String    @id @default(uuid())
   username         String    @unique @db.VarChar(10)
   password         String    @db.VarChar(10)
-  followedBy       Follow[]  @relation("FollowedBy")
-  following        Follow[]  @relation("Following")
-  sentRequests     Request[] @relation("SentRequests")
-  receivedRequests Request[] @relation("ReceivedRequests")
-  writtenPosts     Post[]    @relation("WrittenPosts")
-  likedPosts       Post[]    @relation("LikedPosts")
-  comments         Comment[]
+  FollowedBy       Follow[]  @relation("FollowedBy")
+  Following        Follow[]  @relation("Following")
+  SentRequests     Request[] @relation("SentRequests")
+  ReceivedRequests Request[] @relation("ReceivedRequests")
+  WrittenPosts     Post[]    @relation("WrittenPosts")
+  LikedPosts       Post[]    @relation("LikedPosts")
+  Comments         Comment[]
 
   @@map("users")
 }
@@ -55,7 +55,7 @@ model Post {
   text      String    @db.VarChar(100)
   likedBy   User?     @relation("LikedPosts", fields: [likedById], references: [id])
   likedById String?
-  comments  Comment[]
+  Comments  Comment[]
 
   @@map("posts")
 }
@@ -67,7 +67,7 @@ model Comment {
   text     String    @db.VarChar(100)
   post     Post      @relation(fields: [postId], references: [id])
   postId   String
-  Comment  Comment[] @relation("Reply")
+  Replies  Comment[] @relation("Reply")
   reply    Comment   @relation("Reply", fields: [replyId], references: [id])
   replyId  String
 
