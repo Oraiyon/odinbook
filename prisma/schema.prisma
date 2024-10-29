@@ -14,17 +14,38 @@ datasource db {
 }
 
 model User {
-  id           String    @id @default(uuid())
-  username     String    @unique @db.VarChar(10)
-  password     String    @db.VarChar(10)
-  // Implicit many-to-many self relations
-  followedBy   User[]    @relation("UserFollows")
-  following    User[]    @relation("UserFollows")
-  writtenPosts Post[]    @relation("WrittenPosts")
-  likedPosts   Post[]    @relation("LikedPosts")
-  comments     Comment[]
+  id               String    @id @default(uuid())
+  username         String    @unique @db.VarChar(10)
+  password         String    @db.VarChar(10)
+  followedBy       Follow[]  @relation("FollowedBy")
+  following        Follow[]  @relation("Following")
+  sentRequests     Request[] @relation("SentRequests")
+  receivedRequests Request[] @relation("ReceivedRequests")
+  writtenPosts     Post[]    @relation("WrittenPosts")
+  likedPosts       Post[]    @relation("LikedPosts")
+  comments         Comment[]
 
   @@map("users")
+}
+
+model Follow {
+  followedBy   User   @relation("FollowedBy", fields: [followedById], references: [id])
+  followedById String
+  following    User   @relation("Following", fields: [followingId], references: [id])
+  followingId  String
+
+  @@id([followedById, followingId])
+  @@map("follows")
+}
+
+model Request {
+  id         String @id @default(uuid())
+  sender     User   @relation("SentRequests", fields: [senderId], references: [id])
+  senderId   String
+  receiver   User   @relation("ReceivedRequests", fields: [receiverId], references: [id])
+  receiverId String
+
+  @@map("requests")
 }
 
 model Post {
@@ -40,10 +61,15 @@ model Post {
 }
 
 model Comment {
-  id       String @id @default(uuid())
-  author   User   @relation(fields: [authorId], references: [id])
+  id       String    @id @default(uuid())
+  author   User      @relation(fields: [authorId], references: [id])
   authorId String
-  text     String @db.VarChar(100)
-  post     Post   @relation(fields: [postId], references: [id])
+  text     String    @db.VarChar(100)
+  post     Post      @relation(fields: [postId], references: [id])
   postId   String
+  Comment  Comment[] @relation("Reply")
+  reply    Comment   @relation("Reply", fields: [replyId], references: [id])
+  replyId  String
+
+  @@map("comments")
 }
