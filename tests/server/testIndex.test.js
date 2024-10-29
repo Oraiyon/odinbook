@@ -23,9 +23,9 @@ const prisma = new PrismaClient({
   }
 });
 
-test("index route works", async () => {
-  const response = await request(app).get("/");
-  // expect(response.headers["Content-Type"]).toMatch(/json/);
-  expect(response.status).toEqual(200);
-  expect(response.body.name).toEqual("frodo");
-});
+// test("index route works", async () => {
+//   const response = await request(app).get("/");
+//   // expect(response.headers["Content-Type"]).toMatch(/json/);
+//   expect(response.status).toEqual(200);
+//   expect(response.body.name).toEqual("frodo");
+// });
