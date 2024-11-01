@@ -1,13 +1,10 @@
 import { PrismaClient } from "@prisma/client";
 import expressAsyncHandler from "express-async-handler";
-import dotenv from "dotenv";
 import { body, validationResult } from "express-validator";
 import bcrypt from "bcryptjs";
 import passport from "passport";
 
 const prisma = new PrismaClient();
-
-dotenv.config();
 
 const signup = [
   body("username", "Invalid Username").trim().isLength({ max: 10 }).toLowerCase().escape(),
