@@ -40,11 +40,12 @@ model Follow {
 }
 
 model Request {
-  id         String @id @default(uuid())
-  sender     User   @relation("SentRequests", fields: [senderId], references: [id])
-  senderId   String
-  receiver   User   @relation("ReceivedRequests", fields: [receiverId], references: [id])
-  receiverId String
+  requestDate DateTime @default(now())
+  id          String   @id @default(uuid())
+  sender      User     @relation("SentRequests", fields: [senderId], references: [id])
+  senderId    String
+  receiver    User     @relation("ReceivedRequests", fields: [receiverId], references: [id])
+  receiverId  String
 
   @@map("requests")
 }
