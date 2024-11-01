@@ -1,7 +1,7 @@
 import express from "express";
 import signup, { login, logout } from "./controllers/userControllers.js";
+import post_request, { delete_request } from "./controllers/requestController.js";
 import post_follow_user from "./controllers/followController.js";
-import post_request_follow from "./controllers/requestController.js";
 
 const router = express.Router();
 
@@ -11,7 +11,8 @@ router.post("/login", login);
 router.get("/logout", logout);
 
 // requestController
-router.post("/api/requestFollow", post_request_follow);
+router.post("/api/requestFollow", post_request);
+router.delete("/api/deleteRequest", delete_request);
 
 // followController
 router.post("/api/followuser", post_follow_user);
