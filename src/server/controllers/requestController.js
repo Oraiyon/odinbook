@@ -23,22 +23,29 @@ const post_request_follow = expressAsyncHandler(async (req, res, next) => {
     res.status(200).json(false);
     return;
   }
-  const request = await prisma.request.create({
+  await prisma.request.create({
     data: {
       senderId: req.body.sender,
       receiverId: req.body.receiver
     }
   });
-  res.status(200).json(request);
-});
-
-export const get_requests = expressAsyncHandler(async (req, res, next) => {
-  const requests = await prisma.request.findMany({
+  const requestList = await prisma.request.findMany({
     where: {
-      OR: [{ senderId: req.params.id }, { receiverId: req.params.id }]
+      OR: [
+        {
+          senderId: req.body.sender
+        },
+        {
+          receiverId: req.body.sender
+        }
+      ]
+    },
+    include: {
+      sender: true,
+      receiver: true
     }
   });
-  res.status(200).json(requests);
+  res.status(200).json(requestList);
 });
 
 export default post_request_follow;
