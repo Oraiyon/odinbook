@@ -1,6 +1,5 @@
 import { PrismaClient } from "@prisma/client";
 import expressAsyncHandler from "express-async-handler";
-import { body, validationResult } from "express-validator";
 
 const prisma = new PrismaClient();
 
@@ -42,7 +41,7 @@ const post_follow_user = expressAsyncHandler(async (req, res, next) => {
       id: request.id
     }
   });
-  const followUser = await prisma.follow.create({
+  await prisma.follow.create({
     data: {
       followedById: req.body.sender,
       followingId: req.body.receiver
@@ -80,7 +79,6 @@ const post_follow_user = expressAsyncHandler(async (req, res, next) => {
       following: true
     }
   });
-  // Send follows and requests instead?
   res.status(200).json({ requestList: requestList, followList: followList });
 });
 
