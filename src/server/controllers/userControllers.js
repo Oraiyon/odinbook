@@ -10,8 +10,9 @@ const prisma = new PrismaClient();
 dotenv.config();
 
 const signup = [
-  // Validate inputs here
-  //
+  body("username", "Invalid Username").trim().isLength({ max: 10 }).toLowerCase().escape(),
+  body("password", "Invalid Password").trim().isLength({ min: 6 }).toLowerCase().escape(),
+  // Confirm password here
   expressAsyncHandler(async (req, res, next) => {
     bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
       if (err) {
@@ -19,13 +20,15 @@ const signup = [
       } else {
         const errors = validationResult(req);
         const usernameTaken = await prisma.user.findFirst({
-          where: req.body.username
+          where: {
+            username: req.body.username
+          }
         });
         if (!errors.isEmpty() || usernameTaken) {
           res.status(200).json(false);
           return;
         }
-        await prisma.user.create({
+        const user = await prisma.user.create({
           data: {
             username: req.body.username,
             password: hashedPassword
