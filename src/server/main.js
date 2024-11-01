@@ -35,6 +35,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 initializePassport(passport);
 
-app.get("/", router);
+app.use("/", router);
 
 ViteExpress.listen(app, 3000, () => console.log("Server is listening on port 3000..."));
