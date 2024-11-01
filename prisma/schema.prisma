@@ -29,9 +29,10 @@ model User {
 }
 
 model Follow {
-  followedBy   User   @relation("FollowedBy", fields: [followedById], references: [id])
+  followedDate DateTime @default(now())
+  followedBy   User     @relation("FollowedBy", fields: [followedById], references: [id])
   followedById String
-  following    User   @relation("Following", fields: [followingId], references: [id])
+  following    User     @relation("Following", fields: [followingId], references: [id])
   followingId  String
 
   @@id([followedById, followingId])
