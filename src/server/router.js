@@ -11,12 +11,12 @@ router.post("/login", login);
 router.get("/logout", logout);
 
 // requestControllers
-router.post("/api/requestFollow", post_request);
-router.delete("/api/deleteRequest", delete_request);
+router.post("/api/request/follow", post_request);
+router.delete("/api/request/delete", delete_request);
 
 // followControllers
-router.post("/api/followuser", post_follow);
-router.delete("/api/deleteFollow", delete_follow);
+router.post("/api/follow/user", post_follow);
+router.delete("/api/follow/delete", delete_follow);
 
 // postControllers
 
