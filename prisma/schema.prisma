@@ -29,13 +29,13 @@ model User {
 }
 
 model Follow {
+  id           String   @id @default(uuid())
   followedDate DateTime @default(now())
   followedBy   User     @relation("FollowedBy", fields: [followedById], references: [id])
   followedById String
   following    User     @relation("Following", fields: [followingId], references: [id])
   followingId  String
 
-  @@id([followedById, followingId])
   @@map("follows")
 }
 
