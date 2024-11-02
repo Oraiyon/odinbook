@@ -82,6 +82,43 @@ const post_follow = expressAsyncHandler(async (req, res, next) => {
   res.status(200).json({ requestList: requestList, followList: followList });
 });
 
-export const delete_follow = expressAsyncHandler(async (req, res, next) => {});
+export const delete_follow = expressAsyncHandler(async (req, res, next) => {
+  const alreadyFollowing = await prisma.follow.findFirst({
+    where: {
+      OR: [
+        {
+          followedById: req.body.sender,
+          followingId: req.body.receiver
+        },
+        {
+          followedById: req.body.receiver,
+          followingId: req.body.sender
+        }
+      ]
+    }
+  });
+  if (alreadyFollowing) {
+    await prisma.follow.delete({
+      where: {
+        id: alreadyFollowing.id
+      }
+    });
+    const followList = await prisma.follow.findMany({
+      where: {
+        OR: [
+          {
+            followedById: req.body.sender
+          },
+          {
+            followingId: req.body.sender
+          }
+        ]
+      }
+    });
+    res.status(200).json(followList);
+  } else {
+    res.status(200).json(false);
+  }
+});
 
 export default post_follow;
