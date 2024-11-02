@@ -3,7 +3,7 @@ import expressAsyncHandler from "express-async-handler";
 
 const prisma = new PrismaClient();
 
-const post_follow_user = expressAsyncHandler(async (req, res, next) => {
+const post_follow = expressAsyncHandler(async (req, res, next) => {
   const alreadyFollowing = await prisma.follow.findFirst({
     where: {
       OR: [
@@ -82,4 +82,6 @@ const post_follow_user = expressAsyncHandler(async (req, res, next) => {
   res.status(200).json({ requestList: requestList, followList: followList });
 });
 
-export default post_follow_user;
+export const delete_follow = expressAsyncHandler(async (req, res, next) => {});
+
+export default post_follow;
