@@ -47,7 +47,7 @@ const post_request = expressAsyncHandler(async (req, res, next) => {
   res.status(200).json(requestList);
 });
 
-export const delete_delete_request = expressAsyncHandler(async (req, res, next) => {
+export const delete_request = expressAsyncHandler(async (req, res, next) => {
   const request = await prisma.request.findFirst({
     where: {
       OR: [
