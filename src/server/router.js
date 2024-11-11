@@ -21,9 +21,6 @@ import post_reply from "./controllers/replyController.js";
 
 const router = express.Router();
 
-// "0a97755c-23c2-495f-8d7f-017f4ee1115b" Comment "5945af2b-7fab-46cb-b75b-70f7e5a21452"
-// "e9a6adf1-b54d-473c-91d7-fe8332b6d8e9" Follows
-
 // userControllers
 router.post("/signup", signup);
 router.post("/login", login);
