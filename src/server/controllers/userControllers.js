@@ -7,7 +7,12 @@ import passport from "passport";
 const prisma = new PrismaClient();
 
 const signup = [
-  body("username", "Invalid Username").trim().isLength({ max: 10 }).toLowerCase().escape(),
+  body("username", "Invalid Username")
+    .trim()
+    .isLength({ min: 3 })
+    .isLength({ max: 10 })
+    .toLowerCase()
+    .escape(),
   body("password", "Invalid Password").trim().isLength({ min: 6 }).toLowerCase().escape(),
   // Confirm password here
   expressAsyncHandler(async (req, res, next) => {
@@ -25,13 +30,13 @@ const signup = [
           res.status(200).json(false);
           return;
         }
-        const user = await prisma.user.create({
+        await prisma.user.create({
           data: {
             username: req.body.username,
             password: hashedPassword
           }
         });
-        res.status(200).json(user);
+        res.status(200).redirect("/login");
       }
     });
   })
