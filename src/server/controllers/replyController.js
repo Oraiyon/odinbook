@@ -6,14 +6,15 @@ const prisma = new PrismaClient();
 const post_reply = expressAsyncHandler(async (req, res, next) => {
   await prisma.reply.create({
     data: {
-      authorId: req.body.author,
+      authorId: req.body.authorId,
       text: req.body.text,
-      replyToId: req.body.replyTo
+      replyToId: req.body.replyToId,
+      postId: req.body.postId
     }
   });
   const commentList = await prisma.comment.findMany({
     where: {
-      id: req.body.replyTo
+      id: req.body.replyToId
     },
     include: {
       Reply: {

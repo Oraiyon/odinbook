@@ -69,13 +69,27 @@ export const get_following_posts = expressAsyncHandler(async (req, res, next) =>
 });
 
 export const delete_post = expressAsyncHandler(async (req, res, next) => {
+  await prisma.likes.deleteMany({
+    where: {
+      postId: req.params.postId
+    }
+  });
+  await prisma.reply.deleteMany({
+    where: {
+      postId: req.params.postId
+    }
+  });
+  await prisma.comment.deleteMany({
+    where: {
+      postId: req.params.postId
+    }
+  });
   await prisma.post.delete({
     where: {
       id: req.params.postId,
       authorId: req.params.id
     }
   });
-  // Delete likes & comments too
   const postList = await prisma.post.findMany({
     where: {
       authorId: req.params.id

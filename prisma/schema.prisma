@@ -59,6 +59,7 @@ model Post {
   text     String    @db.VarChar(100)
   Comments Comment[]
   Likes    Likes[]
+  Reply    Reply[]
 
   @@map("posts")
 }
@@ -98,6 +99,8 @@ model Reply {
   text      String   @db.VarChar(100)
   replyTo   Comment  @relation(fields: [replyToId], references: [id])
   replyToId String
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    String
 
   @@map("replies")
 }
