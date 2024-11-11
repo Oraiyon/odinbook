@@ -58,7 +58,11 @@ export const get_following_posts = expressAsyncHandler(async (req, res, next) =>
     },
     include: {
       Likes: true,
-      Comments: true
+      Comments: {
+        include: {
+          Reply: true
+        }
+      }
     }
   });
   res.status(200).json(postList);
