@@ -28,6 +28,8 @@ const post_like_post = [
     }
     next();
   }),
+  // Just jump to this with react
+  // Remove get_following_posts?
   get_following_posts
 ];
 

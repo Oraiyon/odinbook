@@ -26,7 +26,7 @@ const post_reply = expressAsyncHandler(async (req, res, next) => {
       commentDate: "desc"
     }
   });
-  // Just jump to this reply with react
+  // Just jump to this with react
   res.status(200).json(commentList);
 });
 

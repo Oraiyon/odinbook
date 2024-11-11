@@ -61,7 +61,6 @@ export const get_following_posts = expressAsyncHandler(async (req, res, next) =>
       Comments: true
     }
   });
-  // Just jump to this reply with react
   res.status(200).json(postList);
 });
 
