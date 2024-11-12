@@ -1,6 +1,6 @@
 import { Link, useOutletContext } from "react-router-dom";
 import styles from "../stylesheets/Login.module.css";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Login = () => {
   const [user, setUser] = useOutletContext();
@@ -10,6 +10,13 @@ const Login = () => {
   const usernameInputRef = useRef(null);
   const passwordInputRef = useRef(null);
   const signupLinkRef = useRef(null);
+  const toUserRef = useRef(null);
+
+  useEffect(() => {
+    if (user) {
+      toUserRef.current.click();
+    }
+  }, [user]);
 
   const submitLogin = async (e) => {
     try {
@@ -56,6 +63,7 @@ const Login = () => {
           Sign Up!
         </Link>
       </p>
+      {user ? <Link to={`/${user.id}/feed`} ref={toUserRef}></Link> : ""}
     </div>
   );
 };

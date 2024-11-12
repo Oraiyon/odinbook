@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./components/App";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
+import Feed from "./components/Feed";
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -16,6 +17,10 @@ const Router = () => {
         {
           path: "/login",
           element: <Login />
+        },
+        {
+          path: "/:id/feed",
+          element: <Feed />
         }
       ]
     }
