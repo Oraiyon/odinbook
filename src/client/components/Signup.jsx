@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 import styles from "../stylesheets/Signup.module.css";
 import { Link } from "react-router-dom";
-import Navbar from "./Navbar";
 
 const Signup = () => {
   const [invalidUsername, setInvalidUsername] = useState("");
@@ -93,7 +92,6 @@ const Signup = () => {
           Log In!
         </Link>
       </p>
-      <Navbar user={null} />
     </div>
   );
 };
