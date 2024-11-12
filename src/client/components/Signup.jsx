@@ -63,7 +63,7 @@ const Signup = () => {
 
   return (
     <div className={styles.signup_container}>
-      <h1>Sign up</h1>
+      <h1>Sign Up</h1>
       <form onSubmit={submitSignup} className={styles.signup_form}>
         <div>
           <label htmlFor="username">Username</label>
@@ -90,10 +90,10 @@ const Signup = () => {
       <p>
         Already have an account?{" "}
         <Link to={"/login"} ref={loginLinkRef}>
-          Login!
+          Log In!
         </Link>
       </p>
-      <Navbar user={false} />
+      <Navbar user={null} />
     </div>
   );
 };

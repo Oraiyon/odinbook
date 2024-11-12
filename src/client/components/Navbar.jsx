@@ -6,8 +6,8 @@ const Navbar = (props) => {
   } else {
     return (
       <nav className={styles.navbar_container}>
-        <Link to={"/signup"}>Signup</Link>
-        <Link to={"/login"}>Login</Link>
+        <Link to={"/signup"}>Sign Up</Link>
+        <Link to={"/login"}>Log In</Link>
       </nav>
     );
   }

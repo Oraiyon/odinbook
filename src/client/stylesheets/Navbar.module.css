@@ -10,6 +10,7 @@
   flex: 1;
   text-align: center;
   padding: 0.5em;
+  text-decoration: none;
 }
 
 .navbar_container > a:first-of-type {
