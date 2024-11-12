@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import styles from "../stylesheets/Signup.module.css";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   const usernameInputRef = useRef(null);
@@ -36,18 +37,15 @@ const Signup = () => {
   };
 
   const validateSignupInputs = () => {
-    if (
-      !usernameInputRef.current.value ||
-      usernameInputRef.current.value.length < 3 ||
-      usernameInputRef.current.value > 20
-    ) {
-      invalidUsernameRef.current.innerText =
-        "Usernames must be atleast 3 characters long and atmost 20 characters long.";
+    if (!usernameInputRef.current.value || usernameInputRef.current.value.length < 3) {
+      invalidUsernameRef.current.innerText = "Username must be atleast 3 characters long.";
+    } else if (usernameInputRef.current.value > 20) {
+      invalidUsernameRef.current.innerText = "Username must be atmost 20 characters long.";
     } else {
       invalidUsernameRef.current.innerText = "";
     }
     if (!passwordInputRef.current.value || passwordInputRef.current.value.length < 3) {
-      invalidPasswordRef.current.innerText = "Passwords must be atleast 6 characters long.";
+      invalidPasswordRef.current.innerText = "Password must be atleast 6 characters long.";
     } else {
       invalidPasswordRef.current.innerText = "";
     }
@@ -59,20 +57,20 @@ const Signup = () => {
   };
 
   return (
-    <>
+    <div className={styles.signup_container}>
       <h1>Sign up</h1>
-      <form onSubmit={submitSignup}>
-        <div className={styles.username_input}>
+      <form onSubmit={submitSignup} className={styles.signup_form}>
+        <div>
           <label htmlFor="username">Username</label>
           <input type="text" id="username" name="username" ref={usernameInputRef} />
           <p ref={invalidUsernameRef}></p>
         </div>
-        <div className={styles.password_input}>
+        <div>
           <label htmlFor="password">Password</label>
           <input type="password" id="password" name="password" ref={passwordInputRef} />
           <p ref={invalidPasswordRef}></p>
         </div>
-        <div className={styles.confirm_password_input}>
+        <div>
           <label htmlFor="confirmPassword">Confirm Password</label>
           <input
             type="password"
@@ -84,7 +82,10 @@ const Signup = () => {
         </div>
         <button>Sign up</button>
       </form>
-    </>
+      <p>
+        Already have an account? <Link to={"/login"}>Login!</Link>
+      </p>
+    </div>
   );
 };
 
