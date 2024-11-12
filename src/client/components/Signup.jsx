@@ -12,8 +12,12 @@ const Signup = () => {
   const submitSignup = async (e) => {
     try {
       e.preventDefault();
-      const validInputs = validateSignupInputs();
-      if (validInputs) {
+      validateSignupInputs();
+      if (
+        !usernameInputRef.current.value ||
+        !passwordInputRef.current.value ||
+        passwordInputRef.current.value !== confirmPasswordInputRef.current.value
+      ) {
         await fetch("/signup", {
           method: "POST",
           headers: {
@@ -32,25 +36,26 @@ const Signup = () => {
   };
 
   const validateSignupInputs = () => {
-    let validInputs = true;
     if (
       !usernameInputRef.current.value ||
       usernameInputRef.current.value.length < 3 ||
-      usernameInputRef.current.value > 10
+      usernameInputRef.current.value > 20
     ) {
-      invalidUsernameRef.current.value =
-        "Usernames must be atleast 3 characters long and atmost 10 characters long.";
-      validInputs = false;
+      invalidUsernameRef.current.innerText =
+        "Usernames must be atleast 3 characters long and atmost 20 characters long.";
+    } else {
+      invalidUsernameRef.current.innerText = "";
     }
     if (!passwordInputRef.current.value || passwordInputRef.current.value.length < 3) {
-      invalidPasswordRef.current.value = "Passwords must be atleast 6 characters long.";
-      validInputs = false;
+      invalidPasswordRef.current.innerText = "Passwords must be atleast 6 characters long.";
+    } else {
+      invalidPasswordRef.current.innerText = "";
     }
     if (passwordInputRef.current.value !== confirmPasswordInputRef.current.value) {
-      invalidConfirmPasswordRef.current.value = "Confirm Passwords must match your Password.";
-      validInputs = false;
+      invalidConfirmPasswordRef.current.innerText = "Confirm Password must match your Password.";
+    } else {
+      invalidConfirmPasswordRef.current.innerText = "";
     }
-    return validInputs;
   };
 
   return (
