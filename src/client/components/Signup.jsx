@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import styles from "../stylesheets/Signup.module.css";
 import { Link } from "react-router-dom";
+import Navbar from "./Navbar";
 
 const Signup = () => {
   const usernameInputRef = useRef(null);
@@ -85,6 +86,7 @@ const Signup = () => {
       <p>
         Already have an account? <Link to={"/login"}>Login!</Link>
       </p>
+      <Navbar user={false} />
     </div>
   );
 };

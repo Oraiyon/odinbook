@@ -1,0 +1,17 @@
+.navbar_container {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  border: 2px solid black;
+}
+
+.navbar_container > a {
+  flex: 1;
+  text-align: center;
+  padding: 0.5em;
+}
+
+.navbar_container > a:first-of-type {
+  border-right: 2px solid black;
+}
