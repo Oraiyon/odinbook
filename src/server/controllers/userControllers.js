@@ -10,7 +10,7 @@ const signup = [
   body("username", "Invalid Username")
     .trim()
     .isLength({ min: 3 })
-    .isLength({ max: 10 })
+    .isLength({ max: 20 })
     .toLowerCase()
     .escape(),
   body("password", "Invalid Password").trim().isLength({ min: 6 }).toLowerCase().escape(),
