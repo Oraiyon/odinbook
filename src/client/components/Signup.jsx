@@ -1,26 +1,23 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import styles from "../stylesheets/Signup.module.css";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 
 const Signup = () => {
+  const [invalidUsername, setInvalidUsername] = useState("");
+  const [invalidPassword, setInvalidPassword] = useState("");
+  const [invalidConfirmPassword, setInvalidConfirmPassword] = useState("");
+
   const usernameInputRef = useRef(null);
   const passwordInputRef = useRef(null);
   const confirmPasswordInputRef = useRef(null);
-  const invalidUsernameRef = useRef(null);
-  const invalidPasswordRef = useRef(null);
-  const invalidConfirmPasswordRef = useRef(null);
   const loginLinkRef = useRef(null);
 
   const submitSignup = async (e) => {
     try {
       e.preventDefault();
       validateSignupInputs();
-      if (
-        !invalidUsernameRef.current.value ||
-        !invalidUsernameRef.current.value ||
-        !invalidConfirmPasswordRef.current.value
-      ) {
+      if (invalidUsername || invalidPassword || invalidConfirmPassword) {
         const response = await fetch("/signup", {
           method: "POST",
           headers: {
@@ -36,7 +33,7 @@ const Signup = () => {
         if (data) {
           loginLinkRef.current.click();
         } else {
-          invalidUsernameRef.current.innerText = "Username is already taken.";
+          setInvalidUsername("Username is already taken.");
         }
       }
     } catch (error) {
@@ -45,22 +42,22 @@ const Signup = () => {
   };
 
   const validateSignupInputs = () => {
-    if (!usernameInputRef.current.value || usernameInputRef.current.value.length < 3) {
-      invalidUsernameRef.current.innerText = "Username must be atleast 3 characters long.";
+    if (usernameInputRef.current.value.length < 3) {
+      setInvalidUsername("Username must be atleast 3 characters long.");
     } else if (usernameInputRef.current.value > 20) {
-      invalidUsernameRef.current.innerText = "Username must be atmost 20 characters long.";
+      setInvalidUsername("Username must be atmost 20 characters long.");
     } else {
-      invalidUsernameRef.current.innerText = "";
+      setInvalidUsername("");
     }
-    if (!passwordInputRef.current.value || passwordInputRef.current.value.length < 3) {
-      invalidPasswordRef.current.innerText = "Password must be atleast 6 characters long.";
+    if (passwordInputRef.current.value.length < 6) {
+      setInvalidPassword("Password must be atleast 6 characters long.");
     } else {
-      invalidPasswordRef.current.innerText = "";
+      setInvalidPassword("");
     }
     if (passwordInputRef.current.value !== confirmPasswordInputRef.current.value) {
-      invalidConfirmPasswordRef.current.innerText = "Confirm Password must match your Password.";
+      setInvalidConfirmPassword("Confirm Password must match your Password.");
     } else {
-      invalidConfirmPasswordRef.current.innerText = "";
+      setInvalidConfirmPassword("");
     }
   };
 
@@ -71,12 +68,12 @@ const Signup = () => {
         <div>
           <label htmlFor="username">Username</label>
           <input type="text" id="username" name="username" ref={usernameInputRef} />
-          <p ref={invalidUsernameRef}></p>
+          <p>{invalidUsername}</p>
         </div>
         <div>
           <label htmlFor="password">Password</label>
           <input type="password" id="password" name="password" ref={passwordInputRef} />
-          <p ref={invalidPasswordRef}></p>
+          <p>{invalidPassword}</p>
         </div>
         <div>
           <label htmlFor="confirmPassword">Confirm Password</label>
@@ -86,7 +83,7 @@ const Signup = () => {
             name="confirmPassword"
             ref={confirmPasswordInputRef}
           />
-          <p ref={invalidConfirmPasswordRef}></p>
+          <p>{invalidConfirmPassword}</p>
         </div>
         <button>Sign up</button>
       </form>
