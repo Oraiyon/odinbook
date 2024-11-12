@@ -14,7 +14,11 @@ const signup = [
     .toLowerCase()
     .escape(),
   body("password", "Invalid Password").trim().isLength({ min: 6 }).toLowerCase().escape(),
-  // Confirm password here
+  body("confirmPassword", "Confirm Password must match Password")
+    .trim()
+    .custom((value, { req }) => {
+      return value === req.body.password;
+    }),
   expressAsyncHandler(async (req, res, next) => {
     bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
       if (err) {
@@ -30,13 +34,13 @@ const signup = [
           res.status(200).json(false);
           return;
         }
-        await prisma.user.create({
+        const user = await prisma.user.create({
           data: {
             username: req.body.username,
             password: hashedPassword
           }
         });
-        res.status(200).redirect("/login");
+        res.status(200).json(true);
       }
     });
   })

@@ -10,17 +10,18 @@ const Signup = () => {
   const invalidUsernameRef = useRef(null);
   const invalidPasswordRef = useRef(null);
   const invalidConfirmPasswordRef = useRef(null);
+  const loginLinkRef = useRef(null);
 
   const submitSignup = async (e) => {
     try {
       e.preventDefault();
       validateSignupInputs();
       if (
-        !usernameInputRef.current.value ||
-        !passwordInputRef.current.value ||
-        passwordInputRef.current.value !== confirmPasswordInputRef.current.value
+        !invalidUsernameRef.current.value ||
+        !invalidUsernameRef.current.value ||
+        !invalidConfirmPasswordRef.current.value
       ) {
-        await fetch("/signup", {
+        const response = await fetch("/signup", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -31,6 +32,12 @@ const Signup = () => {
             confirmPassword: confirmPasswordInputRef.current.value
           })
         });
+        const data = await response.json();
+        if (data) {
+          loginLinkRef.current.click();
+        } else {
+          invalidUsernameRef.current.innerText = "Username is already taken.";
+        }
       }
     } catch (error) {
       console.log(error);
@@ -84,7 +91,10 @@ const Signup = () => {
         <button>Sign up</button>
       </form>
       <p>
-        Already have an account? <Link to={"/login"}>Login!</Link>
+        Already have an account?{" "}
+        <Link to={"/login"} ref={loginLinkRef}>
+          Login!
+        </Link>
       </p>
       <Navbar user={false} />
     </div>
