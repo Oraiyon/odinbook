@@ -42,7 +42,9 @@ const Search = () => {
       {searchedUsername && searchedUsersList ? (
         <div className={styles.searchUserList_container}>
           {searchedUsersList.map((user) => (
-            <p key={user.id}>{user.username}</p>
+            <div key={user.id} className={styles.searchUser_card}>
+              <p>{user.username}</p>
+            </div>
           ))}
         </div>
       ) : (
