@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "../stylesheets/PostList.module.css";
 
 const PostList = (props) => {
-  // props.user for following or separate component?
+  // props.user for displaying following posts or separate component?
   const [postList, setPostList] = useState([]);
 
   useEffect(() => {
@@ -35,7 +35,9 @@ const PostList = (props) => {
             <div key={post.id} className={styles.post_card}>
               <p>{post.author.username}</p>
               <p>{post.text}</p>
-              <p>{post.Likes.length} likes</p>
+              <p>
+                {post.Likes.length} {post.Likes.length !== 1 ? "Likes" : "Like"}
+              </p>
               <p>View {post.Comments.length} comments</p>
               <DisplayPostDate postDate={post.postDate} />
             </div>
