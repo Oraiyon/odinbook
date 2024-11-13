@@ -1,33 +1,53 @@
 import { useOutletContext } from "react-router-dom";
 import styles from "../stylesheets/Search.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import PostList from "./PostList";
 
 const Search = () => {
   const [user, setUser] = useOutletContext();
 
-  const [postList, setPostList] = useState([]);
+  const [searchedUsername, setSearchedUsername] = useState(null);
+  const [searchedUsersList, setSearchedUsersList] = useState(null);
+
+  const searchBarRef = useRef(null);
 
   useEffect(() => {
-    const getPosts = async () => {
+    const getUsers = async () => {
       try {
-        const response = await fetch("/api/get/posts");
+        const response = await fetch(`/api/search/${searchedUsername}`);
         const data = await response.json();
-        setPostList(data);
+        setSearchedUsersList(data);
       } catch (error) {
         console.log(error);
       }
     };
-    getPosts();
-  }, []);
+    if (searchedUsername) {
+      getUsers();
+    }
+  }, [searchedUsername]);
 
   return (
     <div className={styles.search_container}>
       <div className={styles.searchBar}>
         <label htmlFor="searchBar"></label>
-        <input type="text" id="searchBar" name="searchBar" placeholder="Search Username" />
+        <input
+          type="text"
+          id="searchBar"
+          name="searchBar"
+          placeholder="Search Username"
+          ref={searchBarRef}
+          onChange={() => setSearchedUsername(searchBarRef.current.value)}
+        />
       </div>
-      <PostList user={user} postList={postList} />
+      {searchedUsername && searchedUsersList ? (
+        <div className={styles.searchUserList_container}>
+          {searchedUsersList.map((user) => (
+            <p key={user.id}>{user.username}</p>
+          ))}
+        </div>
+      ) : (
+        <PostList user={user} />
+      )}
     </div>
   );
 };

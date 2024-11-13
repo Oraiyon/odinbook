@@ -79,4 +79,15 @@ export const logout = (req, res, next) => {
   });
 };
 
+export const get_search_user = expressAsyncHandler(async (req, res, next) => {
+  const searchUserList = await prisma.user.findMany({
+    where: {
+      username: {
+        contains: req.params.username
+      }
+    }
+  });
+  res.status(200).json(searchUserList);
+});
+
 export default signup;
