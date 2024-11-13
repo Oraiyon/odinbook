@@ -6,6 +6,7 @@ const Navbar = (props) => {
     return (
       <nav className={styles.navbar_container}>
         <Link to={"/signup"}>Sign Up</Link>
+        <Link to={"/"}>Search</Link>
         <Link to={"/login"}>Log In</Link>
       </nav>
     );
@@ -13,7 +14,7 @@ const Navbar = (props) => {
     return (
       <nav className={styles.navbar_container}>
         <Link to={"/feed"}>Feed</Link>
-        <Link to={"/search"}>Search</Link>
+        <Link to={"/"}>Search</Link>
         <Link to={"/post"}>Post</Link>
         <Link to={"/inbox"}>Inbox</Link>
         <Link to={"/profile"}>Profile</Link>

@@ -26,10 +26,6 @@ const Router = () => {
         {
           path: "/feed",
           element: <Feed />
-        },
-        {
-          path: "/search",
-          element: <Search />
         }
       ]
     }

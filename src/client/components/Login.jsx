@@ -44,7 +44,7 @@ const Login = () => {
 
   return (
     <div onSubmit={submitLogin} className={styles.login_container}>
-      <h1>Login</h1>
+      <h1>Log In</h1>
       <form className={styles.login_form}>
         <div>
           <label htmlFor="username">Username</label>
