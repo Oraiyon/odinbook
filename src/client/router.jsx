@@ -3,6 +3,7 @@ import App from "./components/App";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Feed from "./components/Feed";
+import Search from "./components/Search";
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -10,8 +11,10 @@ const Router = () => {
       path: "/",
       element: <App />,
       children: [
-        // "/"
-        // No user feed here
+        {
+          path: "/",
+          element: <Search />
+        },
         {
           path: "/signup",
           element: <Signup />
@@ -23,6 +26,10 @@ const Router = () => {
         {
           path: "/feed",
           element: <Feed />
+        },
+        {
+          path: "/search",
+          element: <Search />
         }
       ]
     }
