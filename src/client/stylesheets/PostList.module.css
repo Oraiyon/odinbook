@@ -1,0 +1,12 @@
+.post_container {
+  overflow-y: hidden;
+  flex-grow: 1;
+}
+
+.post_card {
+  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+  padding: 0.25em;
+}
