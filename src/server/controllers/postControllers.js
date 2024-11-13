@@ -16,6 +16,33 @@ const post_post = expressAsyncHandler(async (req, res, next) => {
     },
     orderBy: {
       postDate: "desc"
+    },
+    include: {
+      Likes: true,
+      Comments: {
+        include: {
+          Reply: true
+        }
+      },
+      author: true
+    }
+  });
+  res.status(200).json(postList);
+});
+
+export const get_posts = expressAsyncHandler(async (req, res, next) => {
+  const postList = await prisma.post.findMany({
+    orderBy: {
+      postDate: "desc"
+    },
+    include: {
+      Likes: true,
+      Comments: {
+        include: {
+          Reply: true
+        }
+      },
+      author: true
     }
   });
   res.status(200).json(postList);
@@ -31,7 +58,12 @@ export const get_user_posts = expressAsyncHandler(async (req, res, next) => {
     },
     include: {
       Likes: true,
-      Comments: true
+      Comments: {
+        include: {
+          Reply: true
+        }
+      },
+      author: true
     }
   });
   res.status(200).json(postList);
@@ -62,7 +94,8 @@ export const get_following_posts = expressAsyncHandler(async (req, res, next) =>
         include: {
           Reply: true
         }
-      }
+      },
+      author: true
     }
   });
   res.status(200).json(postList);
@@ -96,6 +129,15 @@ export const delete_post = expressAsyncHandler(async (req, res, next) => {
     },
     orderBy: {
       postDate: "desc"
+    },
+    include: {
+      Likes: true,
+      Comments: {
+        include: {
+          Reply: true
+        }
+      },
+      author: true
     }
   });
   res.status(200).json(postList);
