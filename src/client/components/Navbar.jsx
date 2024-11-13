@@ -12,11 +12,11 @@ const Navbar = (props) => {
   } else {
     return (
       <nav className={styles.navbar_container}>
-        <Link to={`/feed`}>Feed</Link>
-        <Link to={`/search`}>Search</Link>
-        <Link to={`/post`}>Post</Link>
-        <Link to={`/inbox`}>Inbox</Link>
-        <Link to={`/profile`}>Profile</Link>
+        <Link to={"/feed"}>Feed</Link>
+        <Link to={"/search"}>Search</Link>
+        <Link to={"/post"}>Post</Link>
+        <Link to={"/inbox"}>Inbox</Link>
+        <Link to={"/profile"}>Profile</Link>
       </nav>
     );
   }
