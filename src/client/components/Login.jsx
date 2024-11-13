@@ -63,7 +63,7 @@ const Login = () => {
           Sign Up!
         </Link>
       </p>
-      {user ? <Link to={`/${user.id}/feed`} ref={toUserRef}></Link> : ""}
+      {user ? <Link to={`/feed`} ref={toUserRef}></Link> : ""}
     </div>
   );
 };

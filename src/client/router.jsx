@@ -10,6 +10,8 @@ const Router = () => {
       path: "/",
       element: <App />,
       children: [
+        // "/"
+        // No user feed here
         {
           path: "/signup",
           element: <Signup />
@@ -19,7 +21,7 @@ const Router = () => {
           element: <Login />
         },
         {
-          path: "/:id/feed",
+          path: "/feed",
           element: <Feed />
         }
       ]
