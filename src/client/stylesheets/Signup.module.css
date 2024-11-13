@@ -7,10 +7,6 @@
   position: relative;
 }
 
-.signup_container > h1 {
-  font-size: xx-large;
-}
-
 .signup_form {
   width: 100%;
   padding: 0.5em;
