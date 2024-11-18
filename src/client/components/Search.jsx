@@ -8,6 +8,7 @@ const Search = () => {
 
   const [searchedUsername, setSearchedUsername] = useState(null);
   const [searchedUsersList, setSearchedUsersList] = useState(null);
+  const [displayLikes, setDisplayLikes] = useState(false);
 
   const searchBarRef = useRef(null);
 
@@ -28,17 +29,21 @@ const Search = () => {
 
   return (
     <div className={styles.search_container}>
-      <div className={styles.searchBar}>
-        <label htmlFor="searchBar"></label>
-        <input
-          type="text"
-          id="searchBar"
-          name="searchBar"
-          placeholder="Search Username"
-          ref={searchBarRef}
-          onChange={() => setSearchedUsername(searchBarRef.current.value)}
-        />
-      </div>
+      {!displayLikes ? (
+        <div className={styles.searchBar}>
+          <label htmlFor="searchBar"></label>
+          <input
+            type="text"
+            id="searchBar"
+            name="searchBar"
+            placeholder="Search Username"
+            ref={searchBarRef}
+            onChange={() => setSearchedUsername(searchBarRef.current.value)}
+          />
+        </div>
+      ) : (
+        ""
+      )}
       {searchedUsername && searchedUsersList ? (
         <div className={styles.searchUserList_container}>
           {searchedUsersList.map((user) => (
@@ -48,7 +53,7 @@ const Search = () => {
           ))}
         </div>
       ) : (
-        <PostList user={user} />
+        <PostList user={user} displayLikes={displayLikes} setDisplayLikes={setDisplayLikes} />
       )}
     </div>
   );

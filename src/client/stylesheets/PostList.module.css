@@ -28,3 +28,18 @@
 .post_card > p:last-of-type {
   cursor: default;
 }
+
+.likes_container {
+}
+
+.likes_container > div {
+  max-height: 50px;
+  border: 2px solid black;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.likes_container > div > svg {
+  max-width: 50px;
+}
