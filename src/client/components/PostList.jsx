@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "../stylesheets/PostList.module.css";
-import Icon from "@mdi/react";
-import { mdiArrowLeft } from "@mdi/js";
+import BackHeader from "./BackHeader";
 
 const PostList = (props) => {
   // props.user for displaying following posts or separate component?
@@ -12,7 +11,6 @@ const PostList = (props) => {
       try {
         const response = await fetch("/api/get/posts");
         const data = await response.json();
-        console.log(data);
         setPostList(data);
       } catch (error) {
         console.log(error);
@@ -83,10 +81,7 @@ const PostList = (props) => {
             )}
             {props.displayLikes ? (
               <div className={styles.likes_container}>
-                <div>
-                  <Icon path={mdiArrowLeft} onClick={() => displayLikesModal(post.Likes)} />
-                  <p>{post.text}</p>
-                </div>
+                <BackHeader post={post} displayLikesModal={displayLikesModal} />
                 {post.Likes.map((like) => (
                   <p key={like.id}>{like.likedBy.username}</p>
                 ))}

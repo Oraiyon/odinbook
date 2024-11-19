@@ -1,0 +1,11 @@
+.backHeader_container {
+  max-height: 50px;
+  border: 2px solid black;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.backHeader_container > svg {
+  max-width: 50px;
+}
