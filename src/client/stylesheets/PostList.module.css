@@ -15,10 +15,6 @@
   width: max-content;
 }
 
-.post_card > p:first-of-type {
-  font-weight: bold;
-}
-
 .post_card > p:nth-of-type(2) {
   border-top: 2px solid black;
   border-bottom: 2px solid black;
@@ -29,7 +25,7 @@
   cursor: default;
 }
 
-.likes_container > p {
+.likes_container > div > p {
   padding: 0.5em;
 }
 

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "../stylesheets/PostList.module.css";
 import BackHeader from "./BackHeader";
+import ToProfile from "./ToProfile";
 
 const PostList = (props) => {
   // props.user for displaying following posts or separate component?
@@ -105,7 +106,7 @@ const PostList = (props) => {
           <div key={post.id} className={styles.post_container}>
             {!props.displayLikes && !props.displayComments ? (
               <div className={styles.post_card}>
-                <p>{post.author.username}</p>
+                <ToProfile user={post.author} />
                 <p onClick={() => likePost(post.id)}>{post.text}</p>
                 <p onClick={displayLikesModal}>
                   {post.Likes.length} {post.Likes.length !== 1 ? "Likes" : "Like"}
@@ -126,7 +127,11 @@ const PostList = (props) => {
                   mode={"likes"}
                 />
                 {post.Likes.length ? (
-                  post.Likes.map((like) => <p key={like.id}>{like.likedBy.username}</p>)
+                  post.Likes.map((like) => (
+                    <div key={like.id}>
+                      <p>{like.likedBy.username}</p>
+                    </div>
+                  ))
                 ) : (
                   <p>No likes.</p>
                 )}
@@ -146,7 +151,7 @@ const PostList = (props) => {
                     postComments.map((comment) => (
                       <div key={comment.id} className={styles.comment_card}>
                         <div>
-                          <p>{comment.author.username}</p>
+                          <ToProfile user={comment.author} />
                           <DisplayDate date={comment.commentDate} />
                         </div>
                         <p>{comment.text}</p>
