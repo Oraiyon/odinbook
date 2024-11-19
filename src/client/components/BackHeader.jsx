@@ -3,12 +3,21 @@ import Icon from "@mdi/react";
 import { mdiArrowLeft } from "@mdi/js";
 
 const BackHeader = (props) => {
-  return (
-    <div className={styles.backHeader_container}>
-      <Icon path={mdiArrowLeft} onClick={() => props.displayLikesModal(props.post.Likes)} />
-      <p>{props.post.text}</p>
-    </div>
-  );
+  if (props.mode === "likes") {
+    return (
+      <div className={styles.backHeader_container}>
+        <Icon path={mdiArrowLeft} onClick={() => props.displayLikesModal(props.post.Likes)} />
+        <p>{props.post.text}</p>
+      </div>
+    );
+  } else if (props.mode === "comments") {
+    return (
+      <div className={styles.backHeader_container}>
+        <Icon path={mdiArrowLeft} onClick={() => props.displayCommentsModal(props.post.Comments)} />
+        <p>{props.post.text}</p>
+      </div>
+    );
+  }
 };
 
 export default BackHeader;
