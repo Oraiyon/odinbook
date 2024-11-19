@@ -8,4 +8,5 @@
 
 .backHeader_container > svg {
   max-width: 50px;
+  cursor: pointer;
 }
