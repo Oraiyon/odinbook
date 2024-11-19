@@ -9,6 +9,7 @@ const Search = () => {
   const [searchedUsername, setSearchedUsername] = useState(null);
   const [searchedUsersList, setSearchedUsersList] = useState(null);
   const [displayLikes, setDisplayLikes] = useState(false);
+  const [displayComments, setDisplayComments] = useState(false);
 
   const searchBarRef = useRef(null);
 
@@ -29,7 +30,7 @@ const Search = () => {
 
   return (
     <div className={styles.search_container}>
-      {!displayLikes ? (
+      {!displayLikes && !displayComments ? (
         <div className={styles.searchBar}>
           <label htmlFor="searchBar"></label>
           <input
@@ -53,7 +54,13 @@ const Search = () => {
           ))}
         </div>
       ) : (
-        <PostList user={user} displayLikes={displayLikes} setDisplayLikes={setDisplayLikes} />
+        <PostList
+          user={user}
+          displayLikes={displayLikes}
+          setDisplayLikes={setDisplayLikes}
+          displayComments={displayComments}
+          setDisplayComments={setDisplayComments}
+        />
       )}
     </div>
   );
