@@ -20,13 +20,34 @@ const post_comment = expressAsyncHandler(async (req, res, next) => {
         orderBy: {
           replyDate: "desc"
         }
-      }
+      },
+      author: true
     },
     orderBy: {
       commentDate: "desc"
     }
   });
   // Just jump to this with react
+  res.status(200).json(commentList);
+});
+
+export const get_comments = expressAsyncHandler(async (req, res, next) => {
+  const commentList = await prisma.comment.findMany({
+    where: {
+      postId: req.body.post
+    },
+    include: {
+      Reply: {
+        orderBy: {
+          replyDate: "desc"
+        }
+      },
+      author: true
+    },
+    orderBy: {
+      commentDate: "desc"
+    }
+  });
   res.status(200).json(commentList);
 });
 

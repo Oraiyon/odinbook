@@ -17,7 +17,7 @@ import post_post, {
   get_posts
 } from "./controllers/postControllers.js";
 import post_like_post from "./controllers/likeControllers.js";
-import post_comment from "./controllers/commentController.js";
+import post_comment, { get_comments } from "./controllers/commentController.js";
 import post_reply from "./controllers/replyController.js";
 
 const router = express.Router();
@@ -52,6 +52,7 @@ router.post("/api/:id/like/post", post_like_post);
 
 // commentControllers
 router.post("/api/post/create/comment", post_comment);
+router.get("/api/get/:postId/comments", get_comments);
 
 // replyControllers
 router.post("/api/post/create/reply", post_reply);
