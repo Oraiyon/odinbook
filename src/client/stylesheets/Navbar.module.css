@@ -1,6 +1,4 @@
 .navbar_container {
-  position: absolute;
-  bottom: 0;
   width: 100%;
   display: flex;
   border: 2px solid black;
