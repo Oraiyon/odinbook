@@ -48,7 +48,7 @@ router.get("/api/:id/get/following/posts", get_following_posts);
 router.delete("/api/:id/delete/:postId", delete_post);
 
 // likeControllers
-router.post("/api/like/post", post_like_post);
+router.post("/api/:id/like/post", post_like_post);
 
 // commentControllers
 router.post("/api/post/create/comment", post_comment);

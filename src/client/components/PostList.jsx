@@ -12,6 +12,7 @@ const PostList = (props) => {
       try {
         const response = await fetch("/api/get/posts");
         const data = await response.json();
+        console.log(data);
         setPostList(data);
       } catch (error) {
         console.log(error);
@@ -40,6 +41,28 @@ const PostList = (props) => {
     }
   };
 
+  const likePost = async (postId) => {
+    try {
+      if (props.user) {
+        const response = await fetch(`/api/${props.user.id}/like/post`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            id: props.user.id,
+            post: postId,
+            page: "search"
+          })
+        });
+        const data = await response.json();
+        setPostList(data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       {postList ? (
@@ -48,7 +71,7 @@ const PostList = (props) => {
             {!props.displayLikes ? (
               <div className={styles.post_card}>
                 <p>{post.author.username}</p>
-                <p>{post.text}</p>
+                <p onClick={() => likePost(post.id)}>{post.text}</p>
                 <p onClick={() => displayLikesModal(post.Likes)}>
                   {post.Likes.length} {post.Likes.length !== 1 ? "Likes" : "Like"}
                 </p>
@@ -61,9 +84,12 @@ const PostList = (props) => {
             {props.displayLikes ? (
               <div className={styles.likes_container}>
                 <div>
-                  <Icon path={mdiArrowLeft} onClick={() => displayLikesModal()} />
+                  <Icon path={mdiArrowLeft} onClick={() => displayLikesModal(post.Likes)} />
                   <p>{post.text}</p>
                 </div>
+                {post.Likes.map((like) => (
+                  <p key={like.id}>{like.likedBy.username}</p>
+                ))}
               </div>
             ) : (
               ""

@@ -18,7 +18,11 @@ const post_post = expressAsyncHandler(async (req, res, next) => {
       postDate: "desc"
     },
     include: {
-      Likes: true,
+      Likes: {
+        include: {
+          likedBy: true
+        }
+      },
       Comments: {
         include: {
           Reply: true
@@ -36,7 +40,11 @@ export const get_posts = expressAsyncHandler(async (req, res, next) => {
       postDate: "desc"
     },
     include: {
-      Likes: true,
+      Likes: {
+        include: {
+          likedBy: true
+        }
+      },
       Comments: {
         include: {
           Reply: true
@@ -57,7 +65,11 @@ export const get_user_posts = expressAsyncHandler(async (req, res, next) => {
       postDate: "desc"
     },
     include: {
-      Likes: true,
+      Likes: {
+        include: {
+          likedBy: true
+        }
+      },
       Comments: {
         include: {
           Reply: true
@@ -89,7 +101,11 @@ export const get_following_posts = expressAsyncHandler(async (req, res, next) =>
       postDate: "desc"
     },
     include: {
-      Likes: true,
+      Likes: {
+        include: {
+          likedBy: true
+        }
+      },
       Comments: {
         include: {
           Reply: true
@@ -131,7 +147,11 @@ export const delete_post = expressAsyncHandler(async (req, res, next) => {
       postDate: "desc"
     },
     include: {
-      Likes: true,
+      Likes: {
+        include: {
+          likedBy: true
+        }
+      },
       Comments: {
         include: {
           Reply: true

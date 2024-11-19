@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { get_following_posts } from "./postControllers.js";
+import { get_following_posts, get_posts } from "./postControllers.js";
 import expressAsyncHandler from "express-async-handler";
 
 const prisma = new PrismaClient();
@@ -26,10 +26,31 @@ const post_like_post = [
         }
       });
     }
+    if (req.body.page === "search") {
+      const postList = await prisma.post.findMany({
+        orderBy: {
+          postDate: "desc"
+        },
+        include: {
+          Likes: {
+            include: {
+              likedBy: true
+            }
+          },
+          Comments: {
+            include: {
+              Reply: true
+            }
+          },
+          author: true
+        }
+      });
+      res.status(200).json(postList);
+      return;
+    }
     next();
   }),
   // Just jump to this with react
-  // Remove get_following_posts?
   get_following_posts
 ];
 
