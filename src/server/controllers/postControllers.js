@@ -23,9 +23,9 @@ const post_post = expressAsyncHandler(async (req, res, next) => {
           likedBy: true
         }
       },
-      Comments: {
-        include: {
-          Reply: true
+      _count: {
+        select: {
+          Comments: true
         }
       },
       author: true
@@ -45,9 +45,9 @@ export const get_posts = expressAsyncHandler(async (req, res, next) => {
           likedBy: true
         }
       },
-      Comments: {
-        include: {
-          Reply: true
+      _count: {
+        select: {
+          Comments: true
         }
       },
       author: true
@@ -70,9 +70,9 @@ export const get_user_posts = expressAsyncHandler(async (req, res, next) => {
           likedBy: true
         }
       },
-      Comments: {
-        include: {
-          Reply: true
+      _count: {
+        select: {
+          Comments: true
         }
       },
       author: true
@@ -106,9 +106,9 @@ export const get_following_posts = expressAsyncHandler(async (req, res, next) =>
           likedBy: true
         }
       },
-      Comments: {
-        include: {
-          Reply: true
+      _count: {
+        select: {
+          Comments: true
         }
       },
       author: true
@@ -152,9 +152,9 @@ export const delete_post = expressAsyncHandler(async (req, res, next) => {
           likedBy: true
         }
       },
-      Comments: {
-        include: {
-          Reply: true
+      _count: {
+        select: {
+          Comments: true
         }
       },
       author: true

@@ -37,9 +37,9 @@ const post_like_post = [
               likedBy: true
             }
           },
-          Comments: {
-            include: {
-              Reply: true
+          _count: {
+            select: {
+              Comments: true
             }
           },
           author: true
