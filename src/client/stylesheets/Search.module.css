@@ -13,12 +13,3 @@
 .searchUserList_container {
   padding: 0.25em;
 }
-
-.searchUser_card {
-  cursor: pointer;
-  display: flex;
-}
-
-.searchUser_card > p {
-  font-weight: bold;
-}

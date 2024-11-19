@@ -2,6 +2,7 @@ import { useOutletContext } from "react-router-dom";
 import styles from "../stylesheets/Search.module.css";
 import { useEffect, useRef, useState } from "react";
 import PostList from "./PostList";
+import ToProfile from "./ToProfile";
 
 const Search = () => {
   const [user, setUser] = useOutletContext();
@@ -48,8 +49,8 @@ const Search = () => {
       {searchedUsername && searchedUsersList ? (
         <div className={styles.searchUserList_container}>
           {searchedUsersList.map((user) => (
-            <div key={user.id} className={styles.searchUser_card}>
-              <p>{user.username}</p>
+            <div key={user.id}>
+              <ToProfile user={user} />
             </div>
           ))}
         </div>

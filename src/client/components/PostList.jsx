@@ -129,7 +129,7 @@ const PostList = (props) => {
                 {post.Likes.length ? (
                   post.Likes.map((like) => (
                     <div key={like.id}>
-                      <p>{like.likedBy.username}</p>
+                      <ToProfile user={like.likedBy} />
                     </div>
                   ))
                 ) : (
