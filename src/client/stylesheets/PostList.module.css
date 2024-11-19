@@ -9,13 +9,18 @@
   flex-direction: column;
 }
 
+/* For overwriting styling in ToProfile.jsx */
+.post_card > div {
+  padding: 0.25em;
+}
+
 .post_card > p {
   padding: 0.25em;
   cursor: pointer;
   width: max-content;
 }
 
-.post_card > p:nth-of-type(2) {
+.post_card > p:first-of-type {
   border-top: 2px solid black;
   border-bottom: 2px solid black;
   width: 100%;
@@ -23,10 +28,6 @@
 
 .post_card > p:last-of-type {
   cursor: default;
-}
-
-.likes_container > div > p {
-  padding: 0.5em;
 }
 
 .comments_container {
@@ -70,4 +71,9 @@
 .comment_card > div {
   display: flex;
   justify-content: space-between;
+}
+
+/* For overwriting styling in ToProfile.jsx */
+.comment_card > div > div {
+  padding: 0;
 }

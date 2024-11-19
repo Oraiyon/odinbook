@@ -6,9 +6,9 @@ const ToProfile = (props) => {
   };
 
   return (
-    <p onClick={toUser} className={styles.user_card}>
-      {props.user.username}
-    </p>
+    <div onClick={toUser} className={styles.user_card}>
+      <p>{props.user.username}</p>
+    </div>
   );
 };
 
