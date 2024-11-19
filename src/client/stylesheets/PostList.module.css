@@ -67,5 +67,11 @@
 .comment_card {
   padding: 0.5em;
   display: flex;
-  gap: 0.5em;
+  flex-direction: column;
+  gap: 0.25em;
+}
+
+.comment_card > div {
+  display: flex;
+  justify-content: space-between;
 }

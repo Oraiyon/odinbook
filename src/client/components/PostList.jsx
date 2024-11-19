@@ -22,8 +22,8 @@ const PostList = (props) => {
     getPosts();
   }, []);
 
-  const DisplayPostDate = (props) => {
-    const date = new Date(props.postDate);
+  const DisplayDate = (props) => {
+    const date = new Date(props.date);
     const options = {
       month: "short",
       day: "numeric",
@@ -113,7 +113,7 @@ const PostList = (props) => {
                 <p onClick={displayCommentsModal}>
                   View {post._count.Comments} {post._count.Comments !== 1 ? "Comments" : "Comment"}
                 </p>
-                <DisplayPostDate postDate={post.postDate} />
+                <DisplayDate date={post.postDate} />
               </div>
             ) : (
               ""
@@ -145,7 +145,10 @@ const PostList = (props) => {
                   {postComments.length ? (
                     postComments.map((comment) => (
                       <div key={comment.id} className={styles.comment_card}>
-                        <p>{comment.author.username}</p>
+                        <div>
+                          <p>{comment.author.username}</p>
+                          <DisplayDate date={comment.commentDate} />
+                        </div>
                         <p>{comment.text}</p>
                       </div>
                     ))
