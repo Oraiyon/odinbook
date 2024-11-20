@@ -5,21 +5,10 @@ import styles from "../stylesheets/App.module.css";
 
 function App() {
   const [user, setUser] = useState(null);
-  const [displayLikes, setDisplayLikes] = useState(false);
-  const [displayComments, setDisplayComments] = useState(false);
 
   return (
     <div className={styles.app_container}>
-      <Outlet
-        context={[
-          user,
-          setUser,
-          displayLikes,
-          setDisplayLikes,
-          displayComments,
-          setDisplayComments
-        ]}
-      />
+      <Outlet context={[user, setUser]} />
       <Navbar user={user} />
     </div>
   );

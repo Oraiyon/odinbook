@@ -16,8 +16,7 @@ const PostList = (props) => {
         if (props.mode === "search") {
           response = await fetch("/api/get/posts");
         } else if (props.mode === "profile") {
-          // id should be searched user's id
-          // response = await fetch(`/api/${props.user.id}/get/posts`)
+          response = await fetch(`/api/${props.user}/get/posts`);
         } else if (props.mode === "feed") {
           response = await fetch(`/api/${props.user.id}/get/following/posts`);
         }
@@ -113,7 +112,7 @@ const PostList = (props) => {
           <div key={post.id} className={styles.post_container}>
             {!props.displayLikes && !props.displayComments ? (
               <div className={styles.post_card}>
-                <ToProfile user={post.author} />
+                {props.mode !== "profile" ? <ToProfile user={post.author} /> : ""}
                 <p onClick={() => likePost(post.id)}>{post.text}</p>
                 <p onClick={displayLikesModal}>
                   {post.Likes.length} {post.Likes.length !== 1 ? "Likes" : "Like"}
@@ -136,7 +135,12 @@ const PostList = (props) => {
                 {post.Likes.length ? (
                   post.Likes.map((like) => (
                     <div key={like.id}>
-                      <ToProfile user={like.likedBy} />
+                      <ToProfile
+                        user={like.likedBy}
+                        displayLikesModal={displayLikesModal}
+                        post={post.id}
+                        mode={"likes"}
+                      />
                     </div>
                   ))
                 ) : (
@@ -158,7 +162,12 @@ const PostList = (props) => {
                     postComments.map((comment) => (
                       <div key={comment.id} className={styles.comment_card}>
                         <div>
-                          <ToProfile user={comment.author} />
+                          <ToProfile
+                            user={comment.author}
+                            displayCommentsModal={displayCommentsModal}
+                            post={post}
+                            mode={"comments"}
+                          />
                           <DisplayDate date={comment.commentDate} />
                         </div>
                         <p>{comment.text}</p>

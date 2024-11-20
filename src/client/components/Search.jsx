@@ -5,11 +5,12 @@ import PostList from "./PostList";
 import ToProfile from "./ToProfile";
 
 const Search = () => {
-  const [user, setUser, displayLikes, setDisplayLikes, displayComments, setDisplayComments] =
-    useOutletContext();
+  const [user, setUser] = useOutletContext();
 
   const [searchedUsername, setSearchedUsername] = useState(null);
   const [searchedUsersList, setSearchedUsersList] = useState(null);
+  const [displayLikes, setDisplayLikes] = useState(false);
+  const [displayComments, setDisplayComments] = useState(false);
 
   const searchBarRef = useRef(null);
 
