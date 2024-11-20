@@ -4,20 +4,20 @@
 }
 
 .post_card {
-  border: 2px solid black;
+  /* border: 2px solid black; */
   display: flex;
   flex-direction: column;
 }
 
-/* For overwriting styling in ToProfile.jsx */
-.post_card > div {
+/* For overwriting BackHeader */
+.post_card > div:first-of-type {
   padding: 0.25em;
 }
 
 .post_card > p {
   padding: 0.25em;
   cursor: pointer;
-  width: max-content;
+  width: 100%;
 }
 
 .post_card > p:first-of-type {
@@ -28,6 +28,10 @@
 
 .post_card > p:last-of-type {
   cursor: default;
+}
+
+.like_card {
+  padding: 0.5em;
 }
 
 .comments_container {
@@ -73,7 +77,14 @@
   justify-content: space-between;
 }
 
-/* For overwriting styling in ToProfile.jsx */
-.comment_card > div > div {
+#post_card_profile {
   padding: 0;
+}
+
+.post_date {
+  border-bottom: 2px solid black;
+}
+
+.comment_card > div > .post_date {
+  border: 0;
 }

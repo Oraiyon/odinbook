@@ -16,8 +16,8 @@ const PostList = (props) => {
         if (props.mode === "search") {
           response = await fetch("/api/get/posts");
         } else if (props.mode === "profile") {
-          response = await fetch(`/api/${props.user}/get/posts`);
-        } else if (props.mode === "feed") {
+          response = await fetch(`/api/${props.userProfile.id}/get/posts`);
+        } else if (props.mode === "feed" && props.user) {
           response = await fetch(`/api/${props.user.id}/get/following/posts`);
         }
         const data = await response.json();
@@ -36,7 +36,7 @@ const PostList = (props) => {
       day: "numeric",
       year: "numeric"
     };
-    return <p>{date.toLocaleDateString("en-us", options)}</p>;
+    return <p className={styles.post_date}>{date.toLocaleDateString("en-us", options)}</p>;
   };
 
   const displayLikesModal = () => {
@@ -112,7 +112,13 @@ const PostList = (props) => {
           <div key={post.id} className={styles.post_container}>
             {!props.displayLikes && !props.displayComments ? (
               <div className={styles.post_card}>
-                {props.mode !== "profile" ? <ToProfile user={post.author} /> : ""}
+                {props.mode !== "profile" ? (
+                  <ToProfile user={post.author} />
+                ) : (
+                  <div id={styles.post_card_profile}>
+                    <ToProfile user={post.author} mode={"profile"} />
+                  </div>
+                )}
                 <p onClick={() => likePost(post.id)}>{post.text}</p>
                 <p onClick={displayLikesModal}>
                   {post.Likes.length} {post.Likes.length !== 1 ? "Likes" : "Like"}
@@ -134,7 +140,7 @@ const PostList = (props) => {
                 />
                 {post.Likes.length ? (
                   post.Likes.map((like) => (
-                    <div key={like.id}>
+                    <div key={like.id} className={styles.like_card}>
                       <ToProfile user={like.likedBy} />
                     </div>
                   ))
