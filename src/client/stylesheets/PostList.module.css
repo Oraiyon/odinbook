@@ -4,7 +4,6 @@
 }
 
 .post_card {
-  /* border: 2px solid black; */
   display: flex;
   flex-direction: column;
 }
@@ -79,6 +78,10 @@
 
 #post_card_profile {
   padding: 0;
+}
+
+#post_card_profile + p:first-of-type {
+  border-top: 0;
 }
 
 .post_date {
