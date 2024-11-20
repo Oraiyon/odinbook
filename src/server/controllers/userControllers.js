@@ -90,4 +90,13 @@ export const get_search_user = expressAsyncHandler(async (req, res, next) => {
   res.status(200).json(searchUserList);
 });
 
+export const get_user_profile = expressAsyncHandler(async (req, res, next) => {
+  const user = await prisma.user.findFirst({
+    where: {
+      id: req.params.id
+    }
+  });
+  res.status(200).json(user);
+});
+
 export default signup;

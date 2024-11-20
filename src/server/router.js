@@ -1,5 +1,10 @@
 import express from "express";
-import signup, { get_search_user, login, logout } from "./controllers/userControllers.js";
+import signup, {
+  get_search_user,
+  get_user_profile,
+  login,
+  logout
+} from "./controllers/userControllers.js";
 import post_request, {
   delete_request,
   get_received_requests,
@@ -27,6 +32,7 @@ router.post("/signup", signup);
 router.post("/login", login);
 router.get("/logout", logout);
 router.get("/api/search/:username", get_search_user);
+router.get("/api/:id/profile", get_user_profile);
 
 // requestControllers
 router.get("/api/:id/sent/requests", get_sent_requests);
