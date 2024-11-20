@@ -4,7 +4,6 @@ import BackHeader from "./BackHeader";
 import ToProfile from "./ToProfile";
 
 const PostList = (props) => {
-  // props.user for displaying following posts or separate component?
   const [postList, setPostList] = useState([]);
   const [postComments, setPostComments] = useState([]);
 
@@ -13,7 +12,15 @@ const PostList = (props) => {
   useEffect(() => {
     const getPosts = async () => {
       try {
-        const response = await fetch("/api/get/posts");
+        let response;
+        if (props.mode === "search") {
+          response = await fetch("/api/get/posts");
+        } else if (props.mode === "profile") {
+          // id should be searched user's id
+          // response = await fetch(`/api/${props.user.id}/get/posts`)
+        } else if (props.mode === "feed") {
+          response = await fetch(`/api/${props.user.id}/get/following/posts`);
+        }
         const data = await response.json();
         setPostList(data);
       } catch (error) {
