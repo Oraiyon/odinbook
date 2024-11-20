@@ -135,12 +135,7 @@ const PostList = (props) => {
                 {post.Likes.length ? (
                   post.Likes.map((like) => (
                     <div key={like.id}>
-                      <ToProfile
-                        user={like.likedBy}
-                        displayLikesModal={displayLikesModal}
-                        post={post.id}
-                        mode={"likes"}
-                      />
+                      <ToProfile user={like.likedBy} />
                     </div>
                   ))
                 ) : (
@@ -162,12 +157,7 @@ const PostList = (props) => {
                     postComments.map((comment) => (
                       <div key={comment.id} className={styles.comment_card}>
                         <div>
-                          <ToProfile
-                            user={comment.author}
-                            displayCommentsModal={displayCommentsModal}
-                            post={post}
-                            mode={"comments"}
-                          />
+                          <ToProfile user={comment.author} />
                           <DisplayDate date={comment.commentDate} />
                         </div>
                         <p>{comment.text}</p>
