@@ -42,10 +42,14 @@ const PostList = (props) => {
   const displayLikesModal = () => {
     if (!props.displayLikes) {
       props.setDisplayLikes(true);
-      props.setDisplayBackHeader(false);
+      if (props.mode === "profile") {
+        props.setDisplayBackHeader(false);
+      }
     } else {
       props.setDisplayLikes(false);
-      props.setDisplayBackHeader(true);
+      if (props.mode === "profile") {
+        props.setDisplayBackHeader(true);
+      }
     }
   };
 
@@ -78,10 +82,14 @@ const PostList = (props) => {
         const data = await response.json();
         setPostComments(data);
         props.setDisplayComments(true);
-        props.setDisplayBackHeader(false);
+        if (props.mode === "profile") {
+          props.setDisplayBackHeader(false);
+        }
       } else {
         props.setDisplayComments(false);
-        props.setDisplayBackHeader(true);
+        if (props.mode === "profile") {
+          props.setDisplayBackHeader(true);
+        }
       }
     } catch (error) {
       console.log(error);
