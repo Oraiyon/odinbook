@@ -51,6 +51,10 @@ export const login = [
     const user = await prisma.user.findFirst({
       where: {
         username: req.body.username
+      },
+      include: {
+        FollowedBy: true,
+        Following: true
       }
     });
     if (!user) {
@@ -85,6 +89,10 @@ export const get_search_user = expressAsyncHandler(async (req, res, next) => {
       username: {
         contains: req.params.username
       }
+    },
+    include: {
+      FollowedBy: true,
+      Following: true
     }
   });
   res.status(200).json(searchUserList);
@@ -94,6 +102,10 @@ export const get_user_profile = expressAsyncHandler(async (req, res, next) => {
   const user = await prisma.user.findFirst({
     where: {
       id: req.params.id
+    },
+    include: {
+      FollowedBy: true,
+      Following: true
     }
   });
   res.status(200).json(user);

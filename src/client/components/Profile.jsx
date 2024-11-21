@@ -18,8 +18,7 @@ const Profile = () => {
         const response = await fetch(`/api/${window.location.pathname.split("/")[1]}/profile`);
         const data = await response.json();
         setUserProfile(data);
-        // Include followers & following
-        console.log(data);
+        // console.log(data);
       } catch (error) {
         console.log(error);
       }
@@ -29,14 +28,23 @@ const Profile = () => {
 
   return (
     <div className={styles.profile_container}>
-      {userProfile ? (
+      {!user && userProfile ? (
         <>
           {displayBackHeader ? (
             <>
               <BackHeader mode={"profile"} previousPage={previousPage} />
               <header>
                 <h1>{userProfile.username}</h1>
-                <div></div>
+                <div className={styles.follow_container}>
+                  <div className={styles.followers_container}>
+                    <p>Followers</p>
+                    <p>{userProfile.FollowedBy.length}</p>
+                  </div>
+                  <div className={styles.following_container}>
+                    <p>Following</p>
+                    <p>{userProfile.Following.length}</p>
+                  </div>
+                </div>
               </header>
             </>
           ) : (
