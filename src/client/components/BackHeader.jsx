@@ -2,8 +2,11 @@ import styles from "../stylesheets/BackHeader.module.css";
 import Icon from "@mdi/react";
 import { mdiArrowLeft } from "@mdi/js";
 import { Link } from "react-router-dom";
+import { useRef } from "react";
 
 const BackHeader = (props) => {
+  const linkRef = useRef(null);
+
   if (props.mode === "likes") {
     return (
       <div className={styles.backHeader_container}>
@@ -19,11 +22,14 @@ const BackHeader = (props) => {
       </div>
     );
   } else if (props.mode === "profile") {
-    //
+    // Use previousPage state?
     return (
       <div className={styles.backHeader_container_profile}>
-        <Icon path={mdiArrowLeft} />
-        <p>{props.user}</p>
+        <div onClick={() => linkRef.current.click()}>
+          <Icon path={mdiArrowLeft} />
+          <Link to={props.previousPage} ref={linkRef} />
+        </div>
+        <p>{props.previousPage}</p>
       </div>
     );
   }

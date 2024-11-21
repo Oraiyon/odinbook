@@ -42,8 +42,10 @@ const PostList = (props) => {
   const displayLikesModal = () => {
     if (!props.displayLikes) {
       props.setDisplayLikes(true);
+      props.setDisplayBackHeader(false);
     } else {
       props.setDisplayLikes(false);
+      props.setDisplayBackHeader(true);
     }
   };
 
@@ -76,8 +78,10 @@ const PostList = (props) => {
         const data = await response.json();
         setPostComments(data);
         props.setDisplayComments(true);
+        props.setDisplayBackHeader(false);
       } else {
         props.setDisplayComments(false);
+        props.setDisplayBackHeader(true);
       }
     } catch (error) {
       console.log(error);
@@ -112,13 +116,7 @@ const PostList = (props) => {
           <div key={post.id} className={styles.post_container}>
             {!props.displayLikes && !props.displayComments ? (
               <div className={styles.post_card}>
-                {props.mode !== "profile" ? (
-                  <ToProfile user={post.author} />
-                ) : (
-                  <div id={styles.post_card_profile}>
-                    <ToProfile user={post.author} mode={"profile"} />
-                  </div>
-                )}
+                <ToProfile user={post.author} />
                 <p onClick={() => likePost(post.id)}>{post.text}</p>
                 <p onClick={displayLikesModal}>
                   {post.Likes.length} {post.Likes.length !== 1 ? "Likes" : "Like"}

@@ -21,7 +21,13 @@
   align-items: center;
 }
 
-.backHeader_container_profile > svg {
+.backHeader_container_profile > div {
   max-width: 50px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.backHeader_container_profile > div > svg {
+  width: 100%;
 }

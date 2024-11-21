@@ -5,7 +5,7 @@ import PostList from "./PostList";
 import ToProfile from "./ToProfile";
 
 const Search = () => {
-  const [user, setUser] = useOutletContext();
+  const [user, setUser, previousPage, setPreviousPage] = useOutletContext();
 
   const [searchedUsername, setSearchedUsername] = useState(null);
   const [searchedUsersList, setSearchedUsersList] = useState(null);
@@ -49,7 +49,7 @@ const Search = () => {
       {searchedUsername && searchedUsersList ? (
         <div className={styles.searchUserList_container}>
           {searchedUsersList.map((user) => (
-            <div key={user.id}>
+            <div key={user.id} className={styles.search_card}>
               <ToProfile user={user} />
             </div>
           ))}
