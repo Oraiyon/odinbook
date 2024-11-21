@@ -129,7 +129,7 @@ const PostList = (props) => {
                 <p onClick={displayLikesModal}>
                   {post.Likes.length} {post.Likes.length !== 1 ? "Likes" : "Like"}
                 </p>
-                <p onClick={displayCommentsModal}>
+                <p onClick={() => displayCommentsModal(post.id)}>
                   View {post._count.Comments} {post._count.Comments !== 1 ? "Comments" : "Comment"}
                 </p>
                 <DisplayDate date={post.postDate} />
@@ -147,7 +147,16 @@ const PostList = (props) => {
                 {post.Likes.length ? (
                   post.Likes.map((like) => (
                     <div key={like.id} className={styles.like_card}>
-                      <ToProfile user={like.likedBy} />
+                      {props.mode !== "profile" ? (
+                        <ToProfile user={like.likedBy} />
+                      ) : (
+                        <ToProfile
+                          user={like.likedBy}
+                          mode={"profile"}
+                          post={post}
+                          displayLikesModal={() => displayLikesModal(post.id)}
+                        />
+                      )}
                     </div>
                   ))
                 ) : (
@@ -169,7 +178,16 @@ const PostList = (props) => {
                     postComments.map((comment) => (
                       <div key={comment.id} className={styles.comment_card}>
                         <div>
-                          <ToProfile user={comment.author} />
+                          {props.mode !== "profile" ? (
+                            <ToProfile user={comment.author} />
+                          ) : (
+                            <ToProfile
+                              user={comment.author}
+                              mode={"profile"}
+                              post={post}
+                              displayCommentsModal={() => displayCommentsModal(post.id)}
+                            />
+                          )}
                           <DisplayDate date={comment.commentDate} />
                         </div>
                         <p>{comment.text}</p>
