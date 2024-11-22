@@ -17,7 +17,7 @@ const Navbar = (props) => {
         <Link to={"/"}>Search</Link>
         <Link to={"/post"}>Post</Link>
         <Link to={"/inbox"}>Inbox</Link>
-        <Link to={"/profile"}>Profile</Link>
+        <Link to={"/user"}>User</Link>
       </nav>
     );
   }
