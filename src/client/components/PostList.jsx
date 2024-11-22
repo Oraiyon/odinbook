@@ -17,7 +17,7 @@ const PostList = (props) => {
           response = await fetch("/api/get/posts");
         } else if (props.mode === "profile" && props.user) {
           response = await fetch(`/api/${props.user.id}/get/posts`);
-        } else if (props.mode === "profile") {
+        } else if (props.mode === "profile" && props.userProfile) {
           response = await fetch(`/api/${props.userProfile.id}/get/posts`);
         }
         const data = await response.json();

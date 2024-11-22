@@ -23,7 +23,7 @@ const User = () => {
           displayComments={displayComments}
           setDisplayComments={setDisplayComments}
           mode={"profile"}
-          userProfile={user}
+          userProfile={null}
           setDisplayBackHeader={setDisplayBackHeader}
         />
       </div>
