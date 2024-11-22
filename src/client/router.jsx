@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import Feed from "./components/Feed";
 import Search from "./components/Search";
 import Profile from "./components/Profile";
+import User from "./components/User";
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -31,8 +32,13 @@ const Router = () => {
         {
           path: "/:id/profile",
           element: <Profile />
+        },
+        {
+          path: "/user",
+          element: <User />
         }
       ]
+      // errorElement
     }
   ]);
 
