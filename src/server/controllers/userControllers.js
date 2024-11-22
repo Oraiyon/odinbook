@@ -69,9 +69,18 @@ export const login = [
     next();
   }),
   passport.authenticate("local"),
-  (req, res, next) => {
-    res.status(200).json(req.user);
-  }
+  expressAsyncHandler(async (req, res, next) => {
+    const user = await prisma.user.findFirst({
+      where: {
+        username: req.body.username
+      },
+      include: {
+        FollowedBy: true,
+        Following: true
+      }
+    });
+    res.status(200).json(user);
+  })
 ];
 
 export const logout = (req, res, next) => {
