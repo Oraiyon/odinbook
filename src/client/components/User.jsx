@@ -15,7 +15,7 @@ const User = () => {
   if (user) {
     return (
       <div className={styles.user_container}>
-        <Follows userProfile={user} />
+        {displayBackHeader ? <Follows userProfile={user} /> : ""}
         <PostList
           user={user}
           displayLikes={displayLikes}

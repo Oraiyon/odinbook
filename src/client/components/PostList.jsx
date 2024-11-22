@@ -15,10 +15,10 @@ const PostList = (props) => {
         let response;
         if (props.mode === "search") {
           response = await fetch("/api/get/posts");
+        } else if (props.mode === "profile" && props.user) {
+          response = await fetch(`/api/${props.user.id}/get/posts`);
         } else if (props.mode === "profile") {
           response = await fetch(`/api/${props.userProfile.id}/get/posts`);
-        } else if (props.mode === "feed" && props.user) {
-          response = await fetch(`/api/${props.user.id}/get/following/posts`);
         }
         const data = await response.json();
         setPostList(data);
