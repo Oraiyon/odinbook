@@ -13,13 +13,17 @@ const ToProfile = (props) => {
   if (props.mode !== "profile") {
     return (
       <div className={styles.user_card}>
-        <Link to={`/${props.user.id}/profile`}>{props.user.username}</Link>
+        {!props.user ? (
+          <Link to={`/${props.searchedUser.id}/profile`}>{props.searchedUser.username}</Link>
+        ) : (
+          <Link to={`/profile`}>{props.user.username}</Link>
+        )}
       </div>
     );
   } else {
     return (
       <div className={styles.user_card}>
-        <p onClick={handleModals}>{props.user.username}</p>
+        <p onClick={handleModals}>{props.searchedUser.username}</p>
       </div>
     );
   }

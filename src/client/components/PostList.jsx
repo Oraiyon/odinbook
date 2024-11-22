@@ -124,7 +124,11 @@ const PostList = (props) => {
           <div key={post.id} className={styles.post_container}>
             {!props.displayLikes && !props.displayComments ? (
               <div className={styles.post_card}>
-                <ToProfile user={post.author} />
+                {props.mode !== "profile" ? (
+                  <ToProfile searchedUser={post.author} />
+                ) : (
+                  <ToProfile searchedUser={post.author} mode={"profile"} />
+                )}
                 <p onClick={() => likePost(post.id)}>{post.text}</p>
                 <p onClick={displayLikesModal}>
                   {post.Likes.length} {post.Likes.length !== 1 ? "Likes" : "Like"}
@@ -148,10 +152,10 @@ const PostList = (props) => {
                   post.Likes.map((like) => (
                     <div key={like.id} className={styles.like_card}>
                       {props.mode !== "profile" ? (
-                        <ToProfile user={like.likedBy} />
+                        <ToProfile searchedUser={like.likedBy} />
                       ) : (
                         <ToProfile
-                          user={like.likedBy}
+                          searchedUser={like.likedBy}
                           mode={"profile"}
                           post={post}
                           displayLikesModal={() => displayLikesModal(post.id)}
@@ -179,10 +183,10 @@ const PostList = (props) => {
                       <div key={comment.id} className={styles.comment_card}>
                         <div>
                           {props.mode !== "profile" ? (
-                            <ToProfile user={comment.author} />
+                            <ToProfile searchedUser={comment.author} />
                           ) : (
                             <ToProfile
-                              user={comment.author}
+                              searchedUser={comment.author}
                               mode={"profile"}
                               post={post}
                               displayCommentsModal={() => displayCommentsModal(post.id)}

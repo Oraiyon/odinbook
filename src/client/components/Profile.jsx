@@ -28,7 +28,7 @@ const Profile = () => {
 
   return (
     <div className={styles.profile_container}>
-      {!user && userProfile ? (
+      {userProfile ? (
         <>
           {displayBackHeader ? (
             <>
@@ -50,17 +50,30 @@ const Profile = () => {
           ) : (
             ""
           )}
-          <PostList
-            user={null}
-            displayLikes={displayLikes}
-            setDisplayLikes={setDisplayLikes}
-            displayComments={displayComments}
-            setDisplayComments={setDisplayComments}
-            mode={"profile"}
-            userProfile={userProfile}
-            //
-            setDisplayBackHeader={setDisplayBackHeader}
-          />
+          {!user ? (
+            <PostList
+              user={null}
+              displayLikes={displayLikes}
+              setDisplayLikes={setDisplayLikes}
+              displayComments={displayComments}
+              setDisplayComments={setDisplayComments}
+              mode={"profile"}
+              userProfile={userProfile}
+              setDisplayBackHeader={setDisplayBackHeader}
+            />
+          ) : (
+            // <PostList
+            //   user={user}
+            //   displayLikes={displayLikes}
+            //   setDisplayLikes={setDisplayLikes}
+            //   displayComments={displayComments}
+            //   setDisplayComments={setDisplayComments}
+            //   mode={"profile"}
+            //   userProfile={userProfile}
+            //   setDisplayBackHeader={setDisplayBackHeader}
+            // />
+            ""
+          )}
         </>
       ) : (
         ""
