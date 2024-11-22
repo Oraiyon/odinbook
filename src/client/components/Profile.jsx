@@ -3,6 +3,7 @@ import PostList from "./PostList";
 import { useEffect, useState } from "react";
 import styles from "../stylesheets/Profile.module.css";
 import BackHeader from "./BackHeader";
+import Follows from "./Follows";
 
 const Profile = () => {
   const [user, setUser, previousPage, setPreviousPage] = useOutletContext();
@@ -33,19 +34,7 @@ const Profile = () => {
           {displayBackHeader ? (
             <>
               <BackHeader mode={"profile"} previousPage={previousPage} />
-              <header>
-                <h1>{userProfile.username}</h1>
-                <div className={styles.follow_container}>
-                  <div className={styles.followers_container}>
-                    <p>Followers</p>
-                    <p>{userProfile.FollowedBy.length}</p>
-                  </div>
-                  <div className={styles.following_container}>
-                    <p>Following</p>
-                    <p>{userProfile.Following.length}</p>
-                  </div>
-                </div>
-              </header>
+              <Follows userProfile={user} />
             </>
           ) : (
             ""
@@ -62,16 +51,6 @@ const Profile = () => {
               setDisplayBackHeader={setDisplayBackHeader}
             />
           ) : (
-            // <PostList
-            //   user={user}
-            //   displayLikes={displayLikes}
-            //   setDisplayLikes={setDisplayLikes}
-            //   displayComments={displayComments}
-            //   setDisplayComments={setDisplayComments}
-            //   mode={"profile"}
-            //   userProfile={userProfile}
-            //   setDisplayBackHeader={setDisplayBackHeader}
-            // />
             ""
           )}
         </>
