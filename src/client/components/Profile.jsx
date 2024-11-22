@@ -1,9 +1,10 @@
-import { useOutletContext } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import PostList from "./PostList";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "../stylesheets/Profile.module.css";
 import BackHeader from "./BackHeader";
 import Follows from "./Follows";
+import User from "./User";
 
 const Profile = () => {
   const [user, setUser, previousPage, setPreviousPage] = useOutletContext();
@@ -27,31 +28,43 @@ const Profile = () => {
     fetchUser();
   }, []);
 
+  const RedirectToUser = () => {
+    useEffect(() => {
+      linkToUserRef.current.click();
+    }, []);
+
+    const linkToUserRef = useRef(null);
+
+    return <Link to={"/user"} ref={linkToUserRef} />;
+  };
+
   return (
     <div className={styles.profile_container}>
       {userProfile ? (
         <>
-          {displayBackHeader ? (
+          {!user ? (
             <>
-              <BackHeader mode={"profile"} previousPage={previousPage} />
-              <Follows userProfile={user} />
+              {displayBackHeader ? (
+                <>
+                  <BackHeader mode={"profile"} previousPage={previousPage} />
+                  <Follows userProfile={userProfile} />
+                </>
+              ) : (
+                ""
+              )}
+              <PostList
+                user={null}
+                displayLikes={displayLikes}
+                setDisplayLikes={setDisplayLikes}
+                displayComments={displayComments}
+                setDisplayComments={setDisplayComments}
+                mode={"profile"}
+                userProfile={userProfile}
+                setDisplayBackHeader={setDisplayBackHeader}
+              />
             </>
           ) : (
-            ""
-          )}
-          {!user ? (
-            <PostList
-              user={null}
-              displayLikes={displayLikes}
-              setDisplayLikes={setDisplayLikes}
-              displayComments={displayComments}
-              setDisplayComments={setDisplayComments}
-              mode={"profile"}
-              userProfile={userProfile}
-              setDisplayBackHeader={setDisplayBackHeader}
-            />
-          ) : (
-            ""
+            <RedirectToUser />
           )}
         </>
       ) : (
