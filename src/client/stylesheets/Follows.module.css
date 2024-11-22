@@ -1,0 +1,19 @@
+.header_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.25em;
+  border-bottom: 2px solid black;
+}
+
+.follow_container {
+  display: flex;
+  gap: 0.25em;
+}
+
+.followers_container,
+.following_container {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
