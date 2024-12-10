@@ -7,7 +7,7 @@ import { useEffect } from "react";
 const Likes = () => {
   const [user, setUser, post, setPost] = useOutletContext();
 
-  // GET LIKES
+  // GET post or likes?
   useEffect(() => {
     const fetchLikes = async () => {
       try {
