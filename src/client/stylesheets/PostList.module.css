@@ -1,0 +1,42 @@
+.post_container {
+  overflow-y: hidden;
+  flex-grow: 1;
+}
+
+.post_card {
+  display: flex;
+  flex-direction: column;
+}
+
+/* For overwriting BackHeader */
+.post_card > div:first-of-type {
+  padding: 0.25em;
+}
+
+.post_card > p {
+  padding: 0.25em;
+  cursor: pointer;
+  width: 100%;
+}
+
+.post_card > p:first-of-type {
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  width: 100%;
+}
+
+.post_card > p:last-of-type {
+  cursor: default;
+}
+
+#post_card_profile {
+  padding: 0;
+}
+
+#post_card_profile + p:first-of-type {
+  border-top: 0;
+}
+
+.post_date {
+  border-bottom: 2px solid black;
+}

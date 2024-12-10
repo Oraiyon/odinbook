@@ -1,0 +1,15 @@
+.backHeader_container,
+.backHeader_container_profile {
+  max-height: 50px;
+  height: 100%;
+  border: 2px solid black;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.backHeader_container > svg,
+.backHeader_container_profile > svg {
+  max-width: 50px;
+  cursor: pointer;
+}
