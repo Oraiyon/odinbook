@@ -5,10 +5,10 @@ const ToProfile = (props) => {
   if (props.mode !== "profile") {
     return (
       <div className={styles.user_card}>
-        {!props.user ? (
+        {props.user.username !== props.searchedUser.username ? (
           <Link to={`/${props.searchedUser.id}/profile`}>{props.searchedUser.username}</Link>
         ) : (
-          <Link to={`/user`}>{props.user.username}</Link>
+          <Link to={`/user`}>{props.searchedUser.username}</Link>
         )}
       </div>
     );
