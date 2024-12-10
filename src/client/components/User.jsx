@@ -5,11 +5,9 @@ import Follows from "./Follows";
 import styles from "../stylesheets/User.module.css";
 
 const User = () => {
-  const [user, setUser, previousPage, setPreviousPage] = useOutletContext();
+  const [user, setUser, post, setPost] = useOutletContext();
 
-  const [userProfile, setUserProfile] = useState(null);
-  const [displayLikes, setDisplayLikes] = useState(false);
-  const [displayComments, setDisplayComments] = useState(false);
+  // const [userProfile, setUserProfile] = useState(null);
   const [displayBackHeader, setDisplayBackHeader] = useState(true);
 
   if (user) {
@@ -18,13 +16,11 @@ const User = () => {
         {displayBackHeader ? <Follows userProfile={user} /> : ""}
         <PostList
           user={user}
-          displayLikes={displayLikes}
-          setDisplayLikes={setDisplayLikes}
-          displayComments={displayComments}
-          setDisplayComments={setDisplayComments}
           mode={"profile"}
+          post={post}
+          setPost={setPost}
           userProfile={null}
-          setDisplayBackHeader={setDisplayBackHeader}
+          // setDisplayBackHeader={setDisplayBackHeader}
         />
       </div>
     );
