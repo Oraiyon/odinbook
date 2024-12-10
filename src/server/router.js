@@ -19,7 +19,8 @@ import post_post, {
   get_user_posts,
   get_following_posts,
   delete_post,
-  get_posts
+  get_posts,
+  get_post
 } from "./controllers/postControllers.js";
 import post_like_post from "./controllers/likeControllers.js";
 import post_comment, { get_comments } from "./controllers/commentController.js";
@@ -49,6 +50,7 @@ router.delete("/api/delete/follow/:sender/:receiver", delete_follow);
 // postControllers
 router.post("/api/create/post", post_post);
 router.get("/api/get/posts", get_posts);
+router.get("/api/get/:postId", get_post);
 router.get("/api/:id/get/posts", get_user_posts);
 router.get("/api/:id/get/following/posts", get_following_posts);
 router.delete("/api/:id/delete/:postId", delete_post);

@@ -7,14 +7,30 @@ import { useEffect } from "react";
 const Likes = () => {
   const [user, setUser, post, setPost] = useOutletContext();
 
+  // GET LIKES
+  useEffect(() => {
+    const fetchLikes = async () => {
+      try {
+        const response = await fetch(`/api/get/${window.location.pathname.split("/")[1]}`);
+        const data = await response.json();
+        setPost(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    if (!post) {
+      fetchLikes();
+    }
+  }, []);
+
   return (
     <div className={styles.likes_container}>
-      <BackHeader post={post.text} mode={"likes"} />
-      {post.Likes.length ? (
+      {post ? <BackHeader post={post.text} mode={"likes"} /> : ""}
+      {post && post.Likes.length ? (
         post.Likes.map((like) => (
           <div key={like.id} className={styles.like_card}>
             {/* {props.mode !== "profile" ? (
-              <ToProfile searchedUser={like.likedBy} />
+              <ToProfile searchedUser={like.likedBy} user={user} />
             ) : (
               <ToProfile
                 searchedUser={like.likedBy}
@@ -22,7 +38,7 @@ const Likes = () => {
                 post={post}
               />
             )} */}
-            <ToProfile searchedUser={like.likedBy} />
+            <ToProfile searchedUser={like.likedBy} user={user} />
           </div>
         ))
       ) : (

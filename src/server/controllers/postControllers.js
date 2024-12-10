@@ -56,6 +56,28 @@ export const get_posts = expressAsyncHandler(async (req, res, next) => {
   res.status(200).json(postList);
 });
 
+export const get_post = expressAsyncHandler(async (req, res, next) => {
+  const post = await prisma.post.findFirst({
+    where: {
+      id: req.params.postId
+    },
+    include: {
+      Likes: {
+        include: {
+          likedBy: true
+        }
+      },
+      _count: {
+        select: {
+          Comments: true
+        }
+      },
+      author: true
+    }
+  });
+  res.status(200).json(post);
+});
+
 export const get_user_posts = expressAsyncHandler(async (req, res, next) => {
   const postList = await prisma.post.findMany({
     where: {
