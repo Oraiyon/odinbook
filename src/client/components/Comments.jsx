@@ -14,7 +14,7 @@ const Comments = () => {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const response = await fetch(`/api/get/${post.id}/comments`);
+        const response = await fetch(`/api/get/${window.location.pathname.split("/")[1]}/comments`);
         const data = await response.json();
         setPostComments(data);
       } catch (error) {
@@ -64,7 +64,7 @@ const Comments = () => {
             <div key={comment.id} className={styles.comment_card}>
               <div>
                 {/* {props.mode !== "profile" ? (
-                  <ToProfile searchedUser={comment.author} />
+                  <ToProfile searchedUser={comment.author} user={user}/>
                 ) : (
                   <ToProfile
                     searchedUser={comment.author}
@@ -72,7 +72,7 @@ const Comments = () => {
                     post={post}
                   />
                 )} */}
-                <ToProfile searchedUser={comment.author} />
+                <ToProfile searchedUser={comment.author} user={user} />
                 <DisplayDate date={comment.commentDate} />
               </div>
               <p>{comment.text}</p>
