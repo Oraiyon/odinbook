@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "../stylesheets/PostList.module.css";
-import BackHeader from "./BackHeader";
 import ToProfile from "./ToProfile";
 import { Link } from "react-router-dom";
 
@@ -80,7 +79,7 @@ const PostList = (props) => {
             {!props.displayLikes && !props.displayComments ? (
               <div className={styles.post_card}>
                 {props.mode !== "profile" ? (
-                  <ToProfile searchedUser={post.author} />
+                  <ToProfile searchedUser={post.author} user={props.user} />
                 ) : (
                   <ToProfile searchedUser={post.author} mode={"profile"} />
                 )}
