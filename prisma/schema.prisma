@@ -1,0 +1,106 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String    @id @default(uuid())
+  username         String    @unique @db.VarChar(20)
+  password         String
+  FollowedBy       Follow[]  @relation("FollowedBy")
+  Following        Follow[]  @relation("Following")
+  SentRequests     Request[] @relation("SentRequests")
+  ReceivedRequests Request[] @relation("ReceivedRequests")
+  Posts            Post[]
+  Comments         Comment[]
+  Likes            Likes[]
+  Reply            Reply[]
+
+  @@map("users")
+}
+
+model Follow {
+  id           String   @id @default(uuid())
+  followedDate DateTime @default(now())
+  sender       User     @relation("FollowedBy", fields: [senderId], references: [id])
+  senderId     String
+  receiver     User     @relation("Following", fields: [receiverId], references: [id])
+  receiverId   String
+
+  @@map("follows")
+}
+
+model Request {
+  id          String   @id @default(uuid())
+  requestDate DateTime @default(now())
+  sender      User     @relation("SentRequests", fields: [senderId], references: [id])
+  senderId    String
+  receiver    User     @relation("ReceivedRequests", fields: [receiverId], references: [id])
+  receiverId  String
+
+  @@map("requests")
+}
+
+model Post {
+  id       String    @id @default(uuid())
+  postDate DateTime  @default(now())
+  author   User      @relation(fields: [authorId], references: [id])
+  authorId String
+  text     String    @db.VarChar(100)
+  Comments Comment[]
+  Likes    Likes[]
+  Reply    Reply[]
+
+  @@map("posts")
+}
+
+model Likes {
+  id        String   @id @default(uuid())
+  likeDate  DateTime @default(now())
+  likedBy   User     @relation(fields: [likedById], references: [id])
+  likedById String
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    String
+
+  @@map("likes")
+}
+
+model Comment {
+  id          String   @id @default(uuid())
+  commentDate DateTime @default(now())
+  author      User     @relation(fields: [authorId], references: [id])
+  authorId    String
+  text        String   @db.VarChar(100)
+  post        Post     @relation(fields: [postId], references: [id])
+  postId      String
+  Reply       Reply[]
+  // Replies     Comment[] @relation("Reply")
+  // reply       Comment?  @relation("Reply", fields: [replyId], references: [id])
+  // replyId     String?
+
+  @@map("comments")
+}
+
+model Reply {
+  id        String   @id @default(uuid())
+  replyDate DateTime @default(now())
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String
+  text      String   @db.VarChar(100)
+  replyTo   Comment  @relation(fields: [replyToId], references: [id])
+  replyToId String
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    String
+
+  @@map("replies")
+}
