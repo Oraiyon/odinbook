@@ -71,8 +71,11 @@ const ProfileHeader = (props) => {
       }
       const data = await response.json();
       if (data) {
-        setSentRequest(false);
-        setReceivedRequest(false);
+        if (mode === "sender") {
+          setSentRequest(false);
+        } else {
+          setReceivedRequest(false);
+        }
       }
     } catch (error) {
       console.log(error);
@@ -104,7 +107,16 @@ const ProfileHeader = (props) => {
     }
   };
 
-  // Display BOTH request follow/unfollow button AND accept/decline request
+  const handleAcceptRequest = async () => {
+    try {
+      if (data) {
+        setReceivedRequest(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <header className={styles.header_container}>
       <div>
@@ -116,11 +128,11 @@ const ProfileHeader = (props) => {
           {alreadyFollowing ? (
             <button>Unfollow</button>
           ) : (
-            <HandleRequestButton sentRequest={sentRequest} />
+            <button onClick={handleSentRequest}>{sentRequest ? "Unsend Request" : "Follow"}</button>
           )}
           {receivedRequest ? (
             <div className={styles.request_buttons}>
-              <button>Accept Request</button>
+              <button onClick={handleAcceptRequest}>Accept Request</button>
               <button onClick={() => handleDeclineRequest("receiver")}>Decline Request</button>
             </div>
           ) : (
