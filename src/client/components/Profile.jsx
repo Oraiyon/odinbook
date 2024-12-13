@@ -9,11 +9,12 @@ const Profile = () => {
   const [user, setUser, post, setPost] = useOutletContext();
 
   const [userProfile, setUserProfile] = useState(null);
+  const [updateFollowerCount, setUpdateFollowerCount] = useState(false);
 
   const linkToUserRef = useRef(null);
 
   useEffect(() => {
-    const fetchUser = async () => {
+    const fetchUserProfile = async () => {
       try {
         const response = await fetch(`/api/${window.location.pathname.split("/")[1]}/profile`);
         const data = await response.json();
@@ -25,15 +26,31 @@ const Profile = () => {
         console.log(error);
       }
     };
-    fetchUser();
-  }, []);
+    const fetchUser = async () => {
+      try {
+        const response = await fetch(`/api/${user.id}/profile`);
+        const data = await response.json();
+        setUser(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchUserProfile();
+    if (user) {
+      fetchUser();
+    }
+  }, [updateFollowerCount]);
 
   return (
     <div className={styles.profile_container}>
       {userProfile ? (
         <>
           <BackHeader mode={"profile"} />
-          <ProfileHeader user={user} userProfile={userProfile} />
+          <ProfileHeader
+            user={user}
+            userProfile={userProfile}
+            setUpdateFollowerCount={setUpdateFollowerCount}
+          />
           <PostList
             user={null}
             mode={"profile"}

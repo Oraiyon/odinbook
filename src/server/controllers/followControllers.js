@@ -55,8 +55,8 @@ const post_accept_follow = expressAsyncHandler(async (req, res, next) => {
   });
   await prisma.follow.create({
     data: {
-      senderId: req.body.sender,
-      receiverId: req.body.receiver
+      senderId: req.body.receiver,
+      receiverId: req.body.sender
     }
   });
   const requestList = await prisma.request.findMany({

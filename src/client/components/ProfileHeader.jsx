@@ -49,14 +49,6 @@ const ProfileHeader = (props) => {
     }
   }, []);
 
-  const HandleRequestButton = (props) => {
-    if (props.sentRequest) {
-      return <button onClick={handleSentRequest}>Unsend Request</button>;
-    } else {
-      return <button onClick={handleSentRequest}>Follow</button>;
-    }
-  };
-
   const handleDeclineRequest = async (mode) => {
     try {
       let response;
@@ -109,8 +101,20 @@ const ProfileHeader = (props) => {
 
   const handleAcceptRequest = async () => {
     try {
+      const response = await fetch("/api/accept/follow", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          sender: props.userProfile.id,
+          receiver: props.user.id
+        })
+      });
+      const data = await response.json();
       if (data) {
         setReceivedRequest(false);
+        props.setUpdateFollowerCount((u) => !u);
       }
     } catch (error) {
       console.log(error);
