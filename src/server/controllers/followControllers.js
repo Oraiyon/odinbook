@@ -6,8 +6,8 @@ const prisma = new PrismaClient();
 export const get_follow = expressAsyncHandler(async (req, res, next) => {
   const following = await prisma.follow.findFirst({
     where: {
-      senderId: req.params.sender,
-      receiverId: req.params.receiver
+      senderId: req.params.receiver,
+      receiverId: req.params.sender
     }
   });
   res.status(200).json(following);
@@ -31,43 +31,31 @@ export const get_following = expressAsyncHandler(async (req, res, next) => {
   res.status(200).json(followingList);
 });
 
-const post_accept_follow = expressAsyncHandler(async (req, res, next) => {
+const post_follow = expressAsyncHandler(async (req, res, next) => {
   const alreadyFollowing = await prisma.follow.findFirst({
     where: {
       senderId: req.body.sender,
       receiverId: req.body.receiver
     }
   });
-  const request = await prisma.request.findFirst({
-    where: {
+  if (alreadyFollowing) {
+    res.status(200).json(false);
+    return;
+  }
+  await prisma.follow.create({
+    data: {
       senderId: req.body.sender,
       receiverId: req.body.receiver
     }
   });
-  if (alreadyFollowing || !request) {
-    res.status(200).json(false);
-    return;
-  }
-  await prisma.request.delete({
+  // Sender or receiver?
+  // Keep followList or just send a true?
+  const followList = await prisma.follow.findMany({
     where: {
-      id: request.id
+      senderId: req.params.sender
     }
   });
-  await prisma.follow.create({
-    data: {
-      senderId: req.body.receiver,
-      receiverId: req.body.sender
-    }
-  });
-  const requestList = await prisma.request.findMany({
-    where: {
-      senderId: req.body.sender
-    },
-    include: {
-      receiver: true
-    }
-  });
-  res.status(200).json(requestList);
+  res.status(200).json(followList);
 });
 
 export const delete_follow = expressAsyncHandler(async (req, res, next) => {
@@ -94,4 +82,4 @@ export const delete_follow = expressAsyncHandler(async (req, res, next) => {
   }
 });
 
-export default post_accept_follow;
+export default post_follow;

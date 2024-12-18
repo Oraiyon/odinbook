@@ -9,7 +9,7 @@ const Profile = () => {
   const [user, setUser, post, setPost] = useOutletContext();
 
   const [userProfile, setUserProfile] = useState(null);
-  const [updateFollowerCount, setUpdateFollowerCount] = useState(false);
+  const [updateUserInfo, setUpdateUserInfo] = useState(false);
 
   const linkToUserRef = useRef(null);
 
@@ -39,7 +39,7 @@ const Profile = () => {
     if (user) {
       fetchUser();
     }
-  }, [updateFollowerCount]);
+  }, [updateUserInfo]);
 
   return (
     <div className={styles.profile_container}>
@@ -49,7 +49,7 @@ const Profile = () => {
           <ProfileHeader
             user={user}
             userProfile={userProfile}
-            setUpdateFollowerCount={setUpdateFollowerCount}
+            setUpdateUserInfo={setUpdateUserInfo}
           />
           <PostList
             user={null}

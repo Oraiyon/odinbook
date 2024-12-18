@@ -11,7 +11,7 @@ import post_request, {
   get_sent_request,
   get_sent_requests
 } from "./controllers/requestControllers.js";
-import post_accept_follow, {
+import post_follow, {
   delete_follow,
   get_follow,
   get_followers,
@@ -38,17 +38,17 @@ router.get("/api/search/:username", get_search_user);
 router.get("/api/:id/profile", get_user_profile);
 
 // requestControllers
-router.get("/api/:sender/requests/:receiver", get_sent_request);
-router.get("/api/:id/sent/requests", get_sent_requests);
-router.get("/api/:id/received/requests", get_received_requests);
-router.post("/api/create/request", post_request);
-router.delete("/api/delete/request/:sender/:receiver", delete_request);
+// router.get("/api/:sender/requests/:receiver", get_sent_request);
+// router.get("/api/:id/sent/requests", get_sent_requests);
+// router.get("/api/:id/received/requests", get_received_requests);
+// router.post("/api/create/request", post_request);
+// router.delete("/api/delete/request/:sender/:receiver", delete_request);
 
 // followControllers
 router.get("/api/:sender/following/:receiver", get_follow);
 router.get("/api/:id/followers", get_followers);
 router.get("/api/:id/following", get_following);
-router.post("/api/accept/follow", post_accept_follow);
+router.post("/api/send/follow", post_follow);
 router.delete("/api/delete/follow/:sender/:receiver", delete_follow);
 
 // postControllers
