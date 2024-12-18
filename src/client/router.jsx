@@ -8,6 +8,7 @@ import Profile from "./components/Profile";
 import User from "./components/User";
 import Comments from "./components/Comments";
 import Likes from "./components/Likes";
+import EditProfile from "./components/EditProfile";
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -46,6 +47,10 @@ const Router = () => {
         {
           path: "/user",
           element: <User />
+        },
+        {
+          path: "/user/edit",
+          element: <EditProfile />
         }
       ]
       // errorElement

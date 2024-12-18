@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "../stylesheets/ProfileHeader.module.css";
 import Follows from "./Follows";
+import { Link } from "react-router-dom";
 
 const ProfileHeader = (props) => {
   const [alreadyFollowing, setAlreadyFollowing] = useState(false);
+
+  const editLinkRef = useRef(null);
 
   useEffect(() => {
     const fetchFollow = async () => {
@@ -63,8 +66,18 @@ const ProfileHeader = (props) => {
   return (
     <header className={styles.header_container}>
       <div>
-        <h1>{props.userProfile.username}</h1>
-        <Follows followers={props.userProfile.FollowedBy} following={props.userProfile.Following} />
+        <div>
+          <h1>{props.userProfile.username}</h1>
+          <Follows
+            followers={props.userProfile.FollowedBy}
+            following={props.userProfile.Following}
+          />
+        </div>
+        {props.mode === "user" ? (
+          <button onClick={() => editLinkRef.current.click()}>Edit Profile</button>
+        ) : (
+          ""
+        )}
       </div>
       {props.user ? (
         <>
@@ -77,6 +90,7 @@ const ProfileHeader = (props) => {
       ) : (
         ""
       )}
+      <Link to={"/user/edit"} ref={editLinkRef} />
     </header>
   );
 };
