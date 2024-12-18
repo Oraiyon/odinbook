@@ -1,13 +1,26 @@
 import { useOutletContext } from "react-router-dom";
 import PostList from "./PostList";
-import { useState } from "react";
 import ProfileHeader from "./ProfileHeader";
 import styles from "../stylesheets/User.module.css";
+import { useEffect } from "react";
 
 const User = () => {
   const [user, setUser, post, setPost] = useOutletContext();
 
-  // const [userProfile, setUserProfile] = useState(null);
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await fetch(`/api/${user.id}/profile`);
+        const data = await response.json();
+        setUser(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    if (user) {
+      fetchUser();
+    }
+  }, []);
 
   if (user) {
     return (
