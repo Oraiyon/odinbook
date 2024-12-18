@@ -12,12 +12,3 @@
   align-items: center;
   padding: 0 0.25em;
 }
-
-.request_buttons {
-  display: flex;
-  gap: 0.25em;
-}
-
-.request_buttons > button {
-  flex-grow: 1;
-}

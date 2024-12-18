@@ -47,6 +47,14 @@ const ProfileHeader = (props) => {
 
   const handleUnfollow = async () => {
     try {
+      const response = await fetch(`/api/delete/follow/${props.userProfile.id}/${props.user.id}`, {
+        method: "DELETE"
+      });
+      const data = await response.json();
+      if (data) {
+        setAlreadyFollowing(false);
+        props.setUpdateUserInfo((u) => !u);
+      }
     } catch (error) {
       console.log(error);
     }
