@@ -1,0 +1,11 @@
+.likes_container {
+  overflow-y: auto;
+}
+
+.like_card {
+  padding: 0.25em;
+}
+
+.no_likes {
+  padding: 0.25em;
+}

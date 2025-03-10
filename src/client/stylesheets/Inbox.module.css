@@ -1,0 +1,11 @@
+.inbox_container {
+  overflow-y: auto;
+  height: 100%;
+}
+
+.follower_notification {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.25em;
+}
