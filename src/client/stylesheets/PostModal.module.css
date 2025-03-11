@@ -53,3 +53,17 @@
   border: 2px solid black;
   width: 100%;
 }
+
+.post_info {
+  display: flex;
+}
+
+.post_info > div {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.post_info > div > svg {
+  height: 50px;
+}

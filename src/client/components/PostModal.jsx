@@ -1,7 +1,7 @@
 import styles from "../stylesheets/PostModal.module.css";
 import Icon from "@mdi/react";
 import { Link } from "react-router-dom";
-import { mdiDotsHorizontal, mdiAutorenew } from "@mdi/js";
+import { mdiDotsHorizontal, mdiCardsHeartOutline, mdiCommentOutline } from "@mdi/js";
 import DisplayDate from "./DisplayDate";
 import { useState } from "react";
 import DisplayLoading from "./DisplayLoading";
@@ -43,6 +43,16 @@ const PostModal = (props) => {
             <DisplayLoading loading={loading} />
           </div>
           <p>{props.displayPostModal.text}</p>
+          <div className={styles.post_info}>
+            <div>
+              <Icon path={mdiCardsHeartOutline}></Icon>
+              <p>{props.displayPostModal.Likes.length}</p>
+            </div>
+            <div>
+              <Icon path={mdiCommentOutline}></Icon>
+              <p>{props.displayPostModal._count.Comments}</p>
+            </div>
+          </div>
           <DisplayDate date={props.displayPostModal.postDate} />
           <div className={styles.post_modal_buttons}>
             <Link to={`/post/edit/${props.displayPostModal.id}`}>
