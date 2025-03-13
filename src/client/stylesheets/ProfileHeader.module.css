@@ -21,6 +21,11 @@
   grid-row: 2;
 }
 
+.header_user_info > svg:last-of-type {
+  max-width: 75px;
+  width: 100%;
+}
+
 .header_settings_icon {
   justify-self: end;
   max-width: 50px;
