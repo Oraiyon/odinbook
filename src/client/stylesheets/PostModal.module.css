@@ -36,12 +36,15 @@
 
 .post_modal_buttons {
   display: flex;
-  gap: 0.25em;
-  padding: 0.25em;
 }
 
 .post_modal_buttons * {
   width: 100%;
+  border: 0;
+}
+
+.post_modal_buttons > *:first-of-type {
+  border-right: 2px solid black;
 }
 
 .delete_message {
