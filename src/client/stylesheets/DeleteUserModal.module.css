@@ -36,6 +36,7 @@
 
 .delete_user > button {
   width: 100%;
+  border-top: 2px solid black;
   border-bottom: 0;
   border-right: 0;
   border-left: 0;

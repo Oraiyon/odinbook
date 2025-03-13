@@ -1,7 +1,7 @@
-import styles from "../stylesheets/DeleteModal.module.css";
+import styles from "../stylesheets/DeleteUserModal.module.css";
 import DisplayProfilePicture from "./DisplayProfilePicture";
 
-const DeleteModal = (props) => {
+const DeleteUserModal = (props) => {
   const deleteUser = async () => {
     try {
       const response = await fetch(`/api/user/delete/${props.user.id}`, {
@@ -32,4 +32,4 @@ const DeleteModal = (props) => {
   }
 };
 
-export default DeleteModal;
+export default DeleteUserModal;

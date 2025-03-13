@@ -3,7 +3,7 @@ import styles from "../stylesheets/Settings.module.css";
 import BackHeader from "./BackHeader";
 import Icon from "@mdi/react";
 import { mdiAccountEdit, mdiDelete } from "@mdi/js";
-import DeleteModal from "./DeleteModal";
+import DeleteUserModal from "./DeleteUserModal";
 import { useState } from "react";
 
 const Settings = () => {
@@ -42,7 +42,7 @@ const Settings = () => {
           </div>
         </div>
         <button onClick={logout}>Log Out</button>
-        <DeleteModal
+        <DeleteUserModal
           user={user}
           displayDeleteModal={displayDeleteModal}
           setDisplayDeleteModal={setDisplayDeleteModal}
