@@ -19,8 +19,8 @@
   border: 2px solid black;
   display: flex;
   flex-direction: column;
-  padding: 0.25em;
-  gap: 0.25em;
+  /* padding: 0.25em; */
+  /* gap: 0.25em; */
 }
 
 .post_edit > svg {
@@ -30,11 +30,14 @@
 
 .post_edit > p {
   text-overflow: clip;
+  padding: 0.25em;
+  border-bottom: 2px solid black;
 }
 
 .post_modal_buttons {
   display: flex;
   gap: 0.25em;
+  padding: 0.25em;
 }
 
 .post_modal_buttons * {
@@ -47,15 +50,21 @@
 
 .post_image {
   position: relative;
+  display: flex;
 }
 
 .post_image > img {
+  flex: 1;
   border: 2px solid black;
+  border-left: 0;
+  border-right: 0;
   width: 100%;
 }
 
 .post_info {
   display: flex;
+  padding: 0.25em;
+  padding-bottom: 0;
 }
 
 .post_info > div {
