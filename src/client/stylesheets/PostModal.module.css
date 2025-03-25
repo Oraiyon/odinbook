@@ -43,7 +43,7 @@
   border: 0;
 }
 
-.post_modal_buttons > *:first-of-type {
+.post_modal_buttons > a {
   border-right: 2px solid black;
 }
 
