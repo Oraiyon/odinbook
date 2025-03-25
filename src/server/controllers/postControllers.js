@@ -55,7 +55,13 @@ export const get_posts = expressAsyncHandler(async (req, res, next) => {
       },
       _count: {
         select: {
-          Comments: true
+          Comments: {
+            where: {
+              deletedText: {
+                not: null
+              }
+            }
+          }
         }
       },
       author: true
@@ -77,7 +83,13 @@ export const get_post = expressAsyncHandler(async (req, res, next) => {
       },
       _count: {
         select: {
-          Comments: true
+          Comments: {
+            where: {
+              deletedText: {
+                not: null
+              }
+            }
+          }
         }
       },
       author: true
