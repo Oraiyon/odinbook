@@ -78,7 +78,11 @@ export const get_post = expressAsyncHandler(async (req, res, next) => {
     include: {
       Likes: {
         include: {
-          likedBy: true
+          likedBy: {
+            omit: {
+              password: true
+            }
+          }
         }
       },
       _count: {
@@ -92,7 +96,11 @@ export const get_post = expressAsyncHandler(async (req, res, next) => {
           }
         }
       },
-      author: true
+      author: {
+        omit: {
+          password: true
+        }
+      }
     }
   });
   res.status(200).json(post);

@@ -17,7 +17,11 @@ const post_comment = expressAsyncHandler(async (req, res, next) => {
         postId: req.body.post
       },
       include: {
-        author: true
+        author: {
+          omit: {
+            password: true
+          }
+        }
       },
       orderBy: {
         commentDate: "asc"
@@ -36,7 +40,11 @@ export const get_comments = expressAsyncHandler(async (req, res, next) => {
       postId: req.params.postId
     },
     include: {
-      author: true,
+      author: {
+        omit: {
+          password: true
+        }
+      },
       post: true
     },
     orderBy: {

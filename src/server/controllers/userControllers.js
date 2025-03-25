@@ -90,14 +90,25 @@ export const login = [
       include: {
         Followers: {
           include: {
-            receiver: true
+            receiver: {
+              omit: {
+                password: true
+              }
+            }
           }
         },
         Following: {
           include: {
-            sender: true
+            sender: {
+              omit: {
+                password: true
+              }
+            }
           }
         }
+      },
+      omit: {
+        password: true
       }
     });
     res.status(200).json(user);
@@ -124,14 +135,25 @@ export const get_search_user = expressAsyncHandler(async (req, res, next) => {
     include: {
       Followers: {
         include: {
-          receiver: true
+          receiver: {
+            omit: {
+              password: true
+            }
+          }
         }
       },
       Following: {
         include: {
-          sender: true
+          sender: {
+            omit: {
+              password: true
+            }
+          }
         }
       }
+    },
+    omit: {
+      password: true
     }
   });
   res.status(200).json(searchUserList);
@@ -145,16 +167,35 @@ export const get_user_profile = expressAsyncHandler(async (req, res, next) => {
     include: {
       Followers: {
         include: {
-          sender: true,
-          receiver: true
+          sender: {
+            omit: {
+              password: true
+            }
+          },
+          receiver: {
+            omit: {
+              password: true
+            }
+          }
         }
       },
       Following: {
         include: {
-          sender: true,
-          receiver: true
+          sender: {
+            omit: {
+              password: true
+            }
+          },
+          receiver: {
+            omit: {
+              password: true
+            }
+          }
         }
       }
+    },
+    omit: {
+      password: true
     }
   });
   res.status(200).json(user);
@@ -193,14 +234,25 @@ export const put_user_profile_username = [
       include: {
         Followers: {
           include: {
-            receiver: true
+            receiver: {
+              omit: {
+                password: true
+              }
+            }
           }
         },
         Following: {
           include: {
-            sender: true
+            sender: {
+              omit: {
+                password: true
+              }
+            }
           }
         }
+      },
+      omit: {
+        password: true
       }
     });
     res.status(200).json(user);
@@ -226,14 +278,25 @@ export const put_user_profile_picture = [
       include: {
         Followers: {
           include: {
-            receiver: true
+            receiver: {
+              omit: {
+                password: true
+              }
+            }
           }
         },
         Following: {
           include: {
-            sender: true
+            sender: {
+              omit: {
+                password: true
+              }
+            }
           }
         }
+      },
+      omit: {
+        password: true
       }
     });
     res.status(200).json(user);
@@ -252,14 +315,25 @@ export const put_user_default_picture = expressAsyncHandler(async (req, res, nex
     include: {
       Followers: {
         include: {
-          receiver: true
+          receiver: {
+            omit: {
+              password: true
+            }
+          }
         }
       },
       Following: {
         include: {
-          sender: true
+          sender: {
+            omit: {
+              password: true
+            }
+          }
         }
       }
+    },
+    omit: {
+      password: true
     }
   });
   res.status(200).json(user);

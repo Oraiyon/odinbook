@@ -19,7 +19,11 @@ export const get_followers = expressAsyncHandler(async (req, res, next) => {
       receiverId: req.params.id
     },
     include: {
-      sender: true
+      sender: {
+        omit: {
+          password: true
+        }
+      }
     }
   });
   res.status(200).json(followersList);
@@ -31,7 +35,11 @@ export const get_following = expressAsyncHandler(async (req, res, next) => {
       senderId: req.params.id
     },
     include: {
-      receiver: true
+      receiver: {
+        omit: {
+          password: true
+        }
+      }
     }
   });
   res.status(200).json(followingList);
@@ -61,16 +69,35 @@ const post_follow = expressAsyncHandler(async (req, res, next) => {
     include: {
       Followers: {
         include: {
-          sender: true,
-          receiver: true
+          sender: {
+            omit: {
+              password: true
+            }
+          },
+          receiver: {
+            omit: {
+              password: true
+            }
+          }
         }
       },
       Following: {
         include: {
-          sender: true,
-          receiver: true
+          sender: {
+            omit: {
+              password: true
+            }
+          },
+          receiver: {
+            omit: {
+              password: true
+            }
+          }
         }
       }
+    },
+    omit: {
+      password: true
     }
   });
   res.status(200).json(user);
@@ -96,16 +123,35 @@ export const delete_follow = expressAsyncHandler(async (req, res, next) => {
       include: {
         Followers: {
           include: {
-            sender: true,
-            receiver: true
+            sender: {
+              omit: {
+                password: true
+              }
+            },
+            receiver: {
+              omit: {
+                password: true
+              }
+            }
           }
         },
         Following: {
           include: {
-            sender: true,
-            receiver: true
+            sender: {
+              omit: {
+                password: true
+              }
+            },
+            receiver: {
+              omit: {
+                password: true
+              }
+            }
           }
         }
+      },
+      omit: {
+        password: true
       }
     });
     res.status(200).json(user);
