@@ -31,4 +31,5 @@
   max-width: 50px;
   grid-column: 2;
   grid-row: 1;
+  cursor: pointer;
 }
