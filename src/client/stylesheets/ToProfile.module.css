@@ -1,5 +1,8 @@
+.user_link {
+  width: max-content;
+}
+
 .user_card {
-  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 0.25em;

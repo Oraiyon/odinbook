@@ -63,6 +63,7 @@ const ToProfile = (props) => {
         {!props.user || props.user.username !== props.searchedUser.username ? (
           <Link
             to={`/${props.searchedUser.sender ? props.searchedUser.sender.id : props.searchedUser.receiver.id}/profile`}
+            className={styles.user_link}
           >
             <div className={styles.user_card}>
               <DisplayProfilePicture
@@ -88,7 +89,7 @@ const ToProfile = (props) => {
     return (
       <>
         {!props.user || props.user.username !== props.searchedUser.username ? (
-          <Link to={`/${props.searchedUser.id}/profile`}>
+          <Link to={`/${props.searchedUser.id}/profile`} className={styles.user_link}>
             <div className={styles.user_card}>
               <DisplayProfilePicture user={props.searchedUser} />
               <p>{props.searchedUser.username}</p>
