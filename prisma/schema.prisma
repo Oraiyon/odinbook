@@ -23,6 +23,7 @@ model User {
   Comments       Comment[]
   Likes          Likes[]
   profilePicture String?
+  admin          Boolean   @default(false)
 
   @@map("users")
 }
