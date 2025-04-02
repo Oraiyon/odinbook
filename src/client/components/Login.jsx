@@ -14,9 +14,12 @@ const Login = () => {
   const passwordInputRef = useRef(null);
   const signupLinkRef = useRef(null);
   const toUserRef = useRef(null);
+  const toAdminRef = useRef(null);
 
   useEffect(() => {
-    if (user) {
+    if (user && user.admin) {
+      toAdminRef.current.click();
+    } else if (user) {
       toUserRef.current.click();
     }
   }, [user]);
@@ -74,7 +77,14 @@ const Login = () => {
       <Link to={"/signup"} ref={signupLinkRef}>
         Sign Up!
       </Link>
-      {user ? <Link to={`/feed`} ref={toUserRef}></Link> : ""}
+      {user ? (
+        <>
+          <Link to={`/feed`} ref={toUserRef}></Link>
+          <Link to={`/admin`} ref={toAdminRef}></Link>
+        </>
+      ) : (
+        ""
+      )}
     </div>
   );
 };
