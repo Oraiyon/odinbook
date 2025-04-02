@@ -1,0 +1,23 @@
+.admin_container {
+  padding: 0.25em;
+  height: 100%;
+}
+
+.admin_container > form > input {
+  width: 100%;
+  padding: 0.25em;
+}
+
+.admin_container > div:first-of-type {
+  max-height: 250px;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.selected_user {
+  border: 2px solid red;
+}
+
+.unselected_user {
+  border: 2px solid black;
+}
