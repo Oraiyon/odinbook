@@ -15,6 +15,7 @@ import ErrorPage from "./components/ErrorPage";
 import Inbox from "./components/Inbox";
 import Followers from "./components/Followers";
 import Following from "./components/Following";
+import Admin from "./components/Admin";
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -81,6 +82,11 @@ const Router = () => {
         {
           path: "/:id/following",
           element: <Following />
+        },
+        ,
+        {
+          path: "/admin",
+          element: <Admin />
         }
       ],
       errorElement: <ErrorPage />
