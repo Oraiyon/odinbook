@@ -80,7 +80,7 @@ const Login = () => {
       {user ? (
         <>
           <Link to={`/feed`} ref={toUserRef}></Link>
-          <Link to={`/admin`} ref={toAdminRef}></Link>
+          <Link to={`/admin/${user.id}`} ref={toAdminRef}></Link>
         </>
       ) : (
         ""

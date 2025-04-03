@@ -16,6 +16,7 @@ import Inbox from "./components/Inbox";
 import Followers from "./components/Followers";
 import Following from "./components/Following";
 import Admin from "./components/Admin";
+import AdminPosts from "./components/AdminPosts";
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -85,8 +86,12 @@ const Router = () => {
         },
         ,
         {
-          path: "/admin",
+          path: "/admin/:id",
           element: <Admin />
+        },
+        {
+          path: "/admin/:id/:userId/posts",
+          element: <AdminPosts />
         }
       ],
       errorElement: <ErrorPage />

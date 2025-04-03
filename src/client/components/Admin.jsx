@@ -1,15 +1,24 @@
-import { useOutletContext } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import styles from "../stylesheets/Admin.module.css";
 import { useEffect, useRef, useState } from "react";
 
 const Admin = () => {
-  const [user, setUser] = useOutletContext();
-
-  const [searchedUsers, setSearchedUsers] = useState(null);
-  const [searchedUsersList, setSearchedUsersList] = useState([]);
-  const [selectedUser, setSelectedUser] = useState(null);
-  const [selectedUserPostList, setSelectedUserPostList] = useState([]);
-  const [selectedUserCommentList, setSelectedUserCommentList] = useState([]);
+  const [
+    user,
+    setUser,
+    post,
+    setPost,
+    searchedUsers,
+    setSearchedUsers,
+    searchedUsersList,
+    setSearchedUsersList,
+    selectedUser,
+    setSelectedUser,
+    selectedUserPostList,
+    setSelectedUserPostList,
+    selectedUserCommentList,
+    setSelectedUserCommentList
+  ] = useOutletContext();
 
   useEffect(() => {
     const fetchSearchedUsers = async () => {
@@ -82,8 +91,8 @@ const Admin = () => {
         )}
         {selectedUser ? (
           <>
-            <div>Posts</div>
-            <div>Comments</div>
+            <Link to={`/admin/${selectedUser.id}/posts`}>Posts: {selectedUserPostList.length}</Link>
+            <div>Comments {selectedUserCommentList.length}</div>
           </>
         ) : (
           ""
