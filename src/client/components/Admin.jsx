@@ -91,7 +91,9 @@ const Admin = () => {
         )}
         {selectedUser ? (
           <>
-            <Link to={`/admin/${selectedUser.id}/posts`}>Posts: {selectedUserPostList.length}</Link>
+            <Link to={`/admin/${user.id}/${selectedUser.id}/posts`}>
+              Posts: {selectedUserPostList.length}
+            </Link>
             <div>Comments {selectedUserCommentList.length}</div>
           </>
         ) : (
