@@ -10,7 +10,7 @@ function App() {
   return (
     <div className={styles.app_container}>
       <Outlet context={[user, setUser, post, setPost]} />
-      <Navbar user={user} />
+      {user && user.admin ? "" : <Navbar user={user} />}
     </div>
   );
 }
