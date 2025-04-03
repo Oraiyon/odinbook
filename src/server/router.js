@@ -1,5 +1,6 @@
 import express from "express";
 import signup, {
+  admin_get_user,
   delete_user,
   get_search_user,
   get_user_profile,
@@ -38,6 +39,7 @@ router.put("/api/user/edit/username", put_user_profile_username);
 router.put("/api/user/edit/picture", put_user_profile_picture);
 router.put("/api/user/edit/default", put_user_default_picture);
 router.delete("/api/user/delete/:id", delete_user);
+router.get("/api/admin/:id/get/:userId", admin_get_user);
 
 // followControllers
 router.get("/api/:sender/following/:receiver", get_follow);

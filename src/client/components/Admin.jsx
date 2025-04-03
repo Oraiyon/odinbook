@@ -8,13 +8,14 @@ const Admin = () => {
   const [searchedUsers, setSearchedUsers] = useState(null);
   const [searchedUsersList, setSearchedUsersList] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [selectedUserPostList, setSelectedUserPostList] = useState([]);
+  const [selectedUserCommentList, setSelectedUserCommentList] = useState([]);
 
   useEffect(() => {
     const fetchSearchedUsers = async () => {
       try {
         const response = await fetch(`/api/search/${searchedUsers}`);
         const data = await response.json();
-        console.log(data);
         setSearchedUsersList(data);
       } catch (error) {
         console.log(error);
@@ -22,6 +23,13 @@ const Admin = () => {
     };
     const fetchSelectedUser = async () => {
       try {
+        const response = await fetch(`/api/admin/${user.id}/get/${selectedUser.id}`);
+        const data = await response.json();
+        console.log(data);
+        if (data) {
+          setSelectedUserPostList(data.postList);
+          setSelectedUserCommentList(data.commentList);
+        }
       } catch (error) {
         console.log(error);
       }
@@ -50,28 +58,36 @@ const Admin = () => {
             onChange={(e) => setSearchedUsers(e.target.value)}
           />
         </form>
-        <h2>Selected User: {selectedUser ? selectedUser.username : ""} </h2>
         {searchedUsers && searchedUsersList ? (
-          <div>
-            {searchedUsersList.map((user) => (
-              <div
-                key={user.id}
-                onClick={() => setSelectedUser(user)}
-                className={
-                  selectedUser && selectedUser.id === user.id
-                    ? styles.selected_user
-                    : styles.unselected_user
-                }
-              >
-                {user.username}
-              </div>
-            ))}
-          </div>
+          <>
+            <h2>Selected User: {selectedUser ? selectedUser.username : ""} </h2>
+            <div>
+              {searchedUsersList.map((user) => (
+                <div
+                  key={user.id}
+                  onClick={() => setSelectedUser(user)}
+                  className={
+                    selectedUser && selectedUser.id === user.id
+                      ? styles.selected_user
+                      : styles.unselected_user
+                  }
+                >
+                  {user.username}
+                </div>
+              ))}
+            </div>
+          </>
         ) : (
           ""
         )}
-        <div>Posts</div>
-        <div>Comments</div>
+        {selectedUser ? (
+          <>
+            <div>Posts</div>
+            <div>Comments</div>
+          </>
+        ) : (
+          ""
+        )}
       </div>
     );
   } else {

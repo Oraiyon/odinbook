@@ -16,8 +16,10 @@
 
 .selected_user {
   border: 2px solid red;
+  padding: 0 0.25em;
 }
 
 .unselected_user {
   border: 2px solid black;
+  padding: 0 0.25em;
 }

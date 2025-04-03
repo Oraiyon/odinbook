@@ -380,4 +380,52 @@ export const delete_user = [
   logout
 ];
 
+export const admin_get_user = expressAsyncHandler(async (req, res, next) => {
+  const admin = await prisma.user.findFirst({
+    where: {
+      id: req.params.id,
+      admin: true
+    }
+  });
+  if (admin) {
+    const [postList, commentList] = [
+      await prisma.post.findMany({
+        orderBy: {
+          postDate: "desc"
+        },
+        include: {
+          Likes: {
+            include: {
+              likedBy: true
+            }
+          },
+          _count: {
+            select: {
+              Comments: {
+                where: {
+                  deletedText: {
+                    not: null
+                  }
+                }
+              }
+            }
+          },
+          author: true
+        }
+      }),
+      await prisma.comment.findMany({
+        where: {
+          authorId: req.params.id
+        },
+        orderBy: {
+          commentDate: "desc"
+        }
+      })
+    ];
+    res.status(200).json({ postList, commentList });
+  } else {
+    res.status(200).json(false);
+  }
+});
+
 export default signup;
