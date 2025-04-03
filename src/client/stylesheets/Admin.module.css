@@ -10,7 +10,6 @@
 
 .admin_container > div:first-of-type {
   max-height: 250px;
-  height: 100%;
   overflow-y: scroll;
 }
 
