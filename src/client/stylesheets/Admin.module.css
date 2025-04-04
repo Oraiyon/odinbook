@@ -8,9 +8,14 @@
   padding: 0.25em;
 }
 
-.admin_container > div:first-of-type {
+.search_list {
   max-height: 250px;
   overflow-y: scroll;
+}
+
+.selected_user_delete {
+  display: flex;
+  justify-content: space-between;
 }
 
 .selected_user {

@@ -30,11 +30,16 @@ const Admin = () => {
         console.log(error);
       }
     };
+    if (searchedUsers) {
+      fetchSearchedUsers();
+    } else {
+      setSelectedUser(null);
+    }
+
     const fetchSelectedUser = async () => {
       try {
         const response = await fetch(`/api/admin/${user.id}/get/${selectedUser.id}`);
         const data = await response.json();
-        console.log(data);
         if (data) {
           setSelectedUserPostList(data.postList);
           setSelectedUserCommentList(data.commentList);
@@ -43,12 +48,6 @@ const Admin = () => {
         console.log(error);
       }
     };
-
-    if (searchedUsers) {
-      fetchSearchedUsers();
-    } else {
-      setSelectedUser(null);
-    }
     if (selectedUser) {
       fetchSelectedUser();
     }
@@ -69,8 +68,11 @@ const Admin = () => {
         </form>
         {searchedUsers && searchedUsersList ? (
           <>
-            <h2>Selected User: {selectedUser ? selectedUser.username : ""} </h2>
-            <div>
+            <div className={styles.selected_user_delete}>
+              <h2>Selected User: {selectedUser ? selectedUser.username : ""} </h2>
+              <button>Delete</button>
+            </div>
+            <div className={styles.search_list}>
               {searchedUsersList.map((user) => (
                 <div
                   key={user.id}
@@ -94,7 +96,7 @@ const Admin = () => {
             <Link to={`/admin/${user.id}/${selectedUser.id}/posts`}>
               Posts: {selectedUserPostList.length}
             </Link>
-            <div>Comments {selectedUserCommentList.length}</div>
+            <div>Comments: {selectedUserCommentList.length}</div>
           </>
         ) : (
           ""

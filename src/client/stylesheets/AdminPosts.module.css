@@ -1,0 +1,32 @@
+.adminPosts_info {
+  padding: 0.25em;
+}
+
+.postList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.25em;
+}
+
+.postList > div {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.postList > div > img {
+  width: 100%;
+}
+
+.postList > div > p {
+  text-overflow: clip;
+}
+
+.selected_post_card {
+  border: 2px solid red;
+}
+
+.delete_posts {
+  display: flex;
+  justify-content: space-between;
+}

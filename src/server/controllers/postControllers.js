@@ -181,8 +181,7 @@ export const delete_post = expressAsyncHandler(async (req, res, next) => {
     }),
     prisma.post.delete({
       where: {
-        id: req.params.postId,
-        authorId: req.params.id
+        id: req.params.postId
       }
     })
   ]);
