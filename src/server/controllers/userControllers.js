@@ -390,6 +390,9 @@ export const admin_get_user = expressAsyncHandler(async (req, res, next) => {
   if (admin) {
     const [postList, commentList] = [
       await prisma.post.findMany({
+        where: {
+          authorId: req.params.userId
+        },
         orderBy: {
           postDate: "desc"
         },
@@ -415,7 +418,7 @@ export const admin_get_user = expressAsyncHandler(async (req, res, next) => {
       }),
       await prisma.comment.findMany({
         where: {
-          authorId: req.params.id
+          authorId: req.params.userId
         },
         orderBy: {
           commentDate: "desc"
