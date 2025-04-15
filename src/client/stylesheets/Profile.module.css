@@ -1,0 +1,12 @@
+.profile_container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.profile_container > p {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

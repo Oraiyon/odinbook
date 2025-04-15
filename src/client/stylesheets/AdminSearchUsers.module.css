@@ -1,0 +1,17 @@
+.admin_form > input {
+  width: 100%;
+  padding: 0.25em;
+}
+
+.search_list {
+  overflow-y: auto;
+  height: 100%;
+}
+
+.search_list > div {
+  padding: 0.25em;
+}
+
+.search_list > div > p {
+  font-weight: bold;
+}

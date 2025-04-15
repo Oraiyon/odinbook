@@ -1,0 +1,35 @@
+.search_container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.search_card {
+  padding: 0.5em;
+}
+
+.searchBar {
+  position: relative;
+}
+
+.searchBar > label {
+  display: none;
+}
+
+.searchBar > svg {
+  max-width: 50px;
+  max-height: 50px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.searchBar > input {
+  width: 100%;
+  padding: 0.5em;
+  padding-left: 50px;
+  max-height: 50px;
+  border: 0;
+  border-bottom: 2px solid black;
+}

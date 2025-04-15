@@ -1,0 +1,29 @@
+.admin_header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.25em;
+}
+
+.admin_nav > button {
+  padding: 0 0.25em;
+}
+
+.admin_header > button {
+  padding: 0 0.25em;
+}
+
+.admin_container {
+  padding: 0.25em;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+}
+
+.admin_nav {
+  padding: 0 0.25em;
+}
+
+.selected_category {
+  border: 2px solid red;
+}

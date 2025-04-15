@@ -1,0 +1,13 @@
+.error_page_container {
+  padding: 0.25em;
+}
+
+.error_page_container > button {
+  border: 2px solid black;
+  width: 100%;
+  display: flex;
+}
+
+.error_page_container > button > a {
+  flex: 1;
+}

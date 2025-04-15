@@ -1,0 +1,45 @@
+.admin_form > input {
+  width: 100%;
+  padding: 0.25em;
+}
+
+.search_post_container {
+  overflow-y: auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+}
+
+.search_post_container > button {
+  width: 100%;
+}
+
+.postList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.25em;
+}
+
+.postList > div {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.postList > div > p:first-of-type {
+  font-weight: bold;
+}
+
+.postList > div > img {
+  width: 100%;
+}
+
+.postList > div > p {
+  text-overflow: clip;
+}
+
+.selected_post_card {
+  border: 2px solid red;
+  padding: 0.25em;
+}

@@ -1,0 +1,36 @@
+.user_link {
+  width: max-content;
+}
+
+.user_card {
+  display: flex;
+  align-items: center;
+  gap: 0.25em;
+}
+
+.user_card > svg {
+  height: 50px;
+}
+
+.user_card > p {
+  overflow-x: hidden;
+}
+
+.post_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post_header > a {
+  flex: 1;
+}
+
+.post_header > svg {
+  width: 50px;
+  cursor: pointer;
+}
+
+.header_delete_icon {
+  max-width: 25px;
+}
