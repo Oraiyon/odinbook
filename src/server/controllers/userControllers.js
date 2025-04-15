@@ -150,7 +150,9 @@ export const get_search_user = expressAsyncHandler(async (req, res, next) => {
             }
           }
         }
-      }
+      },
+      Posts: true,
+      Comments: true
     },
     omit: {
       password: true
