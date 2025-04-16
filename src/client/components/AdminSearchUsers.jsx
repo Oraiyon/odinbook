@@ -1,11 +1,17 @@
 import { Link } from "react-router-dom";
 import styles from "../stylesheets/AdminSearchUsers.module.css";
+import Icon from "@mdi/react";
+import { mdiDelete } from "@mdi/js";
 
 const AdminSearchUsers = (props) => {
   const handleUserDelete = async (id) => {
     try {
       await fetch(`/api/admin/delete/${id}`, { method: "DELETE" });
-      props.setSearchedUsers(searchedUsers);
+      if (props.searchedUsers) {
+        props.fetchSearchedUsers();
+      } else {
+        props.fetchAllUsers();
+      }
     } catch (error) {
       console.log(error);
     }
@@ -26,10 +32,9 @@ const AdminSearchUsers = (props) => {
         <table className={styles.user_table}>
           <thead>
             <tr>
-              <th>Users</th>
+              <th>Usernames</th>
               <th>Posts</th>
               <th>Comments</th>
-              <th>Delete</th>
             </tr>
           </thead>
           <tbody className={styles.table_body}>
@@ -46,9 +51,9 @@ const AdminSearchUsers = (props) => {
                   <td>
                     <button
                       onClick={() => handleUserDelete(user.id)}
-                      className={styles.user_delete_button}
+                      className={styles.admin_user_delete_button}
                     >
-                      Delete
+                      <Icon path={mdiDelete}></Icon>
                     </button>
                   </td>
                 ) : (

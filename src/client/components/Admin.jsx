@@ -29,20 +29,21 @@ const Admin = () => {
     }
   };
 
+  const fetchSearchedUsers = async () => {
+    try {
+      const response = await fetch(`/api/search/${searchedUsers}`);
+      const data = await response.json();
+      setSearchedUsersList(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     fetchAllUsers();
   }, []);
 
   useEffect(() => {
-    const fetchSearchedUsers = async () => {
-      try {
-        const response = await fetch(`/api/search/${searchedUsers}`);
-        const data = await response.json();
-        setSearchedUsersList(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
     if (searchedUsers) {
       fetchSearchedUsers();
     } else {
@@ -102,6 +103,8 @@ const Admin = () => {
               setSearchedUsers={setSearchedUsers}
               searchedUsers={searchedUsers}
               searchedUsersList={searchedUsersList}
+              fetchAllUsers={fetchAllUsers}
+              fetchSearchedUsers={fetchSearchedUsers}
             />
           ) : (
             <AdminSearchPost
