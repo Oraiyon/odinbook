@@ -21,6 +21,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 0;
+  background-color: inherit;
 }
 
 .admin_user_delete_button > svg {
