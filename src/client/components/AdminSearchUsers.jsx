@@ -2,8 +2,22 @@ import { Link } from "react-router-dom";
 import styles from "../stylesheets/AdminSearchUsers.module.css";
 import Icon from "@mdi/react";
 import { mdiDelete } from "@mdi/js";
+import { useState } from "react";
 
 const AdminSearchUsers = (props) => {
+  const [deletedUsers, setDeletedUsers] = useState([]);
+
+  const handleSelectUser = (id) => {
+    for (let i = 0; i < deletedUsers.length; i++) {
+      if (deletedUsers[i] === id) {
+        const newArray = deletedUsers.filter((item) => item !== id);
+        setDeletedUsers(newArray);
+        return;
+      }
+    }
+    setDeletedUsers((d) => [...d, id]);
+  };
+
   const handleUserDelete = async (id) => {
     try {
       await fetch(`/api/admin/delete/${id}`, { method: "DELETE" });
@@ -33,16 +47,19 @@ const AdminSearchUsers = (props) => {
           <thead>
             <tr>
               <th>Usernames</th>
-              <th>Posts</th>
+              <th>users</th>
               <th>Comments</th>
             </tr>
           </thead>
           <tbody className={styles.table_body}>
             {props.searchedUsersList.map((user) => (
-              <tr key={user.id}>
-                <td>{user.username}</td>
+              <tr
+                key={user.id}
+                className={deletedUsers.includes(user.id) ? styles.selected_user : ""}
+              >
+                <td onClick={() => handleSelectUser(user.id)}>{user.username}</td>
                 <td>
-                  <Link to={`/admin/${user.id}/posts`}>{user.Posts.length}</Link>
+                  <Link to={`/admin/${user.id}/users`}>{user.Posts.length}</Link>
                 </td>
                 <td>
                   <Link to={`/admin/${user.id}/comments`}>{user.Comments.length}</Link>
