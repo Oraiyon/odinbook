@@ -19,11 +19,3 @@
   flex-direction: column;
   gap: 0.25em;
 }
-
-.admin_nav {
-  padding: 0 0.25em;
-}
-
-.selected_category {
-  border: 2px solid red;
-}
