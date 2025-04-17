@@ -115,11 +115,8 @@ const AdminComments = () => {
         </div>
         <div className={styles.adminComments_list}>
           {commentList.map((comment) => (
-            <div
-              key={comment.id}
-              onClick={() => handleSelectPost(comment.id)}
-              className={deletedCommentIds.includes(comment.id) ? styles.selected_comment_card : ""}
-            >
+            <div key={comment.id}>
+              <input type="checkbox" onClick={() => handleSelectPost(comment.id)} />
               <p>{comment.text}</p>
               <DisplayDate date={comment.commentDate} />
             </div>

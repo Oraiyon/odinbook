@@ -43,8 +43,3 @@
 .adminComments_list > div > p:last-of-type {
   text-align: end;
 }
-
-.selected_comment_card {
-  border: 2px solid red;
-  padding: 0.25em;
-}
