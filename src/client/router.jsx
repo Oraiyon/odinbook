@@ -15,10 +15,10 @@ import ErrorPage from "./components/ErrorPage";
 import Inbox from "./components/Inbox";
 import Followers from "./components/Followers";
 import Following from "./components/Following";
-import Admin from "./components/Admin";
 import AdminPosts from "./components/AdminPosts";
 import AdminComments from "./components/AdminComments";
 import AdminSearchPost from "./components/AdminSearchPosts";
+import AdminSearchUsers from "./components/AdminSearchUsers";
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -89,7 +89,7 @@ const Router = () => {
         ,
         {
           path: "/admin/:id",
-          element: <Admin />
+          element: <AdminSearchUsers />
         },
         {
           path: "/admin/:adminId/:user/posts",
