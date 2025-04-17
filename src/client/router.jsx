@@ -18,6 +18,7 @@ import Following from "./components/Following";
 import Admin from "./components/Admin";
 import AdminPosts from "./components/AdminPosts";
 import AdminComments from "./components/AdminComments";
+import AdminSearchPost from "./components/AdminSearchPosts";
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -91,12 +92,16 @@ const Router = () => {
           element: <Admin />
         },
         {
-          path: "/admin/:userId/posts",
+          path: "/admin/:adminId/:user/posts",
           element: <AdminPosts />
         },
         {
-          path: "/admin/:userId/comments",
+          path: "/admin/:adminId/:user/comments",
           element: <AdminComments />
+        },
+        {
+          path: "/admin/:adminId/posts",
+          element: <AdminSearchPost />
         }
       ],
       errorElement: <ErrorPage />
