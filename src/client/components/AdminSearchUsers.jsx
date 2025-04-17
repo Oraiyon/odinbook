@@ -47,7 +47,7 @@ const AdminSearchUsers = (props) => {
           <thead>
             <tr>
               <th>Usernames</th>
-              <th>users</th>
+              <th>Posts</th>
               <th>Comments</th>
             </tr>
           </thead>
@@ -59,7 +59,7 @@ const AdminSearchUsers = (props) => {
               >
                 <td onClick={() => handleSelectUser(user.id)}>{user.username}</td>
                 <td>
-                  <Link to={`/admin/${user.id}/users`}>{user.Posts.length}</Link>
+                  <Link to={`/admin/${user.id}/Posts`}>{user.Posts.length}</Link>
                 </td>
                 <td>
                   <Link to={`/admin/${user.id}/comments`}>{user.Comments.length}</Link>
