@@ -106,11 +106,8 @@ const AdminPosts = () => {
           <button onClick={handlePostDelete}>Delete</button>
           <div className={styles.postList}>
             {postList.map((post) => (
-              <div
-                className={deletedPostIds.includes(post.id) ? styles.selected_post_card : ""}
-                key={post.id}
-                onClick={() => handleSelectPost(post.id)}
-              >
+              <div key={post.id}>
+                <input type="checkbox" onClick={() => handleSelectPost(post.id)} />
                 <img src={post.image} alt="" />
                 <p>{post.text}</p>
               </div>

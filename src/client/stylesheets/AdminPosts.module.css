@@ -34,6 +34,11 @@
   display: flex;
   flex-direction: column;
   cursor: pointer;
+  gap: 0.25em;
+}
+
+.postList > div > input {
+  align-self: flex-end;
 }
 
 .postList > div > img {
@@ -42,9 +47,4 @@
 
 .postList > div > p {
   text-overflow: clip;
-}
-
-.selected_post_card {
-  border: 2px solid red;
-  padding: 0.25em;
 }
