@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 import styles from "../stylesheets/AdminSearchUsers.module.css";
-import Icon from "@mdi/react";
-import { mdiDelete } from "@mdi/js";
 import { useState } from "react";
 
 const AdminSearchUsers = (props) => {
@@ -18,13 +16,15 @@ const AdminSearchUsers = (props) => {
     setDeletedUsers((d) => [...d, id]);
   };
 
-  const handleUserDelete = async (id) => {
+  const handleUserDelete = async () => {
     try {
-      await fetch(`/api/admin/delete/${id}`, { method: "DELETE" });
-      if (props.searchedUsers) {
-        props.fetchSearchedUsers();
-      } else {
-        props.fetchAllUsers();
+      for (let i = 0; i < deletedUsers.length; i++) {
+        await fetch(`/api/admin/delete/${deletedUsers[i]}`, { method: "DELETE" });
+        if (props.searchedUsers) {
+          props.fetchSearchedUsers();
+        } else {
+          props.fetchAllUsers();
+        }
       }
     } catch (error) {
       console.log(error);
@@ -42,6 +42,7 @@ const AdminSearchUsers = (props) => {
           onChange={(e) => props.setSearchedUsers(e.target.value)}
         />
       </form>
+      <button onClick={handleUserDelete}>Delete Selected Users</button>
       {props.searchedUsersList ? (
         <table className={styles.user_table}>
           <thead>
@@ -57,14 +58,21 @@ const AdminSearchUsers = (props) => {
                 key={user.id}
                 className={deletedUsers.includes(user.id) ? styles.selected_user : ""}
               >
-                <td onClick={() => handleSelectUser(user.id)}>{user.username}</td>
+                <td className={styles.select_user}>
+                  {!user.admin ? (
+                    <input type="checkbox" onClick={() => handleSelectUser(user.id)} />
+                  ) : (
+                    <input type="checkbox" className={styles.hidden_checkbox} />
+                  )}
+                  <p>{user.username}</p>
+                </td>
                 <td>
                   <Link to={`/admin/${user.id}/Posts`}>{user.Posts.length}</Link>
                 </td>
                 <td>
                   <Link to={`/admin/${user.id}/comments`}>{user.Comments.length}</Link>
                 </td>
-                {!user.admin ? (
+                {/* {!user.admin ? (
                   <td>
                     <button
                       onClick={() => handleUserDelete(user.id)}
@@ -75,7 +83,7 @@ const AdminSearchUsers = (props) => {
                   </td>
                 ) : (
                   ""
-                )}
+                )} */}
               </tr>
             ))}
           </tbody>

@@ -16,6 +16,15 @@
   font-weight: bold;
 }
 
+.select_user {
+  display: flex;
+  gap: 0.25em;
+}
+
+.hidden_checkbox {
+  visibility: hidden;
+}
+
 .admin_user_delete_button {
   padding: 0 0.25em;
   display: flex;
@@ -28,8 +37,4 @@
 .admin_user_delete_button > svg {
   width: 100%;
   max-width: 25px;
-}
-
-.selected_user > td {
-  border: 2px solid red;
 }
