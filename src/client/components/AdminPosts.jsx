@@ -21,7 +21,7 @@ const AdminPosts = () => {
 
   const fetchUserPosts = async () => {
     try {
-      const response = await fetch(`/api/${window.location.pathname.split("/")[2]}/get/posts`);
+      const response = await fetch(`/api/${window.location.pathname.split("/")[3]}/get/posts`);
       const data = await response.json();
       setPostList(data);
     } catch (error) {
@@ -32,7 +32,7 @@ const AdminPosts = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch(`/api/${window.location.pathname.split("/")[2]}/profile`);
+        const response = await fetch(`/api/${window.location.pathname.split("/")[3]}/profile`);
         const data = await response.json();
         setUserInfo(data);
       } catch (error) {

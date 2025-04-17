@@ -23,7 +23,7 @@ const AdminComments = () => {
   const fetchUserComments = async () => {
     try {
       const response = await fetch(
-        `/api/admin/search/${window.location.pathname.split("/")[2]}/comment/user`
+        `/api/admin/search/${window.location.pathname.split("/")[3]}/comment/user`
       );
       const data = await response.json();
       setCommentList(data);
@@ -35,7 +35,7 @@ const AdminComments = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch(`/api/${window.location.pathname.split("/")[2]}/profile`);
+        const response = await fetch(`/api/${window.location.pathname.split("/")[3]}/profile`);
         const data = await response.json();
         setUserInfo(data);
       } catch (error) {
