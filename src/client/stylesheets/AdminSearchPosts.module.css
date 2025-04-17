@@ -27,7 +27,12 @@
   cursor: pointer;
 }
 
-.postList > div > p:first-of-type {
+.postList > div > div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.postList > div > div > p {
   font-weight: bold;
 }
 
@@ -37,9 +42,4 @@
 
 .postList > div > p {
   text-overflow: clip;
-}
-
-.selected_post_card {
-  border: 2px solid red;
-  padding: 0.25em;
 }

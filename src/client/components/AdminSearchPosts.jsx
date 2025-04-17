@@ -82,12 +82,11 @@ const AdminSearchPost = (props) => {
       <button onClick={handlePostDelete}>Delete</button>
       <div className={styles.postList}>
         {postList.map((post) => (
-          <div
-            key={post.id}
-            className={deletePostsId.includes(post.id) ? styles.selected_post_card : ""}
-            onClick={() => handleSelectPost(post)}
-          >
-            <p>{post.author.username}</p>
+          <div key={post.id}>
+            <div>
+              <p>{post.author.username}</p>
+              <input type="checkbox" onClick={() => handleSelectPost(post)} />
+            </div>
             <img src={post.image} alt="" />
             <p>{post.text}</p>
           </div>
