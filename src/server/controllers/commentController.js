@@ -24,7 +24,7 @@ const post_comment = expressAsyncHandler(async (req, res, next) => {
         }
       },
       orderBy: {
-        commentDate: "asc"
+        commentDate: "desc"
       }
     });
     // Just jump to this with react
@@ -48,7 +48,7 @@ export const get_comments = expressAsyncHandler(async (req, res, next) => {
       post: true
     },
     orderBy: {
-      commentDate: "asc"
+      commentDate: "desc"
     }
   });
   res.status(200).json(commentList);
@@ -81,7 +81,7 @@ export const delete_comment = expressAsyncHandler(async (req, res, next) => {
         post: true
       },
       orderBy: {
-        commentDate: "asc"
+        commentDate: "desc"
       }
     });
     res.status(200).json(commentList);
@@ -108,6 +108,16 @@ export const delete_comment_admin = expressAsyncHandler(async (req, res, next) =
       const commentList = await prisma.comment.findMany({
         where: {
           authorId: deletedComment.authorId
+        },
+        include: {
+          author: {
+            omit: {
+              password: true
+            }
+          }
+        },
+        orderBy: {
+          commentDate: "desc"
         }
       });
       res.status(200).json(commentList);
@@ -128,6 +138,16 @@ export const get_search_comments = expressAsyncHandler(async (req, res, next) =>
       text: {
         contains: req.params.text
       }
+    },
+    include: {
+      author: {
+        omit: {
+          password: true
+        }
+      }
+    },
+    orderBy: {
+      commentDate: "desc"
     }
   });
   res.status(200).json(commentList);
@@ -137,6 +157,16 @@ export const get_all_user_comments = expressAsyncHandler(async (req, res, next) 
   const commentList = await prisma.comment.findMany({
     where: {
       authorId: req.params.id
+    },
+    include: {
+      author: {
+        omit: {
+          password: true
+        }
+      }
+    },
+    orderBy: {
+      commentDate: "desc"
     }
   });
   res.status(200).json(commentList);
@@ -150,6 +180,9 @@ export const get_all_comments = expressAsyncHandler(async (req, res, next) => {
           password: true
         }
       }
+    },
+    orderBy: {
+      commentDate: "desc"
     }
   });
   res.status(200).json(commentList);
@@ -158,7 +191,9 @@ export const get_all_comments = expressAsyncHandler(async (req, res, next) => {
 export const get_search_all_comments = expressAsyncHandler(async (req, res, next) => {
   const commentList = await prisma.comment.findMany({
     where: {
-      text: req.params.text
+      text: {
+        contains: req.params.text
+      }
     },
     include: {
       author: {
@@ -166,6 +201,9 @@ export const get_search_all_comments = expressAsyncHandler(async (req, res, next
           password: true
         }
       }
+    },
+    orderBy: {
+      commentDate: "desc"
     }
   });
   res.status(200).json(commentList);
