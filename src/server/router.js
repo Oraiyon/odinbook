@@ -30,8 +30,10 @@ import post_like_post from "./controllers/likeControllers.js";
 import post_comment, {
   delete_comment,
   delete_comment_admin,
+  get_all_comments,
   get_all_user_comments,
   get_comments,
+  get_search_all_comments,
   get_search_comments
 } from "./controllers/commentController.js";
 
@@ -79,5 +81,7 @@ router.delete("/api/:authorId/delete/:postId/:commentId", delete_comment);
 router.delete("/api/admin/:id/delete/comment/:commentId", delete_comment_admin);
 router.get("/api/admin/search/:id/:text/comment", get_search_comments);
 router.get("/api/admin/search/:id/comment/user", get_all_user_comments);
+router.get("/api/admin/get/all/comments", get_all_comments);
+router.get("/api/admin/get/all/comments/search/:text", get_search_all_comments);
 
 export default router;

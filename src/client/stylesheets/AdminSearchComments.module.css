@@ -1,0 +1,4 @@
+.adminComments_list > div > div {
+  display: flex;
+  gap: 0.25em;
+}

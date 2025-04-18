@@ -142,4 +142,33 @@ export const get_all_user_comments = expressAsyncHandler(async (req, res, next) 
   res.status(200).json(commentList);
 });
 
+export const get_all_comments = expressAsyncHandler(async (req, res, next) => {
+  const commentList = await prisma.comment.findMany({
+    include: {
+      author: {
+        omit: {
+          password: true
+        }
+      }
+    }
+  });
+  res.status(200).json(commentList);
+});
+
+export const get_search_all_comments = expressAsyncHandler(async (req, res, next) => {
+  const commentList = await prisma.comment.findMany({
+    where: {
+      text: req.params.text
+    },
+    include: {
+      author: {
+        omit: {
+          password: true
+        }
+      }
+    }
+  });
+  res.status(200).json(commentList);
+});
+
 export default post_comment;
