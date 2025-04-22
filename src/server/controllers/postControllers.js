@@ -92,11 +92,6 @@ export const get_post = expressAsyncHandler(async (req, res, next) => {
           }
         }
       },
-      _count: {
-        select: {
-          Comments: true
-        }
-      },
       author: {
         omit: {
           password: true
