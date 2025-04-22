@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "../stylesheets/AdminSearchPosts.module.css";
 import { Link, useOutletContext } from "react-router-dom";
-import BackHeader from "./BackHeader";
 import AdminNavbar from "./AdminNavbar";
 
 const AdminSearchPost = () => {
@@ -20,6 +19,8 @@ const AdminSearchPost = () => {
   const [deletedPosts, setDeletedPosts] = useState([]);
   const [deletePostsId, setDeletedPostsId] = useState([]);
   const [searchedText, setSearchedText] = useState("");
+
+  const postLinkRef = useRef(null);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -47,7 +48,8 @@ const AdminSearchPost = () => {
     }
   }, [searchedText]);
 
-  const handleSelectPost = (post) => {
+  const handleSelectPost = (e, post) => {
+    e.stopPropagation();
     for (let i = 0; i < deletedPosts.length; i++) {
       if (deletedPosts[i].id === post.id) {
         const newArray = deletedPosts.filter((item) => item.id !== post.id);
@@ -100,13 +102,14 @@ const AdminSearchPost = () => {
           <button onClick={handlePostDelete}>Delete</button>
           <div className={styles.postList}>
             {postList.map((post) => (
-              <div key={post.id}>
+              <div key={post.id} onClick={() => postLinkRef.current.click()}>
                 <div>
                   <p>{post.author.username}</p>
-                  <input type="checkbox" onClick={() => handleSelectPost(post)} />
+                  <input type="checkbox" onClick={(e) => handleSelectPost(e, post)} />
                 </div>
                 <img src={post.image} alt="" />
                 <p>{post.text}</p>
+                <Link to={`/admin/${user.id}/post/${post.id}`} ref={postLinkRef}></Link>
               </div>
             ))}
           </div>
