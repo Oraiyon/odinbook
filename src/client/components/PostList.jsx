@@ -110,7 +110,7 @@ const PostList = (props) => {
                   <div className={styles.comments_section}>
                     <Link to={`/${post.id}/comments`}>
                       <Icon path={mdiCommentOutline} className={styles.post_icon}></Icon>
-                      <p>{post._count.Comments}</p>
+                      <p>{post.Comments.length}</p>
                     </Link>
                   </div>
                 </div>

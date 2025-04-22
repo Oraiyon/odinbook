@@ -50,7 +50,7 @@ const PostModal = (props) => {
             </div>
             <div>
               <Icon path={mdiCommentOutline}></Icon>
-              <p>{props.displayPostModal._count.Comments}</p>
+              <p>{props.displayPostModal.Comments.length}</p>
             </div>
           </div>
           <DisplayDate date={props.displayPostModal.postDate} />

@@ -53,9 +53,13 @@ export const get_posts = expressAsyncHandler(async (req, res, next) => {
           likedBy: true
         }
       },
-      _count: {
-        select: {
-          Comments: true
+      Comments: {
+        include: {
+          author: {
+            omit: {
+              password: true
+            }
+          }
         }
       },
       author: true
@@ -73,6 +77,15 @@ export const get_post = expressAsyncHandler(async (req, res, next) => {
       Likes: {
         include: {
           likedBy: {
+            omit: {
+              password: true
+            }
+          }
+        }
+      },
+      Comments: {
+        include: {
+          author: {
             omit: {
               password: true
             }
@@ -108,9 +121,13 @@ export const get_user_posts = expressAsyncHandler(async (req, res, next) => {
           likedBy: true
         }
       },
-      _count: {
-        select: {
-          Comments: true
+      Comments: {
+        include: {
+          author: {
+            omit: {
+              password: true
+            }
+          }
         }
       },
       author: true
@@ -144,9 +161,13 @@ export const get_following_posts = expressAsyncHandler(async (req, res, next) =>
           likedBy: true
         }
       },
-      _count: {
-        select: {
-          Comments: true
+      Comments: {
+        include: {
+          author: {
+            omit: {
+              password: true
+            }
+          }
         }
       },
       author: true
@@ -190,9 +211,13 @@ export const delete_post = expressAsyncHandler(async (req, res, next) => {
             likedBy: true
           }
         },
-        _count: {
-          select: {
-            Comments: true
+        Comments: {
+          include: {
+            author: {
+              omit: {
+                password: true
+              }
+            }
           }
         },
         author: true
@@ -209,9 +234,13 @@ export const delete_post = expressAsyncHandler(async (req, res, next) => {
             likedBy: true
           }
         },
-        _count: {
-          select: {
-            Comments: true
+        Comments: {
+          include: {
+            author: {
+              omit: {
+                password: true
+              }
+            }
           }
         },
         author: true
@@ -250,13 +279,16 @@ export const get_search_post = expressAsyncHandler(async (req, res, next) => {
           likedBy: true
         }
       },
-      _count: {
-        select: {
-          Comments: {
-            where: {
-              deletedText: {
-                not: null
-              }
+      Comments: {
+        where: {
+          deletedText: {
+            not: null
+          }
+        },
+        include: {
+          author: {
+            omit: {
+              password: true
             }
           }
         }
