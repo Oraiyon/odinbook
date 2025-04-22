@@ -36,19 +36,24 @@
   overflow-y: auto;
 }
 
-.adminComments_list > div > p:first-of-type {
-  overflow-wrap: break-word;
-}
-
-.adminComments_list > div > p:last-of-type {
-  text-align: end;
-}
-
-.adminComments_list > div > div:first-of-type {
+.comment_card > div:first-of-type {
   display: flex;
   gap: 0.25em;
 }
 
-.adminComments_list > div > div > p {
+.comment_card > div:first-of-type > p {
   font-weight: bold;
+}
+
+.comment_card > div:last-of-type {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment_card > div:last-of-type > p:first-of-type {
+  overflow-wrap: break-word;
+}
+
+.comment_card > div:last-of-type > p:last-of-type {
+  align-self: flex-end;
 }
