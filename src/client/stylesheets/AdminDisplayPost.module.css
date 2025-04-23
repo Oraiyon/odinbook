@@ -1,0 +1,25 @@
+.post_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.post_container > div {
+  overflow-y: auto;
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment > p:first-of-type {
+  font-weight: bold;
+}
+
+.comment > p:nth-of-type(2) {
+  overflow-wrap: break-word;
+}
+
+.comment > p:last-of-type {
+  align-self: flex-end;
+}
