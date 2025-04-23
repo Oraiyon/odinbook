@@ -21,6 +21,7 @@ import AdminSearchPost from "./components/AdminSearchPosts";
 import AdminSearchUsers from "./components/AdminSearchUsers";
 import AdminSearchComments from "./components/AdminSearchComments";
 import AdminDisplayPost from "./components/AdminDisplayPost";
+import AdminDisplayComments from "./components/AdminDisplayComments";
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -112,6 +113,10 @@ const Router = () => {
         {
           path: "/admin/:adminId/post/:postId",
           element: <AdminDisplayPost />
+        },
+        {
+          path: "/admin/:adminId/post/:postId/comments",
+          element: <AdminDisplayComments />
         }
       ],
       errorElement: <ErrorPage />
