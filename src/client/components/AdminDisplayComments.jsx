@@ -75,7 +75,7 @@ const AdminDisplayComments = () => {
           data = await response.json();
         }
         if (data) {
-          setCommentList(data);
+          setDisplayComments(data);
           setDeletedCommentIds([]);
         }
       }
@@ -86,29 +86,32 @@ const AdminDisplayComments = () => {
 
   if (user && user.admin) {
     return (
-      <div className={styles.adminDisplayComments_container}>
-        <BackHeader />
-        <div className={styles.comment_section}>
-          <label htmlFor="comments_search"></label>
-          <input
-            type="text"
-            id="comments_search"
-            placeholder="Search Comment"
-            onChange={(e) => handleCommentSearch(e.target.value)}
-          />
-          <button onClick={handleCommentDelete}>Delete Selected Comments</button>
-          <div className={styles.comment_list}>
-            {displayComments.map((comment) => (
-              <div key={comment.id} className={styles.comment}>
-                <div>
-                  <input type="checkbox" onClick={() => handleSelectPost(comment.id)} />
-                  <p>{comment.author.username}</p>
-                </div>
+      <div className={styles.comments_container}>
+        <div>
+          <BackHeader />
+          {displayComments.map((comment) => (
+            <div key={comment.id} className={styles.comment_card}>
+              <div>
+                <input type="checkbox" onClick={() => handleSelectPost(comment.id)} />
+                <p>{comment.author.username}</p>
+              </div>
+              <div>
                 <p>{comment.text}</p>
                 <DisplayDate date={comment.commentDate} />
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
+        </div>
+        <div className={styles.search_comment}>
+          <label htmlFor="commentInput"></label>
+          <input
+            type="text"
+            id="commentInput"
+            placeholder="Search Comment"
+            name="text"
+            onChange={(e) => handleCommentSearch(e.target.value)}
+          />
+          <button onClick={handleCommentDelete}>Delete Selected Comments</button>
         </div>
       </div>
     );

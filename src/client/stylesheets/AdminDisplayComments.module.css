@@ -1,39 +1,71 @@
-.adminDisplayComments_container {
+.comments_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
-.comment_section > input {
-  width: 100%;
-  padding: 0.25em;
-}
-
-.comment_section > button {
-  width: 100%;
-  padding: 0 0.25em;
-}
-
-.comment_list {
-  border: 1px solid red;
+.comments_container > div:first-of-type {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   overflow-y: auto;
 }
 
-.comment {
+.comments_container > div > p {
+  padding: 0.25em;
+}
+
+.search_comment {
   display: flex;
   flex-direction: column;
 }
 
-.comment > div {
+.search_comment > p {
+  border-top: 2px solid black;
+}
+
+.comment_length {
+  text-align: end;
+}
+
+.search_comment > input {
+  padding: 0.25em;
+  border: 0;
+  border-top: 2px solid black;
+}
+
+.search_comment > button {
+  border: 0;
+  border-top: 2px solid black;
+}
+
+.comment_card {
+  padding: 0.25em;
+  padding-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+}
+
+.comment_card > div:first-of-type {
   display: flex;
   gap: 0.25em;
 }
 
-.comment > div > p {
+.comment_card > div:first-of-type > p {
   font-weight: bold;
 }
 
-.comment > p:first-of-type {
+.comment_card > div:last-of-type {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment_card > div:last-of-type > p:first-of-type {
   overflow-wrap: break-word;
 }
 
-.comment > p:last-of-type {
+.comment_card > div:last-of-type > p:last-of-type {
   align-self: flex-end;
 }
