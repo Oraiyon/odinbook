@@ -90,6 +90,9 @@ export const get_post = expressAsyncHandler(async (req, res, next) => {
               password: true
             }
           }
+        },
+        orderBy: {
+          commentDate: "desc"
         }
       },
       author: {
