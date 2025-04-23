@@ -231,4 +231,43 @@ export const get_search_comment_text = expressAsyncHandler(async (req, res, next
   res.status(200).json(commentList);
 });
 
+export const delete_admin_comment_post = expressAsyncHandler(async (req, res, next) => {
+  const user = await prisma.user.findFirst({
+    where: {
+      id: req.params.id
+    }
+  });
+  if (user.admin) {
+    const deletedComment = await prisma.comment.delete({
+      where: {
+        id: req.params.commentId
+      }
+    });
+    if (deletedComment) {
+      const commentList = await prisma.comment.findMany({
+        where: {
+          postId: req.params.postId
+        },
+        include: {
+          author: {
+            omit: {
+              password: true
+            }
+          }
+        },
+        orderBy: {
+          commentDate: "desc"
+        }
+      });
+      res.status(200).json(commentList);
+      return;
+    } else {
+      res.status(200).json(false);
+      return;
+    }
+  } else {
+    res.status(200).json(false);
+  }
+});
+
 export default post_comment;

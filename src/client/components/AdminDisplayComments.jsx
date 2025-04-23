@@ -67,7 +67,7 @@ const AdminDisplayComments = () => {
         let data;
         for (let i = 0; i < deletedCommentIds.length; i++) {
           const response = await fetch(
-            `/api/admin/${user.id}/delete/comment/${deletedCommentIds[i]}`,
+            `/api/admin/${user.id}/delete/comment/${deletedCommentIds[i]}/post/${displayPost.id}`,
             {
               method: "DELETE"
             }

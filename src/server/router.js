@@ -28,6 +28,7 @@ import post_post, {
 } from "./controllers/postControllers.js";
 import post_like_post from "./controllers/likeControllers.js";
 import post_comment, {
+  delete_admin_comment_post,
   delete_comment,
   delete_comment_admin,
   get_all_comments,
@@ -85,5 +86,6 @@ router.get("/api/admin/search/:id/comment/user", get_all_user_comments);
 router.get("/api/admin/get/all/comments", get_all_comments);
 router.get("/api/admin/get/all/comments/search/:text", get_search_all_comments);
 router.get("/api/admin/search/post/:postId/comment/:text", get_search_comment_text);
+router.delete("/api/admin/:id/delete/comment/:commentId/post/:postId", delete_admin_comment_post);
 
 export default router;
