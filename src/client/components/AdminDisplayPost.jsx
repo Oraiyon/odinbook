@@ -4,6 +4,7 @@ import { Link, useOutletContext } from "react-router-dom";
 import styles from "../stylesheets/AdminDisplayPost.module.css";
 import Icon from "@mdi/react";
 import { mdiCommentOutline } from "@mdi/js";
+import DisplayDate from "./DisplayDate";
 
 const AdminDisplayPost = () => {
   const [
@@ -25,7 +26,6 @@ const AdminDisplayPost = () => {
         const postId = window.location.href.split("/");
         const response = await fetch(`/api/get/${postId[postId.length - 1]}`);
         const data = await response.json();
-        // console.log(data);
         setDisplayPost(data);
       } catch (error) {
         console.log(error);
@@ -48,6 +48,7 @@ const AdminDisplayPost = () => {
               <Icon path={mdiCommentOutline} className={styles.post_icon}></Icon>
               <p>{displayPost.Comments.length}</p>
             </Link>
+            <DisplayDate date={displayPost.postDate} />
           </div>
         ) : (
           ""
