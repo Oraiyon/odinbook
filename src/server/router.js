@@ -34,6 +34,7 @@ import post_comment, {
   get_all_user_comments,
   get_comments,
   get_search_all_comments,
+  get_search_comment_text,
   get_search_comments
 } from "./controllers/commentController.js";
 
@@ -83,5 +84,6 @@ router.get("/api/admin/search/:id/:text/comment", get_search_comments);
 router.get("/api/admin/search/:id/comment/user", get_all_user_comments);
 router.get("/api/admin/get/all/comments", get_all_comments);
 router.get("/api/admin/get/all/comments/search/:text", get_search_all_comments);
+router.get("/api/admin/search/post/:postId/comment/:text", get_search_comment_text);
 
 export default router;

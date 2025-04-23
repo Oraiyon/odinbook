@@ -209,4 +209,26 @@ export const get_search_all_comments = expressAsyncHandler(async (req, res, next
   res.status(200).json(commentList);
 });
 
+export const get_search_comment_text = expressAsyncHandler(async (req, res, next) => {
+  const commentList = await prisma.comment.findMany({
+    where: {
+      postId: req.params.postId,
+      text: {
+        contains: req.params.text
+      }
+    },
+    include: {
+      author: {
+        omit: {
+          password: true
+        }
+      }
+    },
+    orderBy: {
+      commentDate: "desc"
+    }
+  });
+  res.status(200).json(commentList);
+});
+
 export default post_comment;
