@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import BackHeader from "./BackHeader";
-import { useOutletContext } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import styles from "../stylesheets/AdminDisplayPost.module.css";
-import DisplayDate from "./DisplayDate";
+import Icon from "@mdi/react";
+import { mdiCommentOutline } from "@mdi/js";
 
 const AdminDisplayPost = () => {
   const [
@@ -17,7 +18,6 @@ const AdminDisplayPost = () => {
   ] = useOutletContext();
 
   const [displayPost, setDisplayPost] = useState(null);
-  const [displayComments, setDisplayComments] = useState([]);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -27,7 +27,6 @@ const AdminDisplayPost = () => {
         const data = await response.json();
         // console.log(data);
         setDisplayPost(data);
-        setDisplayComments(data.Comments);
       } catch (error) {
         console.log(error);
       }
@@ -35,46 +34,20 @@ const AdminDisplayPost = () => {
     fetchPost();
   }, []);
 
-  const handleCommentSearch = async (text) => {
-    try {
-      if (!text) {
-        setDisplayComments(displayPost.Comments);
-      } else {
-        const response = await fetch(`/api/admin/search/post/${displayPost.id}/comment/${text}`);
-        const data = await response.json();
-        setDisplayComments(data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   if (user && user.admin) {
     return (
       <div className={styles.adminDisplayPost_container}>
         <BackHeader />
-        {displayPost && displayComments ? (
+        {displayPost ? (
           <div className={styles.post_container}>
-            <label htmlFor="comments_search"></label>
-            <input
-              type="text"
-              id="comments_search"
-              placeholder="Search Comment"
-              onChange={(e) => handleCommentSearch(e.target.value)}
-            />
             <button>Delete Post</button>
-            <p>{displayPost.author.username}</p>
+            <h1>{displayPost.author.username}</h1>
             <img src={displayPost.image}></img>
             <p>{displayPost.text}</p>
-            <div>
-              {displayComments.map((comment) => (
-                <div key={comment.id} className={styles.comment}>
-                  <p>{comment.author.username}</p>
-                  <p>{comment.text}</p>
-                  <DisplayDate date={comment.commentDate} />
-                </div>
-              ))}
-            </div>
+            <Link to={`/admin/${user.id}/post/${displayPost.id}/comments`}>
+              <Icon path={mdiCommentOutline} className={styles.post_icon}></Icon>
+              <p>{displayPost.Comments.length}</p>
+            </Link>
           </div>
         ) : (
           ""

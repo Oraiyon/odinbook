@@ -3,23 +3,12 @@
   flex-direction: column;
 }
 
-.post_container > div {
-  overflow-y: auto;
-}
-
-.comment {
+.post_container > a {
   display: flex;
-  flex-direction: column;
+  gap: 0.25em;
+  align-items: center;
 }
 
-.comment > p:first-of-type {
-  font-weight: bold;
-}
-
-.comment > p:nth-of-type(2) {
-  overflow-wrap: break-word;
-}
-
-.comment > p:last-of-type {
-  align-self: flex-end;
+.post_container > a > svg {
+  height: 50px;
 }
