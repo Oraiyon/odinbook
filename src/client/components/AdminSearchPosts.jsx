@@ -102,14 +102,15 @@ const AdminSearchPost = () => {
           <button onClick={handlePostDelete}>Delete</button>
           <div className={styles.postList}>
             {postList.map((post) => (
-              <div key={post.id} onClick={() => postLinkRef.current.click()}>
+              <div key={post.id}>
                 <div>
                   <p>{post.author.username}</p>
                   <input type="checkbox" onClick={(e) => handleSelectPost(e, post)} />
                 </div>
-                <img src={post.image} alt="" />
+                <Link to={`/admin/${user.id}/post/${post.id}`}>
+                  <img src={post.image} alt="" />
+                </Link>
                 <p>{post.text}</p>
-                <Link to={`/admin/${user.id}/post/${post.id}`} ref={postLinkRef}></Link>
               </div>
             ))}
           </div>

@@ -1,6 +1,6 @@
 import { Link, useOutletContext } from "react-router-dom";
 import styles from "../stylesheets/AdminSearchComments.module.css";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import DisplayDate from "./DisplayDate";
 import AdminNavbar from "./AdminNavbar";
 
@@ -18,8 +18,6 @@ const AdminSearchComments = () => {
 
   const [commentList, setCommentList] = useState([]);
   const [deletedCommentIds, setDeletedCommentIds] = useState([]);
-
-  const postLinkRef = useRef(null);
 
   const fetchAllComments = async () => {
     try {
@@ -109,7 +107,7 @@ const AdminSearchComments = () => {
                 <input type="checkbox" onClick={() => handleSelectPost(comment.id)} />
                 <p>{comment.author.username}</p>
               </div>
-              <Link to={`/admin/${user.id}/post/${comment.postId}`} ref={postLinkRef}>
+              <Link to={`/admin/${user.id}/post/${comment.postId}`}>
                 <p>{comment.text}</p>
                 <DisplayDate date={comment.commentDate} />
               </Link>

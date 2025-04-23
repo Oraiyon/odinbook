@@ -39,7 +39,7 @@
   font-weight: bold;
 }
 
-.postList > div > img {
+.postList > div > a > img {
   width: 100%;
 }
 
