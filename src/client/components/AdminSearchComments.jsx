@@ -109,11 +109,10 @@ const AdminSearchComments = () => {
                 <input type="checkbox" onClick={() => handleSelectPost(comment.id)} />
                 <p>{comment.author.username}</p>
               </div>
-              <div onClick={() => postLinkRef.current.click()}>
+              <Link to={`/admin/${user.id}/post/${comment.postId}`} ref={postLinkRef}>
                 <p>{comment.text}</p>
                 <DisplayDate date={comment.commentDate} />
-              </div>
-              <Link to={`/admin/${user.id}/post/${comment.postId}`} ref={postLinkRef}></Link>
+              </Link>
             </div>
           ))}
         </div>

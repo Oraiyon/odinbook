@@ -45,15 +45,15 @@
   font-weight: bold;
 }
 
-.comment_card > div:last-of-type {
+.comment_card > a {
   display: flex;
   flex-direction: column;
 }
 
-.comment_card > div:last-of-type > p:first-of-type {
+.comment_card > a > p:first-of-type {
   overflow-wrap: break-word;
 }
 
-.comment_card > div:last-of-type > p:last-of-type {
+.comment_card > a > p:last-of-type {
   align-self: flex-end;
 }
