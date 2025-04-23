@@ -86,9 +86,23 @@ const AdminDisplayComments = () => {
 
   if (user && user.admin) {
     return (
-      <div className={styles.comments_container}>
-        <div>
-          <BackHeader />
+      <div className={styles.adminComments_container}>
+        <BackHeader />
+        <form>
+          <label htmlFor="comments_search"></label>
+          <input
+            type="text"
+            name="comments_search"
+            id="comments_search"
+            placeholder="Search Comments"
+            onChange={(e) => handleCommentSearch(e.target.value)}
+          />
+        </form>
+        <p>Comments Selected: {deletedCommentIds.length ? deletedCommentIds.length : 0}</p>
+        <div className={styles.adminComments_button}>
+          <button onClick={handleCommentDelete}>Delete</button>
+        </div>
+        <div className={styles.adminComments_list}>
           {displayComments.map((comment) => (
             <div key={comment.id} className={styles.comment_card}>
               <div>
@@ -101,17 +115,6 @@ const AdminDisplayComments = () => {
               </div>
             </div>
           ))}
-        </div>
-        <div className={styles.search_comment}>
-          <label htmlFor="commentInput"></label>
-          <input
-            type="text"
-            id="commentInput"
-            placeholder="Search Comment"
-            name="text"
-            onChange={(e) => handleCommentSearch(e.target.value)}
-          />
-          <button onClick={handleCommentDelete}>Delete Selected Comments</button>
         </div>
       </div>
     );
