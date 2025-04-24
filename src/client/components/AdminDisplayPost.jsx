@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import BackHeader from "./BackHeader";
-import { Link, useOutletContext } from "react-router-dom";
+import { Link, Navigate, useNavigate, useOutletContext } from "react-router-dom";
 import styles from "../stylesheets/AdminDisplayPost.module.css";
 import Icon from "@mdi/react";
 import { mdiCommentOutline } from "@mdi/js";
@@ -20,6 +20,8 @@ const AdminDisplayPost = () => {
 
   const [displayPost, setDisplayPost] = useState(null);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchPost = async () => {
       try {
@@ -34,13 +36,24 @@ const AdminDisplayPost = () => {
     fetchPost();
   }, []);
 
+  const handlePostDelete = async () => {
+    try {
+      await fetch(`/api/${user.id}/delete/${displayPost.id}/user`, {
+        method: "DELETE"
+      });
+      navigate(-1);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   if (user && user.admin) {
     return (
       <div className={styles.adminDisplayPost_container}>
         <BackHeader />
         {displayPost ? (
           <div className={styles.post_container}>
-            <button>Delete Post</button>
+            <button onClick={handlePostDelete}>Delete Post</button>
             <h1>{displayPost.author.username}</h1>
             <img src={displayPost.image}></img>
             <p>{displayPost.text}</p>
