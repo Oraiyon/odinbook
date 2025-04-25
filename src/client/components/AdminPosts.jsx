@@ -1,4 +1,4 @@
-import { useOutletContext } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import styles from "../stylesheets/AdminPosts.module.css";
 import BackHeader from "./BackHeader";
 import { useEffect, useState } from "react";
@@ -43,7 +43,8 @@ const AdminPosts = () => {
     fetchUserPosts();
   }, []);
 
-  const handleSelectPost = (id) => {
+  const handleSelectPost = (e, id) => {
+    e.stopPropagation();
     for (let i = 0; i < deletedPostIds.length; i++) {
       if (deletedPostIds[i] === id) {
         const newArray = deletedPostIds.filter((item) => item !== id);
@@ -106,11 +107,11 @@ const AdminPosts = () => {
           <button onClick={handlePostDelete}>Delete</button>
           <div className={styles.postList}>
             {postList.map((post) => (
-              <div key={post.id}>
-                <input type="checkbox" onClick={() => handleSelectPost(post.id)} />
+              <Link key={post.id} to={`/admin/${user.id}/post/${post.id}`}>
+                <input type="checkbox" onClick={(e) => handleSelectPost(e, post.id)} />
                 <img src={post.image} alt="" />
                 <p>{post.text}</p>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

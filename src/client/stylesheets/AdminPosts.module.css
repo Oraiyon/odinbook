@@ -30,21 +30,21 @@
   gap: 0.25em;
 }
 
-.postList > div {
+.postList > a {
   display: flex;
   flex-direction: column;
   cursor: pointer;
   gap: 0.25em;
 }
 
-.postList > div > input {
+.postList > a > input {
   align-self: flex-end;
 }
 
-.postList > div > img {
+.postList > a > img {
   width: 100%;
 }
 
-.postList > div > p {
+.postList > a > p {
   text-overflow: clip;
 }
