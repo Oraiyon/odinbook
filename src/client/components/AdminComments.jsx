@@ -1,4 +1,4 @@
-import { useOutletContext } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import styles from "../stylesheets/AdminComments.module.css";
 import BackHeader from "./BackHeader";
 import { useEffect, useState } from "react";
@@ -46,7 +46,8 @@ const AdminComments = () => {
     fetchUserComments();
   }, []);
 
-  const handleSelectPost = (id) => {
+  const handleSelectPost = (e, id) => {
+    e.stopPropagation();
     for (let i = 0; i < deletedCommentIds.length; i++) {
       if (deletedCommentIds[i] === id) {
         const newArray = deletedCommentIds.filter((item) => item !== id);
@@ -115,11 +116,11 @@ const AdminComments = () => {
         </div>
         <div className={styles.adminComments_list}>
           {commentList.map((comment) => (
-            <div key={comment.id}>
-              <input type="checkbox" onClick={() => handleSelectPost(comment.id)} />
+            <Link key={comment.id} to={`/admin/${user.id}/post/${comment.postId}`}>
+              <input type="checkbox" onClick={(e) => handleSelectPost(e, comment.id)} />
               <p>{comment.text}</p>
               <DisplayDate date={comment.commentDate} />
-            </div>
+            </Link>
           ))}
         </div>
       </div>

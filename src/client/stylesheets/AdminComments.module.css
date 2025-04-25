@@ -36,10 +36,10 @@
   overflow-y: auto;
 }
 
-.adminComments_list > div > p:first-of-type {
+.adminComments_list > a > p:first-of-type {
   overflow-wrap: break-word;
 }
 
-.adminComments_list > div > p:last-of-type {
+.adminComments_list > a > p:last-of-type {
   text-align: end;
 }
