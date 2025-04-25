@@ -105,7 +105,9 @@ const AdminSearchComments = () => {
             <div key={comment.id} className={styles.comment_card}>
               <div>
                 <input type="checkbox" onClick={() => handleSelectPost(comment.id)} />
-                <p>{comment.author.username}</p>
+                <Link to={`/admin/${user.id}/${comment.authorId}/comments`}>
+                  {comment.author.username}
+                </Link>
               </div>
               <Link to={`/admin/${user.id}/post/${comment.postId}`}>
                 <p>{comment.text}</p>

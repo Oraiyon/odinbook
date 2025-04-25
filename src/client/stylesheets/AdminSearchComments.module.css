@@ -41,7 +41,7 @@
   gap: 0.25em;
 }
 
-.comment_card > div:first-of-type > p {
+.comment_card > div:first-of-type > a {
   font-weight: bold;
 }
 
