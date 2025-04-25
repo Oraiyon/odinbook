@@ -35,7 +35,7 @@
   justify-content: space-between;
 }
 
-.postList > div > div > p {
+.postList > div > div > a {
   font-weight: bold;
 }
 

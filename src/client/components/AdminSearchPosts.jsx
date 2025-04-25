@@ -104,7 +104,9 @@ const AdminSearchPost = () => {
             {postList.map((post) => (
               <div key={post.id}>
                 <div>
-                  <p>{post.author.username}</p>
+                  <Link to={`/admin/${user.id}/${post.authorId}/posts`}>
+                    {post.author.username}
+                  </Link>
                   <input type="checkbox" onClick={(e) => handleSelectPost(e, post)} />
                 </div>
                 <Link to={`/admin/${user.id}/post/${post.id}`}>
