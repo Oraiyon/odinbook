@@ -1,9 +1,9 @@
 import { Link, useOutletContext } from "react-router-dom";
-import styles from "../stylesheets/AdminPosts.module.css";
+import styles from "../stylesheets/AdminUserPosts.module.css";
 import BackHeader from "./BackHeader";
 import { useEffect, useState } from "react";
 
-const AdminPosts = () => {
+const AdminUserPosts = () => {
   const [
     user,
     setUser,
@@ -89,7 +89,7 @@ const AdminPosts = () => {
 
   if (user && user.admin) {
     return (
-      <div className={styles.adminPosts_container}>
+      <div className={styles.adminUserPosts_container}>
         <BackHeader />
         {userInfo ? <h1>{userInfo.username}'s Posts</h1> : ""}
         <form>
@@ -102,7 +102,7 @@ const AdminPosts = () => {
             onChange={(e) => handlePostSearch(e.target.value)}
           />
         </form>
-        <div className={styles.adminPosts_info}>
+        <div className={styles.adminUserPosts_info}>
           <p>Posts To Be Deleted: {deletedPostIds.length}</p>
           <button onClick={handlePostDelete}>Delete</button>
           <div className={styles.postList}>
@@ -122,4 +122,4 @@ const AdminPosts = () => {
   }
 };
 
-export default AdminPosts;
+export default AdminUserPosts;

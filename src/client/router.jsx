@@ -15,11 +15,11 @@ import ErrorPage from "./components/ErrorPage";
 import Inbox from "./components/Inbox";
 import Followers from "./components/Followers";
 import Following from "./components/Following";
-import AdminPosts from "./components/AdminPosts";
-import AdminComments from "./components/AdminComments";
-import AdminSearchPost from "./components/AdminSearchPosts";
-import AdminSearchUsers from "./components/AdminSearchUsers";
-import AdminSearchComments from "./components/AdminSearchComments";
+import AdminUserPosts from "./components/AdminUserPosts";
+import AdminUserComments from "./components/AdminUserComments";
+import AdminAllPosts from "./components/AdminAllPosts";
+import AdminAllUsers from "./components/AdminAllUsers";
+import AdminAllComments from "./components/AdminAllComments";
 import AdminDisplayPost from "./components/AdminDisplayPost";
 import AdminDisplayComments from "./components/AdminDisplayComments";
 
@@ -92,23 +92,23 @@ const Router = () => {
         ,
         {
           path: "/admin/:id",
-          element: <AdminSearchUsers />
+          element: <AdminAllUsers />
         },
         {
           path: "/admin/:adminId/:user/posts",
-          element: <AdminPosts />
+          element: <AdminUserPosts />
         },
         {
           path: "/admin/:adminId/:user/comments",
-          element: <AdminComments />
+          element: <AdminUserComments />
         },
         {
           path: "/admin/:adminId/posts",
-          element: <AdminSearchPost />
+          element: <AdminAllPosts />
         },
         {
           path: "/admin/:adminId/comments",
-          element: <AdminSearchComments />
+          element: <AdminAllComments />
         },
         {
           path: "/admin/:adminId/post/:postId",

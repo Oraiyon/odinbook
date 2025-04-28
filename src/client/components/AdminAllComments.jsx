@@ -1,10 +1,10 @@
 import { Link, useOutletContext } from "react-router-dom";
-import styles from "../stylesheets/AdminSearchComments.module.css";
+import styles from "../stylesheets/AdminAllComments.module.css";
 import { useEffect, useState } from "react";
 import DisplayDate from "./DisplayDate";
 import AdminNavbar from "./AdminNavbar";
 
-const AdminSearchComments = () => {
+const AdminAllComments = () => {
   const [
     user,
     setUser,
@@ -123,4 +123,4 @@ const AdminSearchComments = () => {
   }
 };
 
-export default AdminSearchComments;
+export default AdminAllComments;

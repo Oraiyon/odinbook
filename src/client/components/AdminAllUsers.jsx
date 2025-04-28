@@ -1,9 +1,9 @@
 import { Link, useOutletContext } from "react-router-dom";
-import styles from "../stylesheets/AdminSearchUsers.module.css";
+import styles from "../stylesheets/AdminAllUsers.module.css";
 import { useEffect, useState } from "react";
 import AdminNavbar from "./AdminNavbar";
 
-const AdminSearchUsers = () => {
+const AdminAllUsers = () => {
   const [
     user,
     setUser,
@@ -134,4 +134,4 @@ const AdminSearchUsers = () => {
   }
 };
 
-export default AdminSearchUsers;
+export default AdminAllUsers;

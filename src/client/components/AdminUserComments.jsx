@@ -1,10 +1,10 @@
 import { Link, useOutletContext } from "react-router-dom";
-import styles from "../stylesheets/AdminComments.module.css";
+import styles from "../stylesheets/AdminUserComments.module.css";
 import BackHeader from "./BackHeader";
 import { useEffect, useState } from "react";
 import DisplayDate from "./DisplayDate";
 
-const AdminComments = () => {
+const AdminUserComments = () => {
   const [
     user,
     setUser,
@@ -97,7 +97,7 @@ const AdminComments = () => {
 
   if (user && user.admin) {
     return (
-      <div className={styles.adminComments_container}>
+      <div className={styles.adminUserComments_container}>
         <BackHeader />
         {userInfo ? <h1>{userInfo.username}'s Comments</h1> : ""}
         <form>
@@ -111,10 +111,10 @@ const AdminComments = () => {
           />
         </form>
         <p>Comments Selected: {deletedCommentIds.length ? deletedCommentIds.length : 0}</p>
-        <div className={styles.adminComments_button}>
+        <div className={styles.adminUserComments_button}>
           <button onClick={handleCommentDelete}>Delete</button>
         </div>
-        <div className={styles.adminComments_list}>
+        <div className={styles.adminUserComments_list}>
           {commentList.map((comment) => (
             <Link key={comment.id} to={`/admin/${user.id}/post/${comment.postId}`}>
               <input type="checkbox" onClick={(e) => handleSelectPost(e, comment.id)} />
@@ -130,4 +130,4 @@ const AdminComments = () => {
   }
 };
 
-export default AdminComments;
+export default AdminUserComments;

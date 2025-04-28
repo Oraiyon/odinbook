@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import styles from "../stylesheets/AdminSearchPosts.module.css";
+import styles from "../stylesheets/AdminAllPosts.module.css";
 import { Link, useOutletContext } from "react-router-dom";
 import AdminNavbar from "./AdminNavbar";
 
-const AdminSearchPost = () => {
+const AdminAllPosts = () => {
   const [
     user,
     setUser,
@@ -119,7 +119,9 @@ const AdminSearchPost = () => {
         </div>
       </div>
     );
+  } else {
+    window.location.href = "/login";
   }
 };
 
-export default AdminSearchPost;
+export default AdminAllPosts;

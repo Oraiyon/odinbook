@@ -1,26 +1,26 @@
-.adminPosts_container > h1 {
+.adminUserPosts_container > h1 {
   padding: 0 0.25em;
 }
 
-.adminPosts_container > form {
+.adminUserPosts_container > form {
   display: flex;
 }
 
-.adminPosts_container > form > input {
+.adminUserPosts_container > form > input {
   margin: 0.25em;
   margin-bottom: 0;
   padding: 0.25em;
   width: 100%;
 }
 
-.adminPosts_info {
+.adminUserPosts_info {
   padding: 0.25em;
   display: flex;
   flex-direction: column;
   gap: 0.25em;
 }
 
-.adminPosts_info > button {
+.adminUserPosts_info > button {
   width: 100%;
 }
 
