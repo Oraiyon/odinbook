@@ -22,7 +22,7 @@ const AdminNavbar = (props) => {
       </div>
       <nav className={styles.admin_nav}>
         <button>
-          <Link to={`/admin/${props.user.id}`}>User</Link>
+          <Link to={`/admin/${props.user.id}`}>Users</Link>
         </button>
         <button>
           <Link to={`/admin/${props.user.id}/posts`}>Posts</Link>
