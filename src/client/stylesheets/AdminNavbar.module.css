@@ -8,6 +8,11 @@
   padding: 0 0.25em;
 }
 
+.admin_nav > button:nth-of-type(2) {
+  border-left: 0;
+  border-right: 0;
+}
+
 .admin_header > button {
   padding: 0 0.25em;
 }
