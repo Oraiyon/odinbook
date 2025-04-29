@@ -99,7 +99,7 @@ const AdminAllPosts = () => {
             />
           </form>
           <p>Posts To Be Deleted: {deletedPosts.length}</p>
-          <button onClick={handlePostDelete}>Delete</button>
+          <button onClick={handlePostDelete}>Delete Selected Posts</button>
           <div className={styles.postList}>
             {postList.map((post) => (
               <div key={post.id}>

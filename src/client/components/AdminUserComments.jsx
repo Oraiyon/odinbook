@@ -112,7 +112,7 @@ const AdminUserComments = () => {
         </form>
         <p>Comments Selected: {deletedCommentIds.length ? deletedCommentIds.length : 0}</p>
         <div className={styles.adminUserComments_button}>
-          <button onClick={handleCommentDelete}>Delete</button>
+          <button onClick={handleCommentDelete}>Delete Selected Comments</button>
         </div>
         <div className={styles.adminUserComments_list}>
           {commentList.map((comment) => (

@@ -15,6 +15,20 @@ const AdminAllUsers = () => {
     setSearchedUsersList
   ] = useOutletContext();
 
+  useEffect(() => {
+    fetchAllUsers();
+  }, []);
+
+  useEffect(() => {
+    if (searchedUsers) {
+      fetchSearchedUsers();
+    } else {
+      fetchAllUsers();
+    }
+  }, [searchedUsers]);
+
+  const [deletedUsers, setDeletedUsers] = useState([]);
+
   const fetchAllUsers = async () => {
     try {
       const response = await fetch("/api/admin/search/users");
@@ -34,20 +48,6 @@ const AdminAllUsers = () => {
       console.log(error);
     }
   };
-
-  useEffect(() => {
-    fetchAllUsers();
-  }, []);
-
-  useEffect(() => {
-    if (searchedUsers) {
-      fetchSearchedUsers();
-    } else {
-      fetchAllUsers();
-    }
-  }, [searchedUsers]);
-
-  const [deletedUsers, setDeletedUsers] = useState([]);
 
   const handleSelectUser = (id) => {
     for (let i = 0; i < deletedUsers.length; i++) {
@@ -89,6 +89,7 @@ const AdminAllUsers = () => {
               onChange={(e) => setSearchedUsers(e.target.value)}
             />
           </form>
+          <p>Users To Be Deleted: {deletedUsers.length}</p>
           <button onClick={handleUserDelete}>Delete Selected Users</button>
           {searchedUsersList ? (
             <table className={styles.user_table}>

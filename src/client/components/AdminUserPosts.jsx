@@ -104,7 +104,7 @@ const AdminUserPosts = () => {
         </form>
         <div className={styles.adminUserPosts_info}>
           <p>Posts To Be Deleted: {deletedPostIds.length}</p>
-          <button onClick={handlePostDelete}>Delete</button>
+          <button onClick={handlePostDelete}>Delete Selected Posts</button>
           <div className={styles.postList}>
             {postList.map((post) => (
               <Link key={post.id} to={`/admin/${user.id}/post/${post.id}`}>
