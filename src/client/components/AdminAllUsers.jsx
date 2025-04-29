@@ -102,10 +102,7 @@ const AdminAllUsers = () => {
               </thead>
               <tbody className={styles.table_body}>
                 {searchedUsersList.map((user) => (
-                  <tr
-                    key={user.id}
-                    className={deletedUsers.includes(user.id) ? styles.selected_user : ""}
-                  >
+                  <tr key={user.id}>
                     <td className={styles.select_user}>
                       {!user.admin ? (
                         <input type="checkbox" onClick={() => handleSelectUser(user.id)} />

@@ -24,10 +24,6 @@
   padding: 0.25em;
 }
 
-.search_list > div > p {
-  font-weight: bold;
-}
-
 .select_user {
   display: flex;
   gap: 0.25em;
@@ -35,18 +31,4 @@
 
 .hidden_checkbox {
   visibility: hidden;
-}
-
-.admin_user_delete_button {
-  padding: 0 0.25em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 0;
-  background-color: inherit;
-}
-
-.admin_user_delete_button > svg {
-  width: 100%;
-  max-width: 25px;
 }
