@@ -101,20 +101,24 @@ const AdminAllPosts = () => {
           <p>Posts Selected: {deletedPosts.length}</p>
           <button onClick={handlePostDelete}>Delete Selected Posts</button>
           <div className={styles.postList}>
-            {postList.map((post) => (
-              <div key={post.id}>
-                <div>
-                  <Link to={`/admin/${user.id}/${post.authorId}/posts`}>
-                    {post.author.username}
+            {postList.length ? (
+              postList.map((post) => (
+                <div key={post.id}>
+                  <div>
+                    <Link to={`/admin/${user.id}/${post.authorId}/posts`}>
+                      {post.author.username}
+                    </Link>
+                    <input type="checkbox" onClick={(e) => handleSelectPost(e, post)} />
+                  </div>
+                  <Link to={`/admin/${user.id}/post/${post.id}`}>
+                    <img src={post.image} alt="" />
                   </Link>
-                  <input type="checkbox" onClick={(e) => handleSelectPost(e, post)} />
+                  <p>{post.text}</p>
                 </div>
-                <Link to={`/admin/${user.id}/post/${post.id}`}>
-                  <img src={post.image} alt="" />
-                </Link>
-                <p>{post.text}</p>
-              </div>
-            ))}
+              ))
+            ) : (
+              <p>No Posts</p>
+            )}
           </div>
         </div>
       </div>

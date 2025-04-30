@@ -101,20 +101,24 @@ const AdminAllComments = () => {
           <button onClick={handleCommentDelete}>Delete Selected Comments</button>
         </div>
         <div className={styles.adminComments_list}>
-          {commentList.map((comment) => (
-            <div key={comment.id} className={styles.comment_card}>
-              <div>
-                <input type="checkbox" onClick={() => handleSelectPost(comment.id)} />
-                <Link to={`/admin/${user.id}/${comment.authorId}/comments`}>
-                  {comment.author.username}
+          {commentList.length ? (
+            commentList.map((comment) => (
+              <div key={comment.id} className={styles.comment_card}>
+                <div>
+                  <input type="checkbox" onClick={() => handleSelectPost(comment.id)} />
+                  <Link to={`/admin/${user.id}/${comment.authorId}/comments`}>
+                    {comment.author.username}
+                  </Link>
+                </div>
+                <Link to={`/admin/${user.id}/post/${comment.postId}`}>
+                  <p>{comment.text}</p>
+                  <DisplayDate date={comment.commentDate} />
                 </Link>
               </div>
-              <Link to={`/admin/${user.id}/post/${comment.postId}`}>
-                <p>{comment.text}</p>
-                <DisplayDate date={comment.commentDate} />
-              </Link>
-            </div>
-          ))}
+            ))
+          ) : (
+            <p>No Comments</p>
+          )}
         </div>
       </div>
     );
