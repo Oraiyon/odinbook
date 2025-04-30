@@ -43,6 +43,10 @@
   border-bottom: 2px solid black;
 }
 
+.post_card:last-of-type > .post_info {
+  border-bottom: 0;
+}
+
 .post_clicks {
   display: flex;
   justify-content: space-between;
