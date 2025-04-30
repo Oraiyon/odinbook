@@ -89,7 +89,7 @@ const AdminAllUsers = () => {
               onChange={(e) => setSearchedUsers(e.target.value)}
             />
           </form>
-          <p>Users To Be Deleted: {deletedUsers.length}</p>
+          <p>Users Selected: {deletedUsers.length}</p>
           <button onClick={handleUserDelete}>Delete Selected Users</button>
           {searchedUsersList ? (
             <table className={styles.user_table}>

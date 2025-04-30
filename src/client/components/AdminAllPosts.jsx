@@ -98,7 +98,7 @@ const AdminAllPosts = () => {
               onChange={(e) => setSearchedText(e.target.value)}
             />
           </form>
-          <p>Posts To Be Deleted: {deletedPosts.length}</p>
+          <p>Posts Selected: {deletedPosts.length}</p>
           <button onClick={handlePostDelete}>Delete Selected Posts</button>
           <div className={styles.postList}>
             {postList.map((post) => (
