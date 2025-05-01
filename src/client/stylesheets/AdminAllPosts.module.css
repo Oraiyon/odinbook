@@ -46,3 +46,7 @@
 .postList > div > p {
   text-overflow: clip;
 }
+
+.postList > div > div > input {
+  cursor: pointer;
+}

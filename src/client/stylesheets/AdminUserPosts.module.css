@@ -48,3 +48,7 @@
 .postList > a > p {
   text-overflow: clip;
 }
+
+.postList > a > input {
+  cursor: pointer;
+}

@@ -29,6 +29,10 @@
   gap: 0.25em;
 }
 
+.select_user > input {
+  cursor: pointer;
+}
+
 .hidden_checkbox {
   visibility: hidden;
 }

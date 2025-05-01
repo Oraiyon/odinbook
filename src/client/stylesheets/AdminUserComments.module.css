@@ -43,3 +43,7 @@
 .adminUserComments_list > a > p:last-of-type {
   text-align: end;
 }
+
+.adminUserComments_list > a > input {
+  cursor: pointer;
+}

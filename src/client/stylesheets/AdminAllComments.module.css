@@ -57,3 +57,7 @@
 .comment_card > a > p:last-of-type {
   align-self: flex-end;
 }
+
+.comment_card > div > input {
+  cursor: pointer;
+}
