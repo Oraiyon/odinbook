@@ -129,6 +129,8 @@ const AdminAllUsers = () => {
         </div>
       </div>
     );
+  } else {
+    window.location.href = "/login";
   }
 };
 
