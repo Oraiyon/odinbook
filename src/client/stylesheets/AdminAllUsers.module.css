@@ -33,6 +33,10 @@
   cursor: pointer;
 }
 
+.select_user > p {
+  cursor: pointer;
+}
+
 .hidden_checkbox {
   visibility: hidden;
 }
