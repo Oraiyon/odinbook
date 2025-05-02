@@ -105,11 +105,20 @@ const AdminAllUsers = () => {
                   <tr key={user.id}>
                     <td className={styles.select_user}>
                       {!user.admin ? (
-                        <input type="checkbox" onClick={() => handleSelectUser(user.id)} />
+                        <>
+                          <input
+                            type="checkbox"
+                            onChange={() => handleSelectUser(user.id)}
+                            checked={deletedUsers.includes(user.id)}
+                          />
+                          <p onClick={() => handleSelectUser(user.id)}>{user.username}</p>
+                        </>
                       ) : (
-                        <input type="checkbox" className={styles.hidden_checkbox} />
+                        <>
+                          <input type="checkbox" className={styles.hidden_checkbox} />
+                          <p>{user.username}</p>
+                        </>
                       )}
-                      <p>{user.username}</p>
                     </td>
                     <td>
                       <Link to={`/admin/${user.id}/${user.id}/Posts`}>{user.Posts.length}</Link>
