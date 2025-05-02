@@ -401,13 +401,11 @@ export const admin_get_users = expressAsyncHandler(async (req, res, next) => {
               likedBy: true
             }
           },
-          _count: {
-            select: {
-              Comments: {
-                where: {
-                  deletedText: {
-                    not: null
-                  }
+          Comments: {
+            include: {
+              author: {
+                omit: {
+                  password: true
                 }
               }
             }
