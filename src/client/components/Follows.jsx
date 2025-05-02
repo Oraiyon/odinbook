@@ -1,10 +1,7 @@
-import { useEffect } from "react";
 import styles from "../stylesheets/Follows.module.css";
 import { Link } from "react-router-dom";
 
 const Follows = (props) => {
-  useEffect(() => {}, []);
-
   return (
     <div className={styles.follow_container}>
       <Link to={`/${props.userProfile.id}/followers`}>
