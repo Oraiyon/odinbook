@@ -10,12 +10,12 @@ import DisplayDate from "./DisplayDate";
 const PostList = (props) => {
   const [postList, setPostList] = useState([]);
   const [displayPostModal, setDisplayPostModal] = useState(null);
-  // PAGINATION
+  // DO PAGINATION
   const [pagination, setPagination] = useState(0);
 
-  const getPosts = async () => {
-    try {
-      if (!props.followingPosts) {
+  useEffect(() => {
+    const getPosts = async () => {
+      try {
         let response;
         if (props.mode === "search") {
           response = await fetch(`/api/get/posts/${pagination}/${pagination + 25}`);
@@ -29,25 +29,20 @@ const PostList = (props) => {
           response = await fetch(
             `/api/${props.userProfile.id}/get/posts/${pagination}/${pagination + 25}`
           );
+        } else if (props.mode === "feed") {
+          // For Feed.jsx
+          response = await fetch(`/api/${props.user.id}/get/following/posts`);
         }
         const data = await response.json();
         if (data) {
           setPostList(data);
         }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
+    };
     getPosts();
-    if (!props.followingPosts) {
-      getPosts();
-    } else {
-      setPostList(props.followingPosts);
-    }
-  }, [props.followingPosts]);
+  }, []);
 
   const likePost = async (post) => {
     try {
@@ -136,6 +131,7 @@ const PostList = (props) => {
             setDisplayPostModal={setDisplayPostModal}
             setPostList={setPostList}
           />
+          {/* */}
           {postList.length >= 25 ? <button>Load More Posts</button> : ""}
         </div>
       ) : (
