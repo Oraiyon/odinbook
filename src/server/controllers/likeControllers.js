@@ -37,9 +37,13 @@ const post_like_post = [
               likedBy: true
             }
           },
-          _count: {
-            select: {
-              Comments: true
+          Comments: {
+            include: {
+              author: {
+                omit: {
+                  password: true
+                }
+              }
             }
           },
           author: true
@@ -61,9 +65,13 @@ const post_like_post = [
               likedBy: true
             }
           },
-          _count: {
-            select: {
-              Comments: true
+          Comments: {
+            include: {
+              author: {
+                omit: {
+                  password: true
+                }
+              }
             }
           },
           author: true
