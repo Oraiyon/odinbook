@@ -44,6 +44,8 @@ const post_post = [
 
 export const get_posts = expressAsyncHandler(async (req, res, next) => {
   const postList = await prisma.post.findMany({
+    skip: Number(req.params.skip),
+    take: Number(req.params.take),
     orderBy: {
       postDate: "desc"
     },
@@ -107,6 +109,8 @@ export const get_post = expressAsyncHandler(async (req, res, next) => {
 
 export const get_user_posts = expressAsyncHandler(async (req, res, next) => {
   const postList = await prisma.post.findMany({
+    skip: Number(req.params.skip),
+    take: Number(req.params.take),
     where: {
       authorId: req.params.id
     },
@@ -140,6 +144,10 @@ export const get_following_posts = expressAsyncHandler(async (req, res, next) =>
       senderId: req.params.id
     }
   });
+  if (!followList.length) {
+    res.status(200).json(false);
+    return;
+  }
   const followIds = [];
   for (const follow of followList) {
     followIds.push(follow.receiverId);
@@ -171,7 +179,13 @@ export const get_following_posts = expressAsyncHandler(async (req, res, next) =>
       author: true
     }
   });
-  res.status(200).json(postList);
+  if (!postList.length) {
+    res.status(200).json(false);
+    return;
+  } else {
+    res.status(200).json(postList);
+    return;
+  }
 });
 
 export const delete_post = expressAsyncHandler(async (req, res, next) => {

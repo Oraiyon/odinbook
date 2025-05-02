@@ -63,9 +63,11 @@ router.delete("/api/delete/follow/:sender/:receiver", delete_follow);
 
 // postControllers
 router.post("/api/create/post", post_post);
-router.get("/api/get/posts", get_posts);
+//
+router.get("/api/get/posts/:skip/:take", get_posts);
 router.get("/api/get/:postId", get_post);
-router.get("/api/:id/get/posts", get_user_posts);
+//
+router.get("/api/:id/get/posts/:skip/:take", get_user_posts);
 router.get("/api/:id/get/following/posts", get_following_posts);
 router.delete("/api/:id/delete/:postId", delete_post);
 router.delete("/api/:id/delete/:postId/user", delete_post);
