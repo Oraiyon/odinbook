@@ -11,38 +11,45 @@ const PostList = (props) => {
   const [postList, setPostList] = useState([]);
   const [displayPostModal, setDisplayPostModal] = useState(null);
   // DO PAGINATION
-  const [pagination, setPagination] = useState(0);
+  const [paginationSkip, setPaginationSkip] = useState(0);
+
+  const paginationTake = 25;
 
   useEffect(() => {
     const getPosts = async () => {
       try {
         let response;
         if (props.mode === "search") {
-          response = await fetch(`/api/get/posts/${pagination}/${pagination + 25}`);
+          // For Search.jsx
+          response = await fetch(`/api/get/posts/${paginationSkip}/${paginationTake}`);
         } else if (props.mode === "user" && props.user) {
           // For User.jsx
           response = await fetch(
-            `/api/${props.user.id}/get/posts/${pagination}/${pagination + 25}`
+            `/api/${props.user.id}/get/posts/${paginationSkip}/${paginationTake}`
           );
         } else if (props.mode === "profile" && props.userProfile) {
           // For Profile.jsx
           response = await fetch(
-            `/api/${props.userProfile.id}/get/posts/${pagination}/${pagination + 25}`
+            `/api/${props.userProfile.id}/get/posts/${paginationSkip}/${paginationTake}`
           );
         } else if (props.mode === "feed") {
           // For Feed.jsx
+          // ADD PAGINATION
           response = await fetch(`/api/${props.user.id}/get/following/posts`);
         }
         const data = await response.json();
         if (data) {
-          setPostList(data);
+          // CAUSES DOUBLES ON SAVING. RESET BY GOING TO OTHER ROUTE
+          const newArray = [...postList, ...data];
+          setPostList(newArray);
         }
       } catch (error) {
         console.log(error);
       }
     };
+    setPostList([]);
     getPosts();
-  }, []);
+  }, [paginationSkip]);
 
   const likePost = async (post) => {
     try {
@@ -131,8 +138,13 @@ const PostList = (props) => {
             setDisplayPostModal={setDisplayPostModal}
             setPostList={setPostList}
           />
-          {/* */}
-          {postList.length >= 25 ? <button>Load More Posts</button> : ""}
+          {postList.length >= paginationTake ? (
+            <button onClick={() => setPaginationSkip((p) => p + paginationTake)}>
+              Load More Posts
+            </button>
+          ) : (
+            ""
+          )}
         </div>
       ) : (
         <p className={styles.no_posts}>No Posts Found</p>
