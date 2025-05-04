@@ -153,6 +153,8 @@ export const get_following_posts = expressAsyncHandler(async (req, res, next) =>
     followIds.push(follow.receiverId);
   }
   const postList = await prisma.post.findMany({
+    skip: Number(req.params.skip),
+    take: Number(req.params.take),
     where: {
       authorId: {
         in: followIds

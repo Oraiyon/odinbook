@@ -34,8 +34,9 @@ const PostList = (props) => {
           );
         } else if (props.mode === "feed") {
           // For Feed.jsx
-          // ADD PAGINATION
-          response = await fetch(`/api/${props.user.id}/get/following/posts`);
+          response = await fetch(
+            `/api/${props.user.id}/get/following/posts/${paginationSkip}/${paginationTake}`
+          );
         }
         const data = await response.json();
         if (data) {
