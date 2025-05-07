@@ -92,7 +92,7 @@ const Signup = () => {
         Already have an account?{" "}
         <Link to={"/login"} ref={loginLinkRef}>
           Log In!
-        </Link>{" "}
+        </Link>
       </p>
     </div>
   );
