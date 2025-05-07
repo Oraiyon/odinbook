@@ -23,7 +23,7 @@ const Likes = () => {
 
   return (
     <div>
-      {post ? <BackHeader post={post.text} mode={"likes"} /> : ""}
+      {post ? <BackHeader post={post} mode={"likes"} /> : ""}
       <div className={styles.likes_container}>
         {post && post.Likes.length ? (
           post.Likes.map((like) => (

@@ -75,7 +75,7 @@ const Comments = () => {
   return (
     <div className={styles.comments_container}>
       <div>
-        {post ? <BackHeader post={post.text} mode={"comments"} /> : ""}
+        {post ? <BackHeader post={post} mode={"comments"} /> : ""}
         {postComments && postComments.length ? (
           postComments.map((comment) => (
             <div key={comment.id} className={styles.comment_card}>

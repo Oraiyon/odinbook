@@ -10,7 +10,6 @@ import DisplayDate from "./DisplayDate";
 const PostList = (props) => {
   const [postList, setPostList] = useState([]);
   const [displayPostModal, setDisplayPostModal] = useState(null);
-  // DO PAGINATION
   const [paginationSkip, setPaginationSkip] = useState(0);
 
   const paginationTake = 25;
@@ -48,7 +47,6 @@ const PostList = (props) => {
         console.log(error);
       }
     };
-    setPostList([]);
     getPosts();
   }, [paginationSkip]);
 
@@ -105,7 +103,7 @@ const PostList = (props) => {
       {postList && postList.length ? (
         <div className={styles.post_container}>
           {postList.map((post) => (
-            <div key={post.id} className={styles.post_card}>
+            <div key={post.id} className={styles.post_card} id={post.id}>
               <ToProfile
                 searchedUser={post.author}
                 user={props.user}
