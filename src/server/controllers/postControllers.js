@@ -330,4 +330,33 @@ export const get_search_post_text = expressAsyncHandler(async (req, res, next) =
   res.status(200).json(postList);
 });
 
+export const admin_get_user_posts = expressAsyncHandler(async (req, res, next) => {
+  const postList = await prisma.post.findMany({
+    where: {
+      authorId: req.params.id
+    },
+    orderBy: {
+      postDate: "desc"
+    },
+    include: {
+      Likes: {
+        include: {
+          likedBy: true
+        }
+      },
+      Comments: {
+        include: {
+          author: {
+            omit: {
+              password: true
+            }
+          }
+        }
+      },
+      author: true
+    }
+  });
+  res.status(200).json(postList);
+});
+
 export default post_post;

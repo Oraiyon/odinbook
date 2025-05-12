@@ -24,7 +24,8 @@ import post_post, {
   get_post,
   put_update_post,
   get_search_post,
-  get_search_post_text
+  get_search_post_text,
+  admin_get_user_posts
 } from "./controllers/postControllers.js";
 import post_like_post from "./controllers/likeControllers.js";
 import post_comment, {
@@ -73,6 +74,7 @@ router.delete("/api/:id/delete/:postId/user", delete_post);
 router.put("/api/update/post/:postId", put_update_post);
 router.get("/api/admin/search/:id/:postText", get_search_post);
 router.get("/api/admin/search/post/:text/text", get_search_post_text);
+router.get("/api/admin/:id/get/user/posts", admin_get_user_posts);
 
 // likeControllers
 router.post("/api/:id/like/post", post_like_post);

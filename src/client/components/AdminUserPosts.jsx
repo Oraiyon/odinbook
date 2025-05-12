@@ -21,7 +21,9 @@ const AdminUserPosts = () => {
 
   const fetchUserPosts = async () => {
     try {
-      const response = await fetch(`/api/${window.location.pathname.split("/")[3]}/get/posts`);
+      const response = await fetch(
+        `/api/admin/${window.location.pathname.split("/")[3]}/get/user/posts`
+      );
       const data = await response.json();
       setPostList(data);
     } catch (error) {
