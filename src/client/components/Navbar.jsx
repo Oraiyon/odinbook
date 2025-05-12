@@ -10,6 +10,8 @@ const Navbar = (props) => {
         <Link to={"/login"}>Log In</Link>
       </nav>
     );
+  } else if (props.user && props.user.admin) {
+    return "";
   } else {
     return (
       <nav className={styles.navbar_container}>

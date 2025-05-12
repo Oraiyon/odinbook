@@ -6,6 +6,7 @@ import styles from "../stylesheets/App.module.css";
 function App() {
   const [user, setUser] = useState(null);
   const [post, setPost] = useState(null);
+  // Admin states
   const [searchedUsers, setSearchedUsers] = useState(null);
   const [searchedUsersList, setSearchedUsersList] = useState([]);
 
@@ -23,7 +24,7 @@ function App() {
           setSearchedUsersList
         ]}
       />
-      {user && user.admin ? "" : <Navbar user={user} />}
+      <Navbar user={user} />
     </div>
   );
 }
