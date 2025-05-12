@@ -34,7 +34,7 @@ const AdminAllPosts = () => {
     };
     const fetchAllPosts = async () => {
       try {
-        const response = await fetch("/api/get/posts");
+        const response = await fetch("/api/admin/get/posts");
         const data = await response.json();
         setPostList(data);
       } catch (error) {
