@@ -103,7 +103,7 @@ const Comments = () => {
           ) : (
             ""
           )}
-          <p className={commentLength <= 100 ? styles.comment_length : styles.comment_length_error}>
+          <p className={commentLength < 100 ? styles.comment_length : styles.comment_length_error}>
             {commentLength}/100
           </p>
           <label htmlFor="commentInput"></label>
