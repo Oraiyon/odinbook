@@ -55,41 +55,25 @@ export const get_comments = expressAsyncHandler(async (req, res, next) => {
 });
 
 export const delete_comment = expressAsyncHandler(async (req, res, next) => {
-  const deletedComment = await prisma.comment.findFirst({
+  await prisma.comment.delete({
     where: {
       id: req.params.commentId,
       authorId: req.params.authorId
     }
   });
-  if (deletedComment && deletedComment.text !== "---Comment Deleted---") {
-    await prisma.comment.update({
-      where: {
-        id: req.params.commentId,
-        authorId: req.params.authorId
-      },
-      data: {
-        text: "---Comment Deleted---",
-        deletedText: deletedComment.text
-      }
-    });
-    const commentList = await prisma.comment.findMany({
-      where: {
-        postId: req.params.postId
-      },
-      include: {
-        author: true,
-        post: true
-      },
-      orderBy: {
-        commentDate: "desc"
-      }
-    });
-    res.status(200).json(commentList);
-    return;
-  } else {
-    res.status(200).json(false);
-    return;
-  }
+  const commentList = await prisma.comment.findMany({
+    where: {
+      postId: req.params.postId
+    },
+    include: {
+      author: true,
+      post: true
+    },
+    orderBy: {
+      commentDate: "desc"
+    }
+  });
+  res.status(200).json(commentList);
 });
 
 export const delete_comment_admin = expressAsyncHandler(async (req, res, next) => {

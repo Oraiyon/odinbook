@@ -16,10 +16,6 @@
   padding: 0.25em;
 }
 
-.deleted_comment {
-  color: gray;
-}
-
 .post_comment {
   display: flex;
   flex-direction: column;
