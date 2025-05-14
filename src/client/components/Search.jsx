@@ -11,6 +11,7 @@ const Search = () => {
 
   const [searchedUsername, setSearchedUsername] = useState(null);
   const [searchedUsersList, setSearchedUsersList] = useState(null);
+  const [searchBarFocus, setSearchBarFocus] = useState(false);
 
   const searchBarRef = useRef(null);
 
@@ -29,11 +30,20 @@ const Search = () => {
     }
   }, [searchedUsername]);
 
+  const handleSearchBarFocus = () => {
+    setSearchBarFocus((s) => !s);
+    if (!searchBarFocus) {
+      searchBarRef.current.focus();
+    } else {
+      searchBarRef.current.blur();
+    }
+  };
+
   return (
     <div className={styles.search_container}>
       <div className={styles.searchBar}>
+        <Icon path={mdiMagnify} onClick={handleSearchBarFocus}></Icon>
         <label htmlFor="searchBar">Search</label>
-        <Icon path={mdiMagnify}></Icon>
         <input
           type="text"
           id="searchBar"
