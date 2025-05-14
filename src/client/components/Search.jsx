@@ -50,6 +50,7 @@ const Search = () => {
           name="searchBar"
           placeholder="Search Username"
           ref={searchBarRef}
+          onClick={handleSearchBarFocus}
           onChange={() => setSearchedUsername(searchBarRef.current.value)}
         />
       </div>
