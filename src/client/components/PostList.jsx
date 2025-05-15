@@ -55,18 +55,21 @@ const PostList = (props) => {
       if (props.user) {
         const pathname = window.location.pathname.split("/");
         const pathtype = pathname[pathname.length - 1];
-        const response = await fetch(`/api/${props.user.id}/like/post`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            id: props.user.id,
-            post: post.id,
-            page: pathtype ? pathtype : "search",
-            authorId: post.authorId
-          })
-        });
+        const response = await fetch(
+          `/api/${props.user.id}/like/post/${paginationSkip}/${paginationTake}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              id: props.user.id,
+              post: post.id,
+              page: pathtype ? pathtype : "search",
+              authorId: post.authorId
+            })
+          }
+        );
         const data = await response.json();
         setPostList(data);
       }

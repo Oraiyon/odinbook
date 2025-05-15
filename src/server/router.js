@@ -79,7 +79,7 @@ router.get("/api/admin/:id/get/user/posts", admin_get_user_posts);
 router.get("/api/admin/get/posts", admin_get_all_posts);
 
 // likeControllers
-router.post("/api/:id/like/post", post_like_post);
+router.post("/api/:id/like/post/:skip/:take", post_like_post);
 
 // commentControllers
 router.post("/api/post/create/comment", post_comment);
