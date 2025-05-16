@@ -40,12 +40,14 @@ const Comments = () => {
   useEffect(() => {
     if (commentLength >= 100) {
       setCommentWarning(true);
+    } else {
+      setCommentWarning(false);
     }
   }, [commentLength]);
 
   const sendComment = async (id) => {
     try {
-      if (commentInputRef.current.value) {
+      if (commentInputRef.current.value && commentInputRef.current.value.length <= 100) {
         const response = await fetch("/api/post/create/comment", {
           method: "POST",
           headers: {
@@ -60,9 +62,8 @@ const Comments = () => {
         const data = await response.json();
         if (data) {
           setPostComments(data);
-          setCommentWarning(false);
-          commentInputRef.current.value = "";
           setCommentLength(0);
+          commentInputRef.current.value = "";
         } else {
           setCommentWarning(true);
         }
