@@ -25,20 +25,25 @@ const post_post = [
         text: req.body.text
       }
     });
-    const imageURL = await cloudinary.uploader.upload(req.file.path, {
-      folder: "odinbook_posts",
-      public_id: post.id
-    });
-    await unlink(req.file.path);
-    const finalPost = await prisma.post.update({
-      where: {
-        id: post.id
-      },
-      data: {
-        image: imageURL.secure_url
-      }
-    });
-    res.status(200).json(finalPost);
+    if (post) {
+      const imageURL = await cloudinary.uploader.upload(req.file.path, {
+        folder: "odinbook_posts",
+        public_id: post.id
+      });
+      await unlink(req.file.path);
+      const finalPost = await prisma.post.update({
+        where: {
+          id: post.id
+        },
+        data: {
+          image: imageURL.secure_url
+        }
+      });
+      res.status(200).json(finalPost);
+    } else {
+      await unlink(req.file.path);
+      res.status(200).json(false);
+    }
   })
 ];
 
