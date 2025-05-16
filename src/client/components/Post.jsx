@@ -10,11 +10,21 @@ const Post = () => {
 
   const [postInfo, setPostInfo] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [postWarning, setPostWarning] = useState(false);
+  const [postLength, setPostLength] = useState(0);
 
   const imageRef = useRef(null);
   const textRef = useRef(null);
   const previewImageRef = useRef(null);
   const homeRef = useRef(null);
+
+  useEffect(() => {
+    if (postLength >= 100) {
+      setPostWarning(true);
+    } else {
+      setPostWarning(false);
+    }
+  }, [postLength]);
 
   useEffect(() => {
     if (!user) {
@@ -37,7 +47,7 @@ const Post = () => {
   const writePost = async (e) => {
     try {
       e.preventDefault();
-      if (imageRef.current.value && textRef.current.value) {
+      if (imageRef.current.value && textRef.current.value && textRef.current.value.length <= 100) {
         setLoading(true);
         const formData = new FormData();
         formData.append("author", user.id);
@@ -50,6 +60,7 @@ const Post = () => {
         const data = await response.json();
         if (data) {
           setLoading(false);
+          setPostLength(0);
           imageRef.current.value = "";
           textRef.current.value = "";
           previewImageRef.current.src = "";
@@ -125,6 +136,14 @@ const Post = () => {
               <img src={postInfo ? postInfo.image : ""} alt="" ref={previewImageRef} />
               <DisplayLoading loading={loading} />
             </div>
+            {postWarning ? (
+              <p className={styles.post_warning}>CAPTIONS CANNOT EXCEED 100 CHARACTERS</p>
+            ) : (
+              ""
+            )}
+            <p className={postLength < 100 ? styles.post_length : styles.post_length_error}>
+              {postLength}/100
+            </p>
             <label htmlFor="text"></label>
             <input
               type="text"
@@ -132,8 +151,9 @@ const Post = () => {
               id="text"
               ref={textRef}
               className={styles.post_caption}
-              placeholder="Write a caption..."
+              placeholder="Write a caption"
               defaultValue={postInfo ? postInfo.text : ""}
+              onChange={() => setPostLength(textRef.current.value.length)}
             ></input>
             <button>{postInfo ? "Update Post" : "Create Post"}</button>
           </form>

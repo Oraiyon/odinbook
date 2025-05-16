@@ -37,3 +37,22 @@
 .post_caption {
   padding: 0.5em;
 }
+
+.post_warning {
+  color: red;
+  text-align: center;
+  border-top: 2px solid black;
+}
+
+.post_length {
+  text-align: end;
+  padding: 0.25em;
+  border-top: 2px solid black;
+}
+
+.post_length_error {
+  color: red;
+  text-align: end;
+  padding: 0.25em;
+  border-top: 2px solid black;
+}
