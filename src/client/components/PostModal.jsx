@@ -1,9 +1,9 @@
 import styles from "../stylesheets/PostModal.module.css";
 import Icon from "@mdi/react";
 import { Link } from "react-router-dom";
-import { mdiDotsHorizontal, mdiCardsHeartOutline, mdiCommentOutline } from "@mdi/js";
+import { mdiDotsHorizontal, mdiCardsHeartOutline, mdiCommentOutline, mdiHeart } from "@mdi/js";
 import DisplayDate from "./DisplayDate";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DisplayLoading from "./DisplayLoading";
 
 const PostModal = (props) => {
@@ -33,6 +33,25 @@ const PostModal = (props) => {
     }
   };
 
+  const HandleLikedPost = (props) => {
+    const [liked, setLiked] = useState(false);
+
+    useEffect(() => {
+      if (props.user) {
+        for (const like of props.displayPostModal.Likes) {
+          if (like.likedById === props.user.id) {
+            setLiked(true);
+            return;
+          }
+        }
+      }
+    }, []);
+
+    return (
+      <Icon path={liked ? mdiHeart : mdiCardsHeartOutline} className={styles.like_icon}></Icon>
+    );
+  };
+
   if (props.displayPostModal) {
     return (
       <div className={styles.post_modal} onClick={() => props.setDisplayPostModal(null)}>
@@ -45,7 +64,7 @@ const PostModal = (props) => {
           <p>{props.displayPostModal.text}</p>
           <div className={styles.post_info}>
             <div>
-              <Icon path={mdiCardsHeartOutline}></Icon>
+              <HandleLikedPost user={props.user} displayPostModal={props.displayPostModal} />
               <p>{props.displayPostModal.Likes.length}</p>
             </div>
             <div>

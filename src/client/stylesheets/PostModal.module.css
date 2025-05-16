@@ -26,6 +26,7 @@
 .post_edit > svg {
   height: 50px;
   align-self: flex-end;
+  cursor: pointer;
 }
 
 .post_edit > p {
