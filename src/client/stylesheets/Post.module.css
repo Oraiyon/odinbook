@@ -23,6 +23,7 @@
   flex: 1;
   position: relative;
   height: fit-content;
+  padding: 0.25em 0;
 }
 
 .image_preview > img {
