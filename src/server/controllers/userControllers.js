@@ -95,6 +95,9 @@ export const login = [
                 password: true
               }
             }
+          },
+          orderBy: {
+            followedDate: "desc"
           }
         },
         Following: {
@@ -104,6 +107,9 @@ export const login = [
                 password: true
               }
             }
+          },
+          orderBy: {
+            followedDate: "desc"
           }
         }
       },
@@ -179,6 +185,9 @@ export const get_user_profile = expressAsyncHandler(async (req, res, next) => {
               password: true
             }
           }
+        },
+        orderBy: {
+          followedDate: "desc"
         }
       },
       Following: {
@@ -193,6 +202,9 @@ export const get_user_profile = expressAsyncHandler(async (req, res, next) => {
               password: true
             }
           }
+        },
+        orderBy: {
+          followedDate: "desc"
         }
       }
     },
@@ -322,6 +334,9 @@ export const put_user_default_picture = expressAsyncHandler(async (req, res, nex
               password: true
             }
           }
+        },
+        orderBy: {
+          followedDate: "desc"
         }
       },
       Following: {
@@ -331,6 +346,9 @@ export const put_user_default_picture = expressAsyncHandler(async (req, res, nex
               password: true
             }
           }
+        },
+        orderBy: {
+          followedDate: "desc"
         }
       }
     },
