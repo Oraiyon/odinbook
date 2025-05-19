@@ -8,7 +8,8 @@ import signup, {
   logout,
   put_user_default_picture,
   put_user_profile_picture,
-  put_user_profile_username
+  put_user_profile_username,
+  get_user_inbox
 } from "./controllers/userControllers.js";
 import post_follow, {
   delete_follow,
@@ -55,6 +56,7 @@ router.put("/api/user/edit/default", put_user_default_picture);
 router.delete("/api/user/delete/:id", delete_user);
 router.delete("/api/admin/delete/:id", delete_user);
 router.get("/api/admin/search/users", admin_get_users);
+router.get("/api/:id/inbox", get_user_inbox);
 
 // followControllers
 router.get("/api/:sender/following/:receiver", get_follow);
@@ -68,7 +70,6 @@ router.post("/api/create/post", post_post);
 router.get("/api/get/posts/:skip/:take", get_posts);
 router.get("/api/get/:postId", get_post);
 router.get("/api/:id/get/posts/:skip/:take", get_user_posts);
-//
 router.get("/api/:id/get/following/posts/:skip/:take", get_following_posts);
 router.delete("/api/:id/delete/:postId", delete_post);
 router.delete("/api/:id/delete/:postId/user", delete_post);

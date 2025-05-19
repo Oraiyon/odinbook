@@ -448,4 +448,25 @@ export const admin_get_users = expressAsyncHandler(async (req, res, next) => {
   res.status(200).json(userList);
 });
 
+export const get_user_inbox = expressAsyncHandler(async (req, res, next) => {
+  const followList = await prisma.follow.findMany({
+    skip: 0,
+    take: 25,
+    where: {
+      receiverId: req.params.id
+    },
+    orderBy: {
+      followedDate: "desc"
+    },
+    include: {
+      sender: {
+        omit: {
+          password: true
+        }
+      }
+    }
+  });
+  res.status(200).json(followList);
+});
+
 export default signup;
