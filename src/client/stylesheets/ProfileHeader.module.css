@@ -1,0 +1,27 @@
+.header_container {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 2px solid black;
+  padding: 0.25em;
+}
+
+.header_user_info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+}
+
+.header_user_info > h1 {
+  grid-column: 1;
+}
+
+.header_user_info > div {
+  justify-self: end;
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.header_user_info > svg:last-of-type {
+  max-width: 75px;
+  width: 100%;
+}

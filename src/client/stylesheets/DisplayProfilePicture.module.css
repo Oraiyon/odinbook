@@ -1,0 +1,10 @@
+.default_picture,
+.profile_picture {
+  max-width: 50px;
+}
+
+.profile_picture {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+}

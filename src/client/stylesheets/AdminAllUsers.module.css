@@ -1,0 +1,42 @@
+.admin_container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin_container > div:last-of-type {
+  padding: 0.25em;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin_form > input {
+  width: 100%;
+  padding: 0.25em;
+}
+
+.search_list {
+  overflow-y: auto;
+  height: 100%;
+}
+
+.search_list > div {
+  padding: 0.25em;
+}
+
+.select_user {
+  display: flex;
+  gap: 0.25em;
+}
+
+.select_user > input {
+  cursor: pointer;
+}
+
+.select_user > p {
+  cursor: pointer;
+}
+
+.hidden_checkbox {
+  visibility: hidden;
+}

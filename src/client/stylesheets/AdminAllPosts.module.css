@@ -1,0 +1,52 @@
+.admin_form > input {
+  width: 100%;
+  padding: 0.25em;
+}
+
+.search_post_container {
+  overflow-y: auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.search_post_container > div {
+  padding: 0.25em;
+}
+
+.search_post_container > div:last-of-type > button {
+  width: 100%;
+}
+
+.postList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.25em;
+}
+
+.postList > div {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.postList > div > div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.postList > div > div > a {
+  font-weight: bold;
+}
+
+.postList > div > a > img {
+  width: 100%;
+}
+
+.postList > div > p {
+  text-overflow: clip;
+}
+
+.postList > div > div > input {
+  cursor: pointer;
+}

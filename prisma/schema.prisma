@@ -1,0 +1,76 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String    @id @default(uuid())
+  username       String    @unique @db.VarChar(20)
+  password       String
+  Followers      Follow[]  @relation("Follower")
+  Following      Follow[]  @relation("Following")
+  Posts          Post[]
+  Comments       Comment[]
+  Likes          Likes[]
+  profilePicture String?
+  admin          Boolean   @default(false)
+
+  @@map("users")
+}
+
+model Follow {
+  id           String   @id @default(uuid())
+  followedDate DateTime @default(now())
+  sender       User     @relation("Follower", fields: [senderId], references: [id])
+  senderId     String
+  receiver     User     @relation("Following", fields: [receiverId], references: [id])
+  receiverId   String
+
+  @@map("follows")
+}
+
+model Post {
+  id       String    @id @default(uuid())
+  postDate DateTime  @default(now())
+  author   User      @relation(fields: [authorId], references: [id])
+  authorId String
+  text     String    @db.VarChar(100)
+  Comments Comment[]
+  Likes    Likes[]
+  image    String?
+
+  @@map("posts")
+}
+
+model Likes {
+  id        String   @id @default(uuid())
+  likeDate  DateTime @default(now())
+  likedBy   User     @relation(fields: [likedById], references: [id])
+  likedById String
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    String
+
+  @@map("likes")
+}
+
+model Comment {
+  id          String   @id @default(uuid())
+  commentDate DateTime @default(now())
+  author      User     @relation(fields: [authorId], references: [id])
+  authorId    String
+  text        String   @db.VarChar(100)
+  post        Post     @relation(fields: [postId], references: [id])
+  postId      String
+
+  @@map("comments")
+}

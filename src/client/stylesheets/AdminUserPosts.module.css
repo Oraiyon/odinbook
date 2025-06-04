@@ -1,0 +1,54 @@
+.adminUserPosts_container > h1 {
+  padding: 0 0.25em;
+}
+
+.adminUserPosts_container > form {
+  display: flex;
+}
+
+.adminUserPosts_container > form > input {
+  margin: 0.25em;
+  margin-bottom: 0;
+  padding: 0.25em;
+  width: 100%;
+}
+
+.adminUserPosts_info {
+  padding: 0.25em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+}
+
+.adminUserPosts_info > button {
+  width: 100%;
+}
+
+.postList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.25em;
+}
+
+.postList > a {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 0.25em;
+}
+
+.postList > a > input {
+  align-self: flex-end;
+}
+
+.postList > a > img {
+  width: 100%;
+}
+
+.postList > a > p {
+  text-overflow: clip;
+}
+
+.postList > a > input {
+  cursor: pointer;
+}

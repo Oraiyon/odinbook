@@ -1,0 +1,18 @@
+.followers_container {
+  height: 100%;
+}
+
+.followers_container > p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.followers_list {
+  overflow-y: auto;
+}
+
+.followers_card {
+  padding: 0.25em;
+}

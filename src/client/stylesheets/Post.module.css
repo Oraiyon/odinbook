@@ -1,0 +1,59 @@
+.create_post_container {
+  height: 100%;
+}
+
+.post_form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.post_form > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.post_form > input,
+.post_form > button {
+  border: 0;
+  border-top: 2px solid black;
+}
+
+.image_preview {
+  flex: 1;
+  position: relative;
+  height: fit-content;
+  padding: 0.25em 0;
+}
+
+.image_preview > img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-height: 100%;
+}
+
+.post_caption {
+  padding: 0.5em;
+}
+
+.post_warning {
+  color: red;
+  text-align: center;
+  border-top: 2px solid black;
+}
+
+.post_length {
+  text-align: end;
+  padding: 0.25em;
+  border-top: 2px solid black;
+}
+
+.post_length_error {
+  color: red;
+  text-align: end;
+  padding: 0.25em;
+  border-top: 2px solid black;
+}

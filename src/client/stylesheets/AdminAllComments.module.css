@@ -1,0 +1,63 @@
+.adminComments_container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.adminComments_container > h1 {
+  padding: 0 0.25em;
+}
+
+.adminComments_container > form {
+  margin: 0 0.25em;
+}
+
+.adminComments_container > form > input {
+  width: 100%;
+  padding: 0.25em;
+  margin-top: 0.25em;
+}
+
+.adminComments_container > p {
+  padding: 0 0.25em;
+}
+
+.adminComments_button {
+  padding: 0 0.25em;
+}
+
+.adminComments_button > button {
+  width: 100%;
+}
+
+.adminComments_list {
+  padding: 0 0.25em;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.comment_card > div:first-of-type {
+  display: flex;
+  gap: 0.25em;
+}
+
+.comment_card > div:first-of-type > a {
+  font-weight: bold;
+}
+
+.comment_card > a {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment_card > a > p:first-of-type {
+  overflow-wrap: break-word;
+}
+
+.comment_card > a > p:last-of-type {
+  align-self: flex-end;
+}
+
+.comment_card > div > input {
+  cursor: pointer;
+}
