@@ -51,7 +51,7 @@ const signup = [
           res.status(200).json("Username Already Taken");
           return;
         }
-        const user = await prisma.user.create({
+        await prisma.user.create({
           data: {
             username: req.body.username,
             password: hashedPassword
@@ -353,6 +353,62 @@ export const put_user_default_picture = expressAsyncHandler(async (req, res, nex
   });
   res.status(200).json(user);
 });
+
+export const put_user_password = [
+  body("current_password", "Invalid Password").trim().isLength({ min: 6 }).toLowerCase().escape(),
+  body("new_password", "Invalid Password").trim().isLength({ min: 6 }).toLowerCase().escape(),
+  expressAsyncHandler(async (req, res, next) => {
+    bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
+      if (err) {
+        return err;
+      } else {
+        const errors = validationResult(req);
+        const user = await prisma.user.findFirst({
+          where: {
+            id: req.params.id
+          }
+        });
+        const match = await bcrypt.compare(req.body.current_password, user.password);
+        if (!match || !errors.isEmpty()) {
+          res.status(200).json(false);
+          return;
+        }
+        const updatedUser = await prisma.user.update({
+          where: {
+            id: req.body.id
+          },
+          data: {
+            password: hashedPassword
+          },
+          include: {
+            Followers: {
+              include: {
+                receiver: {
+                  omit: {
+                    password: true
+                  }
+                }
+              }
+            },
+            Following: {
+              include: {
+                sender: {
+                  omit: {
+                    password: true
+                  }
+                }
+              }
+            }
+          },
+          omit: {
+            password: true
+          }
+        });
+        res.status(200).json(updatedUser);
+      }
+    });
+  })
+];
 
 export const delete_user = [
   expressAsyncHandler(async (req, res, next) => {

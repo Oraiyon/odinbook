@@ -9,7 +9,8 @@ import signup, {
   put_user_default_picture,
   put_user_profile_picture,
   put_user_profile_username,
-  get_user_inbox
+  get_user_inbox,
+  put_user_password
 } from "./controllers/userControllers.js";
 import post_follow, {
   delete_follow,
@@ -53,6 +54,7 @@ router.get("/api/:id/profile", get_user_profile);
 router.put("/api/user/edit/username", put_user_profile_username);
 router.put("/api/user/edit/picture", put_user_profile_picture);
 router.put("/api/user/edit/default", put_user_default_picture);
+router.put("/api/user/edit/password", put_user_password);
 router.delete("/api/user/delete/:id", delete_user);
 router.delete("/api/admin/delete/:id", delete_user);
 router.get("/api/admin/search/users", admin_get_users);
