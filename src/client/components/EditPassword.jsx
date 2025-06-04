@@ -9,8 +9,9 @@ const EditPassword = () => {
   const currentPassword = useRef(null);
   const newPassword = useRef(null);
 
-  const changePassword = async () => {
+  const changePassword = async (e) => {
     try {
+      e.preventDefault();
       const response = await fetch("/api/user/edit/password", {
         method: "PUT",
         headers: {
@@ -37,12 +38,14 @@ const EditPassword = () => {
     return (
       <div className={styles.editPassword_container}>
         <BackHeader mode={null} user={user} />
-        <form onSubmit={changePassword}>
-          <label htmlFor="current_password">Current Password</label>
-          <input type="password" id="current_password" ref={currentPassword} />
-          <label htmlFor="new_password">New Password</label>
-          <input type="password" id="new_password" ref={newPassword} />
-          <button>Change Password</button>
+        <form>
+          <div>
+            <label htmlFor="current_password">Current Password</label>
+            <input type="password" id="current_password" ref={currentPassword} />
+            <label htmlFor="new_password">New Password</label>
+            <input type="password" id="new_password" ref={newPassword} />
+          </div>
+          <button onClick={(e) => changePassword(e)}>Change Password</button>
         </form>
       </div>
     );
