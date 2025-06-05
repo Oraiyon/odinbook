@@ -1,10 +1,13 @@
 import { useOutletContext } from "react-router-dom";
 import styles from "../stylesheets/EditPassword.module.css";
 import BackHeader from "./BackHeader";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 const EditPassword = () => {
   const [user, setUser, post, setPost] = useOutletContext();
+
+  const [currentPasswordError, setCurrentPasswordError] = useState("");
+  const [newPasswordError, setNewPasswordError] = useState("");
 
   const currentPassword = useRef(null);
   const newPassword = useRef(null);
@@ -24,13 +27,32 @@ const EditPassword = () => {
         })
       });
       const data = await response.json();
-      if (data) {
+      if (typeof data === "string" && data === "No Match") {
+        setCurrentPasswordError("Incorrect Current Password");
+        setNewPasswordError("");
+      }
+      if (typeof data === "string" && data === "Invalid") {
+        setCurrentPasswordError("");
+        setNewPasswordError("Password must be at least 6 characters long.");
+      }
+      if (Array.isArray(data)) {
         currentPassword.current.value = "";
         newPassword.current.value = "";
         setUser(data);
+        setCurrentPasswordError("");
+        setNewPasswordError("");
       }
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const handleRevealPassword = (e) => {
+    e.preventDefault();
+    if (currentPassword.current.type !== "text") {
+      currentPassword.current.type = "text";
+    } else {
+      currentPassword.current.type = "password";
     }
   };
 
@@ -42,8 +64,11 @@ const EditPassword = () => {
           <div>
             <label htmlFor="current_password">Current Password</label>
             <input type="password" id="current_password" ref={currentPassword} />
+            <button onClick={(e) => handleRevealPassword(e)}>Show</button>
+            <p>{currentPasswordError}</p>
             <label htmlFor="new_password">New Password</label>
             <input type="password" id="new_password" ref={newPassword} />
+            <p>{newPasswordError}</p>
           </div>
           <button onClick={(e) => changePassword(e)}>Change Password</button>
         </form>
