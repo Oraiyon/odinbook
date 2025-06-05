@@ -11,13 +11,13 @@ const EditAccount = () => {
       <div className={styles.editAccount_container}>
         <BackHeader mode={"account"} user={user} />
         <button>
-          <Link to="/user/settings/edit/picture">Edit Profile Picture</Link>
+          <Link to="/user/account/edit/picture">Edit Profile Picture</Link>
         </button>
         <button>
-          <Link to="/user/settings/edit/username">Edit Username</Link>
+          <Link to="/user/account/edit/username">Edit Username</Link>
         </button>
         <button>
-          <Link to="/user/settings/edit/password">Edit Password</Link>
+          <Link to="/user/account/edit/password">Edit Password</Link>
         </button>
       </div>
     );

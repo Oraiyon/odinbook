@@ -69,19 +69,19 @@ const Router = () => {
           element: <Account />
         },
         {
-          path: "/user/settings/edit",
+          path: "/user/account/edit",
           element: <EditAccount />
         },
         {
-          path: "/user/settings/edit/picture",
+          path: "/user/account/edit/picture",
           element: <EditProfilePicture />
         },
         {
-          path: "/user/settings/edit/username",
+          path: "/user/account/edit/username",
           element: <EditUsername />
         },
         {
-          path: "/user/settings/edit/password",
+          path: "/user/account/edit/password",
           element: <EditPassword />
         },
         {

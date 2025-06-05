@@ -29,7 +29,7 @@ const Account = () => {
         <div>
           <BackHeader mode={"user"} user={user} />
           <div className={styles.settings_links}>
-            <Link to={"/user/settings/edit"}>
+            <Link to={"/user/account/edit"}>
               <div>
                 <Icon path={mdiAccountEdit}></Icon>
                 <p>Edit Account Information</p>
