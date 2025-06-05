@@ -51,7 +51,7 @@ const Signup = () => {
       setInvalidUsername("");
     }
     if (passwordInputRef.current.value.length < 6) {
-      setInvalidPassword("Password must be atleast 6 characters long.");
+      setInvalidPassword("Password must be at least 6 characters long.");
     } else {
       setInvalidPassword("");
     }
