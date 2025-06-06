@@ -24,7 +24,6 @@ const DeleteUserModal = (props) => {
             <DisplayProfilePicture user={props.user} />
             <p>{props.user.username}</p>
           </div>
-          <p>Confirm Deletion Of Account</p>
           <button onClick={deleteUser}>Delete Account</button>
         </div>
       </div>
