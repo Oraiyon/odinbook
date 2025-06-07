@@ -60,7 +60,7 @@ const Login = () => {
           <label htmlFor="password">Password</label>
           <div className={styles.login_password}>
             <input
-              type={!revealPassword ? "password" : "text"}
+              type={revealPassword ? "text" : "password"}
               id="password"
               name="password"
               ref={passwordInputRef}
