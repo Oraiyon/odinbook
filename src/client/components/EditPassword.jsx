@@ -2,12 +2,15 @@ import { useOutletContext } from "react-router-dom";
 import styles from "../stylesheets/EditPassword.module.css";
 import BackHeader from "./BackHeader";
 import { useRef, useState } from "react";
+import Icon from "@mdi/react";
+import { mdiEye, mdiEyeOff } from "@mdi/js";
 
 const EditPassword = () => {
   const [user, setUser, post, setPost] = useOutletContext();
 
   const [currentPasswordError, setCurrentPasswordError] = useState("");
   const [newPasswordError, setNewPasswordError] = useState("");
+  const [revealPassword, setRevealPassword] = useState(false);
 
   const currentPassword = useRef(null);
   const newPassword = useRef(null);
@@ -47,15 +50,6 @@ const EditPassword = () => {
     }
   };
 
-  const handleRevealPassword = (e) => {
-    e.preventDefault();
-    if (currentPassword.current.type !== "text") {
-      currentPassword.current.type = "text";
-    } else {
-      currentPassword.current.type = "password";
-    }
-  };
-
   if (user) {
     return (
       <div className={styles.editPassword_container}>
@@ -63,8 +57,16 @@ const EditPassword = () => {
         <form>
           <div>
             <label htmlFor="current_password">Current Password</label>
-            <input type="password" id="current_password" ref={currentPassword} />
-            <button onClick={(e) => handleRevealPassword(e)}>Show</button>
+            <div>
+              <input
+                type={revealPassword ? "text" : "password"}
+                id="current_password"
+                ref={currentPassword}
+              />
+              <div onClick={() => setRevealPassword((r) => !r)}>
+                <Icon path={!revealPassword ? mdiEye : mdiEyeOff}></Icon>
+              </div>
+            </div>
             <p>{currentPasswordError}</p>
             <label htmlFor="new_password">New Password</label>
             <input type="password" id="new_password" ref={newPassword} />
