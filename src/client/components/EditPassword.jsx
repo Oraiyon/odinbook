@@ -62,6 +62,7 @@ const EditPassword = () => {
                 type={revealPassword ? "text" : "password"}
                 id="current_password"
                 ref={currentPassword}
+                placeholder="Enter Your Password"
               />
               <div onClick={() => setRevealPassword((r) => !r)}>
                 <Icon path={!revealPassword ? mdiEye : mdiEyeOff}></Icon>
