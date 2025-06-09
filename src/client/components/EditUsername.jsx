@@ -1,10 +1,12 @@
 import { useOutletContext } from "react-router-dom";
 import BackHeader from "./BackHeader";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import styles from "../stylesheets/EditUsername.module.css";
 
 const EditUsername = () => {
   const [user, setUser, post, setPost] = useOutletContext();
+
+  const [usernameError, setUsernameError] = useState("");
 
   const usernameRef = useRef(null);
 
@@ -24,10 +26,13 @@ const EditUsername = () => {
         });
         const data = await response.json();
         if (data) {
-          setUser(data);
           usernameRef.current.value = "";
+          setUsernameError("");
+          setUser(data);
         }
+        return;
       }
+      setUsernameError("Username Is Invalid");
     } catch (error) {
       console.log(error);
     }
@@ -40,6 +45,7 @@ const EditUsername = () => {
         <div>
           <label htmlFor="edit_username">Edit Username</label>
           <input type="text" id="edit_username" placeholder={user.username} ref={usernameRef} />
+          <p>{usernameError}</p>
         </div>
         <button onClick={(e) => editUsername(e)}>Submit Username</button>
       </form>
