@@ -357,12 +357,21 @@ export const put_user_default_picture = expressAsyncHandler(async (req, res, nex
 export const put_user_password = [
   body("currentPassword", "Invalid Password").trim().isLength({ min: 6 }).toLowerCase().escape(),
   body("newPassword", "Invalid Password").trim().isLength({ min: 6 }).toLowerCase().escape(),
+  body("confirmNewPassword", "Confirm Password must match Password")
+    .trim()
+    .custom((value, { req }) => {
+      return value === req.body.newPassword;
+    }),
   expressAsyncHandler(async (req, res, next) => {
     bcrypt.hash(req.body.newPassword, 10, async (err, hashedPassword) => {
       if (err) {
         return err;
       } else {
         const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+          res.status(200).json("Invalid");
+          return;
+        }
         const user = await prisma.user.findFirst({
           where: {
             id: req.body.id
@@ -371,10 +380,6 @@ export const put_user_password = [
         const match = await bcrypt.compare(req.body.currentPassword, user.password);
         if (!match) {
           res.status(200).json(false);
-          return;
-        }
-        if (!errors.isEmpty()) {
-          res.status(200).json("Invalid");
           return;
         }
         const updatedUser = await prisma.user.update({

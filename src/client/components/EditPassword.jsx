@@ -10,40 +10,48 @@ const EditPassword = () => {
 
   const [currentPasswordError, setCurrentPasswordError] = useState("");
   const [newPasswordError, setNewPasswordError] = useState("");
+  const [confirmNewPasswordError, setConfirmNewPasswordError] = useState("");
   const [revealPassword, setRevealPassword] = useState(false);
 
   const currentPassword = useRef(null);
   const newPassword = useRef(null);
+  const confirmNewPassword = useRef(null);
 
   const changePassword = async (e) => {
     try {
       e.preventDefault();
-      const response = await fetch("/api/user/edit/password", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          id: user.id,
-          currentPassword: currentPassword.current.value,
-          newPassword: newPassword.current.value
-        })
-      });
-      const data = await response.json();
-      if (typeof data === "string" && data === "No Match") {
-        setCurrentPasswordError("Incorrect Current Password");
-        setNewPasswordError("");
-      }
-      if (typeof data === "string" && data === "Invalid") {
-        setCurrentPasswordError("");
-        setNewPasswordError("Password must be at least 6 characters long.");
-      }
-      if (Array.isArray(data)) {
-        currentPassword.current.value = "";
-        newPassword.current.value = "";
-        setUser(data);
-        setCurrentPasswordError("");
-        setNewPasswordError("");
+      if (
+        newPassword.current.value === confirmNewPassword.current.value &&
+        newPassword.current.value.length >= 6
+      ) {
+        const response = await fetch("/api/user/edit/password", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            id: user.id,
+            currentPassword: currentPassword.current.value,
+            newPassword: newPassword.current.value,
+            confirmNewPassword: confirmNewPassword.current.value
+          })
+        });
+        const data = await response.json();
+        if (typeof data === "string" && data === "No Match") {
+          setCurrentPasswordError("Incorrect Current Password");
+          setNewPasswordError("");
+        }
+        if (typeof data === "string" && data === "Invalid") {
+          setCurrentPasswordError("");
+          setNewPasswordError("Password must be at least 6 characters long.");
+        }
+        if (Array.isArray(data)) {
+          currentPassword.current.value = "";
+          newPassword.current.value = "";
+          setUser(data);
+          setCurrentPasswordError("");
+          setNewPasswordError("");
+        }
       }
     } catch (error) {
       console.log(error);
@@ -72,6 +80,9 @@ const EditPassword = () => {
             <label htmlFor="new_password">New Password</label>
             <input type="password" id="new_password" ref={newPassword} />
             <p>{newPasswordError}</p>
+            <label htmlFor="confirm_new_password">Confirm New Password</label>
+            <input type="password" id="confirm_new_password" ref={confirmNewPassword} />
+            <p>{confirmNewPasswordError}</p>
           </div>
           <button onClick={(e) => changePassword(e)}>Change Password</button>
         </form>
