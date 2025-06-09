@@ -21,8 +21,9 @@ const EditPassword = () => {
     try {
       e.preventDefault();
       if (
-        newPassword.current.value === confirmNewPassword.current.value &&
-        newPassword.current.value.length >= 6
+        currentPassword.current.value &&
+        newPassword.current.value &&
+        confirmNewPassword.current.value
       ) {
         const response = await fetch("/api/user/edit/password", {
           method: "PUT",
@@ -37,20 +38,30 @@ const EditPassword = () => {
           })
         });
         const data = await response.json();
-        if (typeof data === "string" && data === "No Match") {
-          setCurrentPasswordError("Incorrect Current Password");
-          setNewPasswordError("");
-        }
-        if (typeof data === "string" && data === "Invalid") {
-          setCurrentPasswordError("");
-          setNewPasswordError("Password must be at least 6 characters long.");
-        }
-        if (Array.isArray(data)) {
+        if (!data.id) {
+          if (!data.passwordMatch) {
+            setCurrentPasswordError("Incorrect Current Password");
+          } else {
+            setCurrentPasswordError("");
+          }
+          if (!data.passwordLength) {
+            setNewPasswordError("Password must be at least 6 characters long.");
+          } else {
+            setNewPasswordError("");
+          }
+          if (!data.passwordConfirm) {
+            setConfirmNewPasswordError("Confirm New Password Must Match New Password");
+          } else {
+            setConfirmNewPasswordError("");
+          }
+        } else {
           currentPassword.current.value = "";
           newPassword.current.value = "";
+          confirmNewPassword.current.value = "";
           setUser(data);
           setCurrentPasswordError("");
           setNewPasswordError("");
+          setConfirmNewPasswordError("");
         }
       }
     } catch (error) {

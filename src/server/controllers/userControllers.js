@@ -368,18 +368,19 @@ export const put_user_password = [
         return err;
       } else {
         const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-          res.status(200).json("Invalid");
-          return;
-        }
         const user = await prisma.user.findFirst({
           where: {
             id: req.body.id
           }
         });
         const match = await bcrypt.compare(req.body.currentPassword, user.password);
-        if (!match) {
-          res.status(200).json(false);
+        const inputErrors = {
+          passwordLength: req.body.newPassword.length >= 6 ? true : false,
+          passwordConfirm: req.body.newPassword === req.body.confirmNewPassword ? true : false,
+          passwordMatch: match ? true : false
+        };
+        if (!errors.isEmpty() || !match) {
+          res.status(200).json(inputErrors);
           return;
         }
         const updatedUser = await prisma.user.update({
