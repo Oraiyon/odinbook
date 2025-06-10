@@ -47,7 +47,7 @@ const EditUsername = () => {
           <input type="text" id="edit_username" placeholder={user.username} ref={usernameRef} />
           <p>{usernameError}</p>
         </div>
-        <button onClick={(e) => editUsername(e)}>Submit Username</button>
+        <button onClick={(e) => editUsername(e)}>Change Username</button>
       </form>
     </div>
   );

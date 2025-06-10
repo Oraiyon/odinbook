@@ -85,7 +85,7 @@ const EditProfilePicture = () => {
             ) : (
               ""
             )}
-            <button onClick={(e) => changeProfilePicture(e)}>Submit Profile Picture</button>
+            <button onClick={(e) => changeProfilePicture(e)}>Change Profile Picture</button>
           </div>
         </form>
       </div>
