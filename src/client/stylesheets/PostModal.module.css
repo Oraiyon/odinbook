@@ -46,6 +46,12 @@
 
 .post_modal_buttons > a {
   border-right: 2px solid black;
+  padding: 0.25em;
+  background-color: white;
+}
+
+.post_modal_buttons > a > button {
+  background-color: white;
 }
 
 .delete_message {

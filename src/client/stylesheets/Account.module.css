@@ -8,6 +8,8 @@
 .settings_container > button {
   border: 0;
   border-top: 2px solid black;
+  padding: 0.25em;
+  background-color: white;
 }
 
 .settings_links {

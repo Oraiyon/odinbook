@@ -19,6 +19,11 @@
   border-top: 2px solid black;
 }
 
+.post_form > button {
+  padding: 0.25em;
+  background-color: white;
+}
+
 .image_preview {
   flex: 1;
   position: relative;
